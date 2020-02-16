@@ -13,7 +13,7 @@
 ```
 
 ```python
-!git add  ./data/* ./*.md ././*.md
+!git add  ./data/*  *.md
 ```
 
 ```python
