@@ -1,0 +1,2 @@
+model_checkpoint_path: "variables"
+all_model_checkpoint_paths: "variables"
