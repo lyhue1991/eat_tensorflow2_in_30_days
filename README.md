@@ -124,7 +124,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day12|  [4-3,AutoGraph的使用规范](./4-3,AutoGraph的使用规范.md)| ⭐️⭐️⭐️   |   0.5hour    |
 |day13|  [4-4,AutoGraph的机制原理](./4-4,AutoGraph的机制原理.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |
 |day14|  [4-5,AutoGraph和tf.Module](./4-5,AutoGraph和tf.Module.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |
-|&nbsp;     |[五、TensorFlow的中阶API](./五、TensorFlow 的中阶API.md) | &nbsp;   | &nbsp;|&nbsp;|
+|&nbsp; |[五、TensorFlow的中阶API](./五、TensorFlow的中阶API.md) | &nbsp;   | &nbsp;|&nbsp;|
 |day15|  [5-1,数据管道Dataset](./5-1,数据管道Dataset.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |
 |day16|  [5-2,特征列feature_column](./5-2,特征列feature_column.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |
 |day17|  [5-3,激活函数activation](./5-3,激活函数activation.md)    | ⭐️⭐️⭐️   |   0.5hour    |
