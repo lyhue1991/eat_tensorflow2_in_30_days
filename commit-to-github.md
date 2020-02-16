@@ -13,7 +13,7 @@
 ```
 
 ```python
-!git add -A ./data/* ./*.md
+!git add  ./data/* ./*.md ././*.md
 ```
 
 ```python
@@ -21,11 +21,11 @@
 ```
 
 ```python
-!git commit -m"add readme.md"
+!git commit -m"add readme"
 ```
 
 ```python
-!git remote add origin https://github.com/lyhue1991/eat_tensorFlow2_in_30_days
+!git remote add origin https://github.com/lyhue1991/lyhue1991.github.io
 ```
 
 ```python
