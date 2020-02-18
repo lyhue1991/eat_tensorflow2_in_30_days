@@ -33,5 +33,5 @@
 ```
 
 ```python
-!git push -f origin master 
+!git push origin master 
 ```
