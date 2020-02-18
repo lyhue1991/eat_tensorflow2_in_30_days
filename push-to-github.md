@@ -17,7 +17,7 @@
 ```
 
 ```python
-!git rm -r ./.ipynb_checkpoints
+!git rm  ./.ipynb_checkpoints/*
 ```
 
 ```python
@@ -37,5 +37,5 @@
 ```
 
 ```python
-!git push -f origin master 
+!git push origin master 
 ```

@@ -109,25 +109,25 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 |日期 | 学习内容                                                       | 内容难度   | 预计学习时间 | 更新状态|
 |----:|:--------------------------------------------------------------|-----------:|----------:|-----:|
-|&nbsp;|[一、TensorFlow的建模流程](./一、TensorFlow的建模流程.md)    |⭐️   |   0hour   |✅    |
+|&nbsp;|[**一、TensorFlow的建模流程**](./一、TensorFlow的建模流程.md)    |⭐️   |   0hour   |✅    |
 |day1 |  [1-1,结构化数据建模流程范例](./1-1,结构化数据建模流程范例.md)    | ⭐️⭐️⭐️ |   1hour    |✅    |
 |day2 |[1-2,图片数据建模流程范例](./1-2,图片数据建模流程范例.md)    | ⭐️⭐️⭐️⭐️  |   2hour    |✅    |
 |day3 |  [1-3,文本数据建模流程范例](./1-3,文本数据建模流程范例.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |✅    |
-|&nbsp;    |[二、TensorFlow的核心概念](./二、TensorFlow的核心概念.md)  | ⭐️  |  0hour |✅  |
+|&nbsp;    |[**二、TensorFlow的核心概念**](./二、TensorFlow的核心概念.md)  | ⭐️  |  0hour |✅  |
 |day4 |  [2-1,张量数据结构](./2-1,张量数据结构.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅    |
 |day5 |  [2-2,三种计算图](./2-2,三种计算图.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅    |
 |day6 |  [2-3,自动微分机制](./2-3,自动微分机制.md)  | ⭐️⭐️⭐️   |   1hour    |✅    |
-|&nbsp; |[三、TensorFlow的层次结构](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |&nbsp;  |
+|&nbsp; |[**三、TensorFlow的层次结构**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |&nbsp;  |
 |day7 |  [3-1,低阶API示范](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day8 |  [3-2,中阶API示范](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day9 |  [3-3,高阶API示范](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
-|&nbsp; |[四、TensorFlow的低阶API](Chapter4/README.md) |⭐️    | 0hour|&nbsp;  |
+|&nbsp; |[**四、TensorFlow的低阶API**](Chapter4/README.md) |⭐️    | 0hour|&nbsp;  |
 |day10|  [4-1,张量的结构操作](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day11|  [4-2,张量的数学运算](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |day12|  [4-3,AutoGraph的使用规范](./4-3,AutoGraph的使用规范.md)| ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day13|  [4-4,AutoGraph的机制原理](./4-4,AutoGraph的机制原理.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day14|  [4-5,AutoGraph和tf.Module](./4-5,AutoGraph和tf.Module.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
-|&nbsp; |[五、TensorFlow的中阶API](./五、TensorFlow的中阶API.md) |  ⭐️  | 0hour|&nbsp;|
+|&nbsp; |[**五、TensorFlow的中阶API**](./五、TensorFlow的中阶API.md) |  ⭐️  | 0hour|&nbsp;|
 |day15|  [5-1,数据管道Dataset](./5-1,数据管道Dataset.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day16|  [5-2,特征列feature_column](./5-2,特征列feature_column.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |day17|  [5-3,激活函数activation](./5-3,激活函数activation.md)    | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
@@ -136,7 +136,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day20|  [5-6,评估函数metrics](./5-6,评估函数metrics.md)    | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day21|  [5-7,优化器optimizers](./5-7,优化器optimizers.md)    | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day22|  [5-8,回调函数callbacks](./5-8,回调函数callbacks.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
-|&nbsp; |[六、TensorFlow的高阶API](./六、TensorFlow的高阶API.md)|    ⭐️ | 0hour|&nbsp;  |
+|&nbsp; |[**六、TensorFlow的高阶API**](./六、TensorFlow的高阶API.md)|    ⭐️ | 0hour|&nbsp;  |
 |day23|  [6-1,构建模型的3种方法](./6-1,构建模型的3种方法.md)   | ⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |day24|  [6-2,训练模型的3种方法](./6-2,训练模型的3种方法.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |day25|  [6-3,使用单GPU训练模型](./6-3,使用单GPU训练模型.md)    | ⭐️⭐️   |   0.5hour    |&nbsp;  |
