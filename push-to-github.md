@@ -21,7 +21,7 @@
 ```
 
 ```python
-!git commit -m"add readme"
+!git commit -m"add chapter1"
 ```
 
 ```python
