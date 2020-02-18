@@ -33,5 +33,9 @@
 ```
 
 ```python
+!git pull origin master 
+```
+
+```python
 !git push origin master 
 ```
