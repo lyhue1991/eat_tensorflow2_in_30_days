@@ -20,5 +20,5 @@ TensorFlow的层次结构从低到高可以分成如下五层。
 第五层为Python实现的模型成品，一般为按照OOP方式封装的高级API，主要为tf.keras.models提供的模型的类接口。
 如果把模型比作一个房子，那么第五层API就是模型本身，即【模型之屋】。
 
-![](./data/TensorFlow的层次结构.jpg)
+![](./data/TensorFlow层次结构呀.jpg)
 
