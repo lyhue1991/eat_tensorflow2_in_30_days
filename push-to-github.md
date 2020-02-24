@@ -29,7 +29,7 @@
 ```
 
 ```python
-!git remote add origin https://github.com/lyhue1991/eat_tensorFlow2_in_30days
+!git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 ```
 
 ```python

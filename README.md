@@ -117,10 +117,10 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day4 |  [2-1,张量数据结构](./2-1,张量数据结构.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅    |
 |day5 |  [2-2,三种计算图](./2-2,三种计算图.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅    |
 |day6 |  [2-3,自动微分机制](./2-3,自动微分机制.md)  | ⭐️⭐️⭐️   |   1hour    |✅    |
-|&nbsp; |[**三、TensorFlow的层次结构**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |&nbsp;  |
-|day7 |  [3-1,低阶API示范](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |&nbsp;  |
-|day8 |  [3-2,中阶API示范](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
-|day9 |  [3-3,高阶API示范](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
+|&nbsp; |[**三、TensorFlow的层次结构**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |✅  |
+|day7 |  [3-1,低阶API示范](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |✅   |
+|day8 |  [3-2,中阶API示范](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |✅  |
+|day9 |  [3-3,高阶API示范](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |✅  |
 |&nbsp; |[**四、TensorFlow的低阶API**](Chapter4/README.md) |⭐️    | 0hour|&nbsp;  |
 |day10|  [4-1,张量的结构操作](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day11|  [4-2,张量的数学运算](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
