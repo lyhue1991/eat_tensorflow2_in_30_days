@@ -21,7 +21,7 @@
 ```
 
 ```python
-!git commit -m"add chapter2"
+!git commit -m"add chapter3"
 ```
 
 ```python
