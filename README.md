@@ -121,9 +121,9 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day7 |  [3-1,低阶API示范](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |✅   |
 |day8 |  [3-2,中阶API示范](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |✅  |
 |day9 |  [3-3,高阶API示范](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |✅  |
-|&nbsp; |[**四、TensorFlow的低阶API**](Chapter4/README.md) |⭐️    | 0hour|&nbsp;  |
-|day10|  [4-1,张量的结构操作](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
-|day11|  [4-2,张量的数学运算](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
+|&nbsp; |[**四、TensorFlow的低阶API**](Chapter4/README.md) |⭐️    | 0hour|✅  |
+|day10|  [4-1,张量的结构操作](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅   |
+|day11|  [4-2,张量的数学运算](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
 |day12|  [4-3,AutoGraph的使用规范](./4-3,AutoGraph的使用规范.md)| ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day13|  [4-4,AutoGraph的机制原理](./4-4,AutoGraph的机制原理.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day14|  [4-5,AutoGraph和tf.Module](./4-5,AutoGraph和tf.Module.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
