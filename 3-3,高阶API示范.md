@@ -18,9 +18,6 @@ TensorFlow的高阶API主要为tf.keras.models提供的模型的类接口。
 import tensorflow as tf
 from tensorflow.keras import models,layers,optimizers
 
-```
-
-```python
 #样本数量
 n = 800
 
