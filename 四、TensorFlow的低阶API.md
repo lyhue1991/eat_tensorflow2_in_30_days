@@ -10,7 +10,7 @@ TensorFlow的低阶API主要包括张量操作，计算图和自动微分。
 
 TensorFlow提供的方法比numpy更全面，运算速度更快，如果需要的话，还可以使用GPU进行加速。
 
-前面几章我们对低阶API已经有了一个整体的认识，本章我们将重点详细介绍张量操作和AutoGraph计算图。
+前面几章我们对低阶API已经有了一个整体的认识，本章我们将重点详细介绍张量操作和Autograph计算图。
 
 
 张量的操作主要包括张量的结构操作和张量的数学运算。
@@ -19,8 +19,5 @@ TensorFlow提供的方法比numpy更全面，运算速度更快，如果需要�
 
 张量数学运算主要有：标量运算，向量运算，矩阵运算。另外我们会介绍张量运算的广播机制。
 
-AutoGraph计算图我们将介绍使用Autograph的规范建议，Autograph的机制原理，Autograph和tf.Module.
-
-
-
+Autograph计算图我们将介绍使用Autograph的规范建议，Autograph的机制原理，Autograph和tf.Module.
 
