@@ -53,18 +53,17 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 ### 三，本书面向读者
 
-
 **本书假定读者有一定的机器学习和深度学习基础，使用过Keras或者Tensorflow1.0或者Pytorch搭建训练过模型。**
 
 **对于没有任何机器学习和深度学习基础的同学，建议在学习本书时同步参考学习《Python深度学习》一书。**
-
 
 《Python深度学习》这本书是Keras之父Francois Chollet所著，该书假定读者无任何机器学习知识，以Keras为工具，
 
 使用丰富的范例示范深度学习的最佳实践，该书通俗易懂，**全书没有一个数学公式，注重培养读者的深度学习直觉。**。
 
-
 该书电子版下载链接：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA 提取码：wtzo 
+
+
 
 
 ```python
