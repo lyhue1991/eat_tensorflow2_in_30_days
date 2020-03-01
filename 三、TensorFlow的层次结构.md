@@ -21,7 +21,7 @@ TensorFlow的层次结构从低到高可以分成如下五层。
 如果把模型比作一个房子，那么第五层API就是模型本身，即【模型之屋】。
 
 
-<img src="./data/tensorflow的层次结构.jpg">
+<img src="./data/tensorflow_structure.jpg">
 
 
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
