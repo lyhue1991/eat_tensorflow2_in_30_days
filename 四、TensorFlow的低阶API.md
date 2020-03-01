@@ -21,3 +21,8 @@ TensorFlow提供的方法比numpy更全面，运算速度更快，如果需要�
 
 Autograph计算图我们将介绍使用Autograph的规范建议，Autograph的机制原理，Autograph和tf.Module.
 
+
+
+如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
+
+![](./data/Python与算法之美logo.jpg)
