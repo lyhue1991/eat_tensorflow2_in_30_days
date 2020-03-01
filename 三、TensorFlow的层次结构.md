@@ -22,8 +22,10 @@ TensorFlow的层次结构从低到高可以分成如下五层。
 
 
 ![](./data/tensorflow的层次结构.jpg)
+![](./data/Python与算法之美logo.jpg)
 
 
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
 
+![](./data/tensorflow的层次结构.jpg)
 ![](./data/Python与算法之美logo.jpg)
