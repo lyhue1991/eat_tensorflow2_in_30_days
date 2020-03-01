@@ -158,9 +158,11 @@ myadd("good","morning")
 ```
 
 ```
+tracing
 0
 1
 2
+tracing
 0
 1
 2
