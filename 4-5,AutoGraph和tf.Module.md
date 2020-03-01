@@ -23,7 +23,7 @@ TensorFlow 2.0主要使用的是动态计算图和Autograph。
 ### 一，应用tf.Module封装Autograph
 
 
-前面在Autograph的到构建Autograph时应该避免在@tf.function修饰的函数内部定义tf.Variable. 
+前面在介绍Autograph的编码规范时提到构建Autograph时应该避免在@tf.function修饰的函数内部定义tf.Variable. 
 
 但是如果在函数外部定义tf.Variable的话，又会显得这个函数有外部变量依赖，封装不够完美。
 
