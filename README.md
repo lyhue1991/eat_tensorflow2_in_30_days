@@ -123,9 +123,9 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |&nbsp; |[**四、TensorFlow的低阶API**](./四、TensorFlow的低阶API.md) |⭐️    | 0hour|✅  |
 |day10|  [4-1,张量的结构操作](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅   |
 |day11|  [4-2,张量的数学运算](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
-|day12|  [4-3,AutoGraph的使用规范](./4-3,AutoGraph的使用规范.md)| ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
-|day13|  [4-4,AutoGraph的机制原理](./4-4,AutoGraph的机制原理.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
-|day14|  [4-5,AutoGraph和tf.Module](./4-5,AutoGraph和tf.Module.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
+|day12|  [4-3,AutoGraph的使用规范](./4-3,AutoGraph的使用规范.md)| ⭐️⭐️⭐️   |   0.5hour    |✅  |
+|day13|  [4-4,AutoGraph的机制原理](./4-4,AutoGraph的机制原理.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅  |
+|day14|  [4-5,AutoGraph和tf.Module](./4-5,AutoGraph和tf.Module.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
 |&nbsp; |[**五、TensorFlow的中阶API**](./五、TensorFlow的中阶API.md) |  ⭐️  | 0hour|&nbsp;|
 |day15|  [5-1,数据管道Dataset](./5-1,数据管道Dataset.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |&nbsp;  |
 |day16|  [5-2,特征列feature_column](./5-2,特征列feature_column.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
