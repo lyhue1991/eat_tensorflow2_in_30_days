@@ -104,27 +104,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 **点击学习内容蓝色标题即可进入该章节。**
 
-
-
 <!-- #endregion -->
-
-```python
-import tensorflow as tf
-
-#注：本书全部代码在tensorflow 2.1版本测试通过
-tf.print("tensorflow version:",tf.__version__)
-
-a = tf.constant("hello")
-b = tf.constant("tensorflow2")
-c = tf.strings.join([a,b]," ")
-tf.print(c)
-```
-
-```
-tensorflow version: 2.1.0
-hello tensorflow2
-```
-
 
 |日期 | 学习内容                                                       | 内容难度   | 预计学习时间 | 更新状态|
 |----:|:--------------------------------------------------------------|-----------:|----------:|-----:|
@@ -164,6 +144,23 @@ hello tensorflow2
 |day28| [6-6,使用tensorflow-serving部署模型](./6-6,使用tensorflow-serving部署模型.md) | ⭐️⭐️⭐️⭐️| 1hour |&nbsp;  |
 |day29| [6-7,使用spark-scala调用tensorflow模型](./6-7,使用spark-scala调用tensorflow模型.md) | ⭐️⭐️⭐️⭐️⭐️|2hour|&nbsp; |
 
+
+```python
+import tensorflow as tf
+
+#注：本书全部代码在tensorflow 2.1版本测试通过
+tf.print("tensorflow version:",tf.__version__)
+
+a = tf.constant("hello")
+b = tf.constant("tensorflow2")
+c = tf.strings.join([a,b]," ")
+tf.print(c)
+```
+
+```
+tensorflow version: 2.1.0
+hello tensorflow2
+```
 
 
 ### 六，鼓励和联系作者
