@@ -18,7 +18,7 @@ TensorFlow 2.0主要使用的是动态计算图和Autograph。
 
 并介绍使用tf.Module来更好地构建Autograph。
 
-上篇我们介绍了Autograph的编码规范，本篇我们介绍使用Autograph的机制原理。
+上篇我们介绍了Autograph的编码规范，本篇我们介绍Autograph的机制原理。
 
 
 
@@ -43,7 +43,6 @@ def myadd(a,b):
 ```
 
 后面什么都没有发生。仅仅是在Python堆栈中记录了这样一个函数的签名。
-
 
 **当我们第一次调用这个被@tf.function装饰的函数时，后面到底发生了什么？**
 

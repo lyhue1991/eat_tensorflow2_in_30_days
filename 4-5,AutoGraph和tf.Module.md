@@ -20,7 +20,7 @@ TensorFlow 2.0主要使用的是动态计算图和Autograph。
 
 
 
-### 一，应用tf.Module封装Autograph
+### 一，Autograph和tf.Module概述
 
 
 前面在介绍Autograph的编码规范时提到构建Autograph时应该避免在@tf.function修饰的函数内部定义tf.Variable. 
@@ -39,6 +39,9 @@ TensorFlow 2.0主要使用的是动态计算图和Autograph。
 
 
 
+
+
+### 二，应用tf.Module封装Autograph
 
 
 定义一个简单的function。
@@ -104,7 +107,6 @@ print(demo.trainable_variables)
 (<tf.Variable 'demo_module/Variable:0' shape=() dtype=float32, numpy=6.0>,)
 (<tf.Variable 'demo_module/Variable:0' shape=() dtype=float32, numpy=6.0>,)
 ```
-
 
 ```python
 #查看模块中的全部子模块
@@ -220,7 +222,8 @@ print(mymodule.variables)
 
 ```python
 #使用tf.saved_model 保存模型
-tf.saved_model.save(mymodule,"./data/mymodule",signatures = {"serving_default":mymodule.addprint})
+tf.saved_model.save(mymodule,"./data/mymodule",
+    signatures = {"serving_default":mymodule.addprint})
 
 #加载模型
 mymodule2 = tf.saved_model.load("./data/mymodule")
@@ -236,7 +239,7 @@ INFO:tensorflow:Assets written to: ./data/mymodule/assets
 
 ```
 
-### 二，tf.Module和tf.keras.Model，tf.keras.layers.Layer
+### 三，tf.Module和tf.keras.Model，tf.keras.layers.Layer
 
 
 tf.keras中的模型和层都是继承tf.Module实现的，也具有变量管理和子模块管理功能。

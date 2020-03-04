@@ -13,7 +13,7 @@
 ```
 
 ```python
-!git add  ./data/*  *.md
+!git add  ./data/*  *.md ./data/tensorflow_structure.jpg
 ```
 
 ```python
