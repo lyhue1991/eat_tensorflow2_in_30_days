@@ -14,6 +14,8 @@
 要创建特征列，请调用 tf.feature_column 模块的函数。该模块中常用的九个函数如下图所示，所有九个函数都会返回一个 Categorical-Column 或一个 
 Dense-Column 对象，但却不会返回 bucketized_column，后者继承自这两个类。
 
+注意：所有的Catogorical Column类型最终都要通过indicator_column转换成Dense Column类型才能传入模型！
+
 
 ![](./data/特征列9种.jpg)
 
@@ -39,7 +41,7 @@ Dense-Column 对象，但却不会返回 bucketized_column，后者继承自这�
 * indicator_column 指标列，由Categorical Column生成，one-hot编码
 
 
-* embedding_column 嵌入列，由Categorical Column生成，嵌入矢量分布参数需要学习。嵌入矢量维数应该是类别数量的 4 次方根。
+* embedding_column 嵌入列，由Categorical Column生成，嵌入矢量分布参数需要学习。嵌入矢量维数建议取类别数量的 4 次方根。
 
 
 * crossed_column 交叉列，可以由除categorical_column_with_hash_bucket的任意分类列构成。
@@ -58,30 +60,13 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import layers,models
 
-tf.keras.backend.clear_session() #清空会话
 
+#打印日志
+def printlog(info):
+    nowtime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print("\n"+"=========="*8 + "%s"%nowtime)
+    print(info+'...\n\n')
 
-#打印时间分割线
-@tf.function
-def printbar():
-    ts = tf.timestamp()
-    today_ts = ts%(24*60*60)
-
-    hour = tf.cast(today_ts//3600+8,tf.int32)%tf.constant(24)
-    minite = tf.cast((today_ts%3600)//60,tf.int32)
-    second = tf.cast(tf.floor(today_ts%60),tf.int32)
-    
-    def timeformat(m):
-        if tf.strings.length(tf.strings.format("{}",m))==1:
-            return(tf.strings.format("0{}",m))
-        else:
-            return(tf.strings.format("{}",m))
-    
-    timestring = tf.strings.join([timeformat(hour),timeformat(minite),
-                timeformat(second)],separator = ":")
-    tf.print("=========="*8,end = "")
-    tf.print(timestring)
-    
 
     
 ```
@@ -90,8 +75,7 @@ def printbar():
 #================================================================================
 # 一，构建数据管道
 #================================================================================
-printbar()
-tf.print("step1: prepare dataset...")
+printlog("step1: prepare dataset...")
 
 
 dftrain_raw = pd.read_csv("./data/titanic/train.csv")
@@ -143,8 +127,7 @@ ds_test = df_to_dataset(dftest)
 #================================================================================
 # 二，定义特征列
 #================================================================================
-printbar()
-tf.print("step2: make feature columns...")
+printlog("step2: make feature columns...")
 
 feature_columns = []
 
@@ -160,7 +143,7 @@ age_buckets = tf.feature_column.bucketized_column(age,
 feature_columns.append(age_buckets)
 
 # 类别列
-# ！！！注意：所有的Catogorical Column类型最终都要通过indicator_column转换成Dense Column类型才能传入模型！
+# 注意：所有的Catogorical Column类型最终都要通过indicator_column转换成Dense Column类型才能传入模型！！
 sex = tf.feature_column.indicator_column(
       tf.feature_column.categorical_column_with_vocabulary_list(
       key='sex',vocabulary_list=["male", "female"]))
@@ -200,8 +183,7 @@ feature_columns.append(crossed_feature)
 #================================================================================
 # 三，定义模型
 #================================================================================
-printbar()
-tf.print("step3: define model...")
+printlog("step3: define model...")
 
 tf.keras.backend.clear_session()
 model = tf.keras.Sequential([
@@ -217,8 +199,7 @@ model = tf.keras.Sequential([
 #================================================================================
 # 四，训练模型
 #================================================================================
-printbar()
-tf.print("step4: train model...")
+printlog("step4: train model...")
 
 model.compile(optimizer='adam',
               loss='binary_crossentropy',
@@ -233,8 +214,7 @@ history = model.fit(ds_train,
 #================================================================================
 # 五，评估模型
 #================================================================================
-printbar()
-tf.print("step5: eval model...")
+printlog("step5: eval model...")
 
 model.summary()
 
@@ -288,7 +268,3 @@ _________________________________________________________________
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
 
 ![image.png](./data/Python与算法之美logo.jpg)
-
-```python
-
-```
