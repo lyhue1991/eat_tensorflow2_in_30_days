@@ -10,9 +10,13 @@
 
 激活函数的综述介绍可以参考下面两篇文章。
 
-[《一文概览深度学习中的激活函数》](https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2650732724&idx=4&sn=5230b8bb1811cda38ab97afb417d1613&chksm=871b3ccab06cb5dcdf0bdfadcc7ae85d8ae95588bed0b884a55ba50b76d541771104675fbb3e&scene=21#wechat_redirect)
+[《一文概览深度学习中的激活函数》](https://zhuanlan.zhihu.com/p/98472075)
+
+https://zhuanlan.zhihu.com/p/98472075
 
 [《从ReLU到GELU,一文概览神经网络中的激活函数》](https://zhuanlan.zhihu.com/p/98863801)
+
+https://zhuanlan.zhihu.com/p/98863801
 
 
 
@@ -25,7 +29,7 @@
 
 * tf.nn.softmax：sigmoid的多分类扩展，一般只在多分类问题的最后输出层使用。
 
-![](./data/softmax.png)
+![](./data/softmax说明.jpg)
 
 * tf.nn.tanh：将实数压缩到-1到1之间，输出期望为0。主要缺陷为存在梯度消失问题，计算复杂度高。
 

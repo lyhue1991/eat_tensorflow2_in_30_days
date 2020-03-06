@@ -162,7 +162,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 #建议在jupyter notebook 上安装最新版本tensorflow 测试本书中的代码
 !pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  -U tensorflow
 
-#建议在jupyter notebook 上安装jupytext，以便能够将本书各章节 markdown文件视作ipynb文件运行
+#建议在jupyter notebook 上安装jupytext，以便能够将本书各章节markdown文件视作ipynb文件运行
 !pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U jupytext
 ```
 
