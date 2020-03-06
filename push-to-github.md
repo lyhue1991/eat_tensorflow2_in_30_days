@@ -12,8 +12,8 @@
 !git init
 ```
 
-```python
-!git add  ./data/*  *.md 
+```bash
+git add  ./data/*  *.md 
 ```
 
 ```python
