@@ -1,7 +1,7 @@
 # 《30天吃掉那只 TensorFlow2.0 》开篇辞 🔥🔥
 
 <!-- #region -->
-### 一，TensorFlow2 ☁️ 还是 Pytorch🔥
+### 一，TensorFlow2 🍎 还是 Pytorch🔥
 
 先说结论:
 
