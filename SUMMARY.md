@@ -11,7 +11,7 @@
 * [2-2,三种计算图](./2-2,三种计算图.md)
 * [2-3,自动微分机制](./2-3,自动微分机制.md)
 
-* [三、TensorFlow的层次结构](./README.md)
+* [三、TensorFlow的层次结构](./三、TensorFlow的层次结构.md)
 * [3-1,低阶API示范](./3-1,低阶API示范.md)
 * [3-2,中阶API示范](./3-2,中阶API示范.md)
 * [3-3,高阶API示范](./3-3,高阶API示范.md)
@@ -28,7 +28,7 @@
 * [5-2,特征列feature_column](./5-2,特征列feature_column.md)
 * [5-3,激活函数activation](./5-3,激活函数activation.md)
 * [5-4,模型层layers](./5-4,模型层layers.md)
-* [5-5,损失函数loss](./5-5,损失函数loss.md)
+* [5-5,损失函数losses](./5-5,损失函数losses.md)
 * [5-6,评估函数metrics](./5-6,评估函数metrics.md)
 * [5-7,优化器optimizers](./5-7,优化器optimizers.md)
 * [5-8,回调函数callbacks](./5-8,回调函数callbacks.md)
@@ -41,4 +41,5 @@
 * [6-5,使用TPU训练模型](./6-5,使用TPU训练模型.md)
 * [6-6,使用tensorflow-serving部署模型](./6-6,使用tensorflow-serving部署模型.md)
 * [6-7,使用spark-scala调用tensorflow模型](./6-7,使用spark-scala调用tensorflow模型.md)
+
 
