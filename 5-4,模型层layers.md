@@ -23,10 +23,7 @@ layers.Embedding,layers.GRU,layers.LSTM,layers.Bidirectional等等。
 ### 一，内置模型层
 
 ```python
-import numpy as np
-import pandas as pd
-import tensorflow as tf
-from tensorflow.keras import layers,models,regularizers
+
 ```
 
 一些常用的内置模型层简单介绍如下。
@@ -179,11 +176,21 @@ linear.build(input_shape = (None,16)) #指定input_shape，显式调用build方�
 print(linear.built)
 ```
 
+```
+False
+True
+```
+
 ```python
 linear = Linear(units = 8)
 print(linear.built)
 linear.build(input_shape = (None,16)) 
-linear.compute_output_shape(input_shape = (None,16))
+print(linear.compute_output_shape(input_shape = (None,16)))
+```
+
+```
+False
+(None, 8)
 ```
 
 ```python
@@ -195,6 +202,12 @@ config = linear.get_config()
 print(config)
 ```
 
+```
+False
+True
+{'name': 'linear_3', 'trainable': True, 'dtype': 'float32', 'units': 16}
+```
+
 ```python
 tf.keras.backend.clear_session()
 
@@ -203,6 +216,20 @@ model.add(Linear(units = 16,input_shape = (64,)))  #注意该处的input_shape�
 print("model.input_shape: ",model.input_shape)
 print("model.output_shape: ",model.output_shape)
 model.summary()
+```
+
+```
+model.input_shape:  (None, 64)
+model.output_shape:  (None, 16)
+Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+linear (Linear)              (None, 16)                1040      
+=================================================================
+Total params: 1,040
+Trainable params: 1,040
+Non-trainable params: 0
 ```
 
 ```python
