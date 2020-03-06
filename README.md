@@ -95,9 +95,10 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 ![](./data/30天吃掉那个TF2.0.jpg)
 
 
-<!-- #region -->
+
 ### 五，本书学习方案 ⏰
 
+**1，学习计划**
 
 本书是作者利用工作之余和疫情放假期间大概2个月写成的，大部分读者应该在30天可以完全学会。
 
@@ -107,7 +108,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 **点击学习内容蓝色标题即可进入该章节。**
 
-<!-- #endregion -->
+
 
 |日期 | 学习内容                                                       | 内容难度   | 预计学习时间 | 更新状态|
 |----:|:--------------------------------------------------------------|-----------:|----------:|-----:|
@@ -148,8 +149,15 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day29| [6-7,使用spark-scala调用tensorflow模型](./6-7,使用spark-scala调用tensorflow模型.md) | ⭐️⭐️⭐️⭐️⭐️|2hour|&nbsp; |
 
 
-```python
 
+**2，学习环境**
+
+```python
+#建议在jupyter notebook 上安装最新版本tensorflow 测试本书中的代码
+!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  -U tensorflow
+
+#建议在jupyter notebook 上安装jupytext，以便能够将本书各章节 markdown文件视作ipynb文件运行
+!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U jupytext
 ```
 
 ```python
