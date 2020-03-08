@@ -29,7 +29,7 @@
 * [5-3,激活函数activation](./5-3,激活函数activation.md)
 * [5-4,模型层layers](./5-4,模型层layers.md)
 * [5-5,损失函数losses](./5-5,损失函数losses.md)
-* [5-6,评估函数metrics](./5-6,评估函数metrics.md)
+* [5-6,评估指标metrics](./5-6,评估指标metrics.md)
 * [5-7,优化器optimizers](./5-7,优化器optimizers.md)
 * [5-8,回调函数callbacks](./5-8,回调函数callbacks.md)
 

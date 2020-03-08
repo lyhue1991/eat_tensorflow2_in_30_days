@@ -150,7 +150,8 @@ class Linear(layers.Layer):
         super(Linear, self).__init__(**kwargs)
         self.units = units
 
-    def build(self, input_shape): #build方法一般定义Layer需要被训练的参数。
+    #build方法一般定义Layer需要被训练的参数。    
+    def build(self, input_shape): 
         self.w = self.add_weight(shape=(input_shape[-1], self.units),
                                  initializer='random_normal',
                                  trainable=True)
@@ -159,10 +160,12 @@ class Linear(layers.Layer):
                                  trainable=True)
         super(Linear,self).build(input_shape) # 相当于设置self.built = True
 
-    def call(self, inputs): #call方法一般定义正向传播运算逻辑，__call__方法调用了它。
+    #call方法一般定义正向传播运算逻辑，__call__方法调用了它。    
+    def call(self, inputs): 
         return tf.matmul(inputs, self.w) + self.b
     
-    def get_config(self):  #如果要让自定义的Layer通过Functional API 组合成模型时可以序列化，需要自定义get_config方法。
+    #如果要让自定义的Layer通过Functional API 组合成模型时可以序列化，需要自定义get_config方法。
+    def get_config(self):  
         config = super(Linear, self).get_config()
         config.update({'units': self.units})
         return config
@@ -172,7 +175,8 @@ class Linear(layers.Layer):
 ```python
 linear = Linear(units = 8)
 print(linear.built)
-linear.build(input_shape = (None,16)) #指定input_shape，显式调用build方法，第0维代表样本数量，用None填充
+#指定input_shape，显式调用build方法，第0维代表样本数量，用None填充
+linear.build(input_shape = (None,16)) 
 print(linear.built)
 ```
 
@@ -196,7 +200,8 @@ False
 ```python
 linear = Linear(units = 16)
 print(linear.built)
-linear(tf.random.uniform((100,64))) #如果built = False，调用__call__时会先调用build方法, 再调用call方法。
+#如果built = False，调用__call__时会先调用build方法, 再调用call方法。
+linear(tf.random.uniform((100,64))) 
 print(linear.built)
 config = linear.get_config()
 print(config)
@@ -212,7 +217,8 @@ True
 tf.keras.backend.clear_session()
 
 model = models.Sequential()
-model.add(Linear(units = 16,input_shape = (64,)))  #注意该处的input_shape会被模型加工，无需使用None代表样本数量维
+#注意该处的input_shape会被模型加工，无需使用None代表样本数量维
+model.add(Linear(units = 16,input_shape = (64,)))  
 print("model.input_shape: ",model.input_shape)
 print("model.output_shape: ",model.output_shape)
 model.summary()

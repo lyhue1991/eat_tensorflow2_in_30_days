@@ -32,8 +32,10 @@ model.add(layers.Dense(64, input_dim=64,
                 kernel_regularizer=regularizers.l2(0.01), 
                 activity_regularizer=regularizers.l1(0.01),
                 kernel_constraint = constraints.MaxNorm(max_value=2, axis=0))) 
-model.add(layers.Dense(10,kernel_regularizer=regularizers.l1_l2(0.01,0.01),activation = "sigmoid"))
-model.compile(optimizer = "rmsprop",loss = "sparse_categorical_crossentropy",metrics = ["AUC"])
+model.add(layers.Dense(10,
+        kernel_regularizer=regularizers.l1_l2(0.01,0.01),activation = "sigmoid"))
+model.compile(optimizer = "rmsprop",
+        loss = "sparse_categorical_crossentropy",metrics = ["AUC"])
 model.summary()
 
 ```
@@ -94,7 +96,6 @@ _________________________________________________________________
 
 也可以对tf.keras.losses.Loss进行子类化，重写call方法实现损失的计算逻辑，从而得到损失函数的类的实现。
 
-
 下面是一个Focal Loss的自定义实现示范。Focal Loss是一种对binary_crossentropy的改进损失函数形式。
 
 在类别不平衡和存在难以训练样本的情形下相对于二元交叉熵能够取得更好的效果。
@@ -130,7 +131,6 @@ class FocalLoss(losses.Loss):
         loss = -tf.sum(self.alpha * tf.pow(1. - pt_1, self.gamma) * tf.log(1e-07+pt_1)) \
            -tf.sum((1-self.alpha) * tf.pow( pt_0, self.gamma) * tf.log(1. - pt_0 + 1e-07))
         return loss
-    
 ```
 
 ```python

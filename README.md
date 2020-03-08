@@ -139,7 +139,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 |day17|  [5-3,激活函数activation](./5-3,激活函数activation.md)    | ⭐️⭐️⭐️   |   0.5hour    |✅   |
 |day18|  [5-4,模型层layers](./5-4,模型层layers.md)  | ⭐️⭐️⭐️   |   1hour    |✅  |
 |day19|  [5-5,损失函数losses](./5-5,损失函数losses.md)    | ⭐️⭐️⭐️   |   1hour    |✅  |
-|day20|  [5-6,评估函数metrics](./5-6,评估函数metrics.md)    | ⭐️⭐️⭐️   |   1hour    |&nbsp;  |
+|day20|  [5-6,评估指标metrics](./5-6,评估指标metrics.md)    | ⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |day21|  [5-7,优化器optimizers](./5-7,优化器optimizers.md)    | ⭐️⭐️⭐️   |   0.5hour    |&nbsp;  |
 |day22|  [5-8,回调函数callbacks](./5-8,回调函数callbacks.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |&nbsp;  |
 |&nbsp; |[**六、TensorFlow的高阶API**](./六、TensorFlow的高阶API.md)|    ⭐️ | 0hour|&nbsp;  |
