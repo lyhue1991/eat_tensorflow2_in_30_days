@@ -17,11 +17,11 @@
 ```
 
 ```python
-!git rm  ./.ipynb_checkpoints/*
+!git rm  .ipynb_checkpoints/
 ```
 
 ```python
-!git commit -m"add chapter5"
+!git commit -m"add chapter6"
 ```
 
 ```python
