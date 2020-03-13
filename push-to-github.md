@@ -21,7 +21,7 @@
 ```
 
 ```python
-!git commit -m"revise chapter1 by vectorized_layer"
+!git commit -m"revise chapter1"
 ```
 
 ```python
