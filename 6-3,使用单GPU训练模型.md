@@ -32,6 +32,9 @@ https://colab.research.google.com/drive/1r5dLoeJq5z01sU72BX2M5UiNSkuxsEFe
 %tensorflow_version 2.x
 import tensorflow as tf
 print(tf.__version__)
+```
+
+```python
 from tensorflow.keras import * 
 
 #打印时间分割线
