@@ -21,7 +21,7 @@
 ```
 
 ```python
-!git commit -m"revise chapter1"
+!git commit -m"add covid-19"
 ```
 
 ```python
