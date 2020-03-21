@@ -1,6 +1,11 @@
 # 《30天吃掉那只 TensorFlow2.0 》开篇辞 🔥🔥
 
-<!-- #region -->
+
+github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_days/
+
+gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days/
+
+
 ### 一，TensorFlow2 🍎 还是 Pytorch🔥
 
 先说结论:
@@ -9,7 +14,7 @@
 
 **如果是学生或者研究人员，应该优先选择Pytorch.**
 
-**如果时间足够，最好Tensorflow2和Pytorch都要学习掌握。**
+**如果时间足够，最好TensorFlow2和Pytorch都要学习掌握。**
 
 
 理由如下：
@@ -21,8 +26,6 @@
 
 
 * 3，TensorFlow2和Pytorch实际上整体风格已经非常相似了，学会了其中一个，学习另外一个将比较容易。两种框架都掌握的话，能够参考的开源模型案例更多，并且可以方便地在两种框架之间切换。
-
-<!-- #endregion -->
 
 ```python
 
@@ -45,13 +48,6 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 随着谷歌对Keras的收购，Keras库2.3.0版本后也将不再进行更新，用户应当使用tf.keras而不是使用pip安装的Keras.
 
-
-
-```python
-
-```
-
-<!-- #region -->
 ### 三，本书📖面向读者 👼
 
 
@@ -66,12 +62,6 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 该书电子版下载链接：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA 提取码：wtzo 
 
 
-
-<!-- #endregion -->
-
-```python
-
-```
 
 ### 四，本书写作风格 🍉
 
@@ -97,10 +87,6 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 
 ### 五，本书学习方案 ⏰
-
-```python
-
-```
 
 **1，学习计划**
 
@@ -159,12 +145,20 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 **2，学习环境**
 
+
+本书全部源码在jupyter中编写测试通过，建议通过git克隆到本地，并在jupyter中交互式运行学习。
+
+为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipnb。
+
 ```python
-#建议在jupyter notebook 上安装最新版本tensorflow 测试本书中的代码
-!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  -U tensorflow
+#克隆本书源码到本地
+!git clone https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
 #建议在jupyter notebook 上安装jupytext，以便能够将本书各章节markdown文件视作ipynb文件运行
 !pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U jupytext
+    
+#建议在jupyter notebook 上安装最新版本tensorflow 测试本书中的代码
+!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  -U tensorflow
 ```
 
 ```python

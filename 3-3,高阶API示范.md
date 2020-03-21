@@ -1,7 +1,5 @@
 # 3-3,高阶API示范
 
-
-
 下面的范例使用TensorFlow的高阶API实现线性回归模型。
 
 TensorFlow的高阶API主要为tf.keras.models提供的模型的类接口。

@@ -1,7 +1,5 @@
 # 六、TensorFlow的高阶API
 
-
-
 TensorFlow的高阶API主要是tensorflow.keras.models.
 
 本章我们主要详细介绍tensorflow.keras.models相关的以下内容。

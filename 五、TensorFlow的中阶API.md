@@ -1,7 +1,5 @@
 # 五、TensorFlow的中阶API
 
-
-
 TensorFlow的中阶API主要包括: 
 
 * 数据管道(tf.data)

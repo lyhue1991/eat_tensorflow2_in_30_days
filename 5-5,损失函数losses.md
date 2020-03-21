@@ -1,7 +1,5 @@
 # 5-5,损失函数losses
 
-
-
 一般来说，监督学习的目标函数由损失函数和正则化项组成。（Objective = Loss + Regularization）
 
 对于keras模型，目标函数中的正则化项一般在各层中指定，例如使用Dense的 kernel_regularizer 和 bias_regularizer等参数指定权重使用l1或者l2正则化项，此外还可以用kernel_constraint 和 bias_constraint等参数约束权重的取值范围，这也是一种正则化手段。

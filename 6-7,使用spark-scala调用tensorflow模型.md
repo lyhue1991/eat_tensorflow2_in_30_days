@@ -1,7 +1,5 @@
 # 6-7,使用spark-scala调用tensorflow2.0训练好的模型
 
-
-
 本篇文章介绍在spark中调用训练好的tensorflow模型进行预测的方法。
 
 本文内容的学习需要一定的spark和scala基础。
@@ -130,7 +128,7 @@ linear.save(export_path+version, save_format="tf")
 也可以从下面网址中直接下载 org.tensorflow.tensorflow的jar包
 
 以及其依赖的org.tensorflow.libtensorflow 和 org.tensorflowlibtensorflow_jni的jar包 放到项目中。
- 
+
 https://mvnrepository.com/artifact/org.tensorflow/tensorflow/1.15.0
 
 

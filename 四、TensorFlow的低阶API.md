@@ -1,7 +1,5 @@
 # 四、TensorFlow的低阶API
 
-
-
 TensorFlow的低阶API主要包括张量操作，计算图和自动微分。
 
 如果把模型比作一个房子，那么低阶API就是【模型之砖】。

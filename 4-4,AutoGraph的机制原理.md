@@ -1,7 +1,5 @@
 # 4-4,AutoGraph的机制原理
 
-
-
 有三种计算图的构建方式：静态计算图，动态计算图，以及Autograph。
 
 TensorFlow 2.0主要使用的是动态计算图和Autograph。
