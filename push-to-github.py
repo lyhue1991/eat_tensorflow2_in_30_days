@@ -67,11 +67,15 @@
 
 # !gitbook build
 
-# !git checkout gh-pages
+# !git branch -D gh-pages 
+
+# !git checkout -b gh-pages
 
 # !cp -r _book/* .
 
 # !git add .
 # !git commit -m "revise readme"
-# !git push -u origin gh-pages
+
+# !git push -f origin gh-pages
+
 # !git checkout master
