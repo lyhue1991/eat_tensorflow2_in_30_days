@@ -1,9 +1,7 @@
 # 《30天吃掉那只 TensorFlow2.0 》开篇辞 🔥🔥
 
 
-github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_days/
-
-gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days/
+📚 gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days/
 
 
 ### 一，TensorFlow2 🍎 还是 Pytorch🔥
