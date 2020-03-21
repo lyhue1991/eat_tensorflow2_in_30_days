@@ -9,7 +9,7 @@
 
 # !git init
 
-# !git add  ./data/*  *.md 
+# !git add  ./data/*  *.md *.py
 
 # !rm -rf *.html
 
@@ -19,11 +19,15 @@
 
 # !git commit -m"add chapter6"
 
-# !git remote rm origin 
+# +
+# #!git remote rm origin 
 
-# !git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
+# +
+# #!git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
-# !git pull origin master 
+# +
+# #!git pull origin master 
+# -
 
 # !git push  origin master 
 
@@ -64,7 +68,9 @@
 # !gitbook build
 
 # !git checkout gh-pages
+
 # !cp -r _book/* .
+
 # !git add .
 # !git commit -m "revise readme"
 # !git push -u origin gh-pages
