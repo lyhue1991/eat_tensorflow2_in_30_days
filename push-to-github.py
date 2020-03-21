@@ -13,7 +13,9 @@
 
 # !rm -rf *.html
 
-# !git rm  .ipynb_checkpoints/
+# +
+# #!git rm --cached  push-to-github.md
+# -
 
 # !git commit -m"add chapter6"
 
@@ -54,7 +56,7 @@
 
 # !git checkout master
 
-# !git add ./data/*  *.md 
+# !git add ./data/*  *.md *.py
 # !git commit -m "revise readme"
 
 # !git push -u origin master
