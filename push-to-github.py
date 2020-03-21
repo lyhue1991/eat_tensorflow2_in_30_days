@@ -17,7 +17,7 @@
 # #!git rm --cached  push-to-github.md
 # -
 
-# !git commit -m"revise readme"
+# !git commit -m"add ebook"
 
 # +
 # #!git remote rm origin 
