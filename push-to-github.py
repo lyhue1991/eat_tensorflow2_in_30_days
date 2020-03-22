@@ -25,6 +25,8 @@
 
 # !git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
+# !git remote add gitee 
+
 # !git pull origin master 
 
 # !git push  origin master 
@@ -68,10 +70,16 @@
 
 # !git checkout -b gh-pages
 
+# !git rm --cached -r *.md
+
+# !git clean -df
+
+# !rm -rf *.md
+
 # !cp -r _book/* .
 
 # !git add .
-# !git commit -m "revise readme"
+# !git commit -m "add postscript"
 
 # !git push -f origin gh-pages
 
