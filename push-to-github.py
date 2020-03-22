@@ -17,7 +17,7 @@
 # #!git rm --cached  push-to-github.md
 # -
 
-# !git commit -m"revise readme"
+# !git commit -m"add postscript"
 
 # +
 # #!git remote rm origin 
@@ -33,8 +33,6 @@
 # ## 创建pages分支
 
 # !git checkout -b gh-pages
-
-# !git branch -m pages gh-pages
 
 # !git rm --cached -r *.md
 
@@ -60,6 +58,7 @@
 # !git checkout master
 
 # !git add ./data/*  *.md *.py
+
 # !git commit -m "revise readme"
 
 # !git push -u origin master
