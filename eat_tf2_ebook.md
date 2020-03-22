@@ -3,7 +3,7 @@
 
 📚 gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
 
-🚀 github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_days
+🚀 github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_d
 
 
 ### 一，TensorFlow2 🍎 还是 Pytorch🔥
@@ -150,6 +150,8 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipnb。
 
+此外，也可以关注公众号”**Python与算法之美**“ ，后台回复关键字：**tf**，获取本书ipynb源码的下载链接。
+
 ```python
 #克隆本书源码到本地
 #!git clone https://github.com/lyhue1991/eat_tensorflow2_in_30_days
@@ -181,10 +183,11 @@ hello tensorflow2
 
 ### 六，鼓励和联系作者 🎈🎈
 
-
 **如果本书对你有所帮助，想鼓励一下作者，记得给本项目加一颗星星star⭐️，并分享给你的朋友们喔😊!** 
 
-如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
+如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"**Python与算法之美**"下留言。作者时间和精力有限，会酌情予以回复。
+
+如果有想要获取本书的jupyter notebook源代码的小伙伴，也可以关注公众号，在后台回复关键字：**tf**，获取本书全部代码和数据集下载链接。
 
 ![image.png](./data/Python与算法之美logo.jpg)
 

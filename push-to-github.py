@@ -17,17 +17,16 @@
 # #!git rm --cached  push-to-github.md
 # -
 
-# !git commit -m"add ebook"
+# !git commit -m"revise readme"
 
 # +
 # #!git remote rm origin 
 
 # +
 # #!git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
-
-# +
-# #!git pull origin master 
 # -
+
+# !git pull origin master 
 
 # !git push  origin master 
 

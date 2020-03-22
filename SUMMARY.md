@@ -42,5 +42,6 @@
 * [6-5,使用TPU训练模型](./6-5,使用TPU训练模型.md)
 * [6-6,使用tensorflow-serving部署模型](./6-6,使用tensorflow-serving部署模型.md)
 * [6-7,使用spark-scala调用tensorflow模型](./6-7,使用spark-scala调用tensorflow模型.md)
+* [后记：一个吃货和一道菜的故事](./后记：一个吃货和一道菜的故事.md)
 
 
