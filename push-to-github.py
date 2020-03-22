@@ -21,10 +21,9 @@
 
 # +
 # #!git remote rm origin 
-
-# +
-# #!git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 # -
+
+# !git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
 # !git pull origin master 
 
