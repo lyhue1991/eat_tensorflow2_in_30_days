@@ -48,6 +48,10 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 随着谷歌对Keras的收购，Keras库2.3.0版本后也将不再进行更新，用户应当使用tf.keras而不是使用pip安装的Keras.
 
+```python
+
+```
+
 ### 三，本书📖面向读者 👼
 
 
@@ -62,6 +66,9 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 该书电子版下载链接：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA 提取码：wtzo 
 
 
+```python
+
+```
 
 ### 四，本书写作风格 🍉
 
@@ -85,6 +92,9 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 ![](./data/30天吃掉那个TF2.0.jpg)
 
 
+```python
+
+```
 
 ### 五，本书学习方案 ⏰
 
@@ -152,8 +162,8 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipnb。
 
 ```python
-#克隆本书源码到本地
-#!git clone https://github.com/lyhue1991/eat_tensorflow2_in_30_days
+#克隆本书源码到本地,使用码云镜像仓库国内下载速度更快
+#!git clone https://gitee.com/Python_Ai_Road/eat_tensorflow2_in_30_days
 
 #建议在jupyter notebook 上安装jupytext，以便能够将本书各章节markdown文件视作ipynb文件运行
 #!pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U jupytext
@@ -179,6 +189,9 @@ tensorflow version: 2.1.0
 hello tensorflow2
 ```
 
+```python
+
+```
 
 ### 六，鼓励和联系作者 🎈🎈
 

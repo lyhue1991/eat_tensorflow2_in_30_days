@@ -18,7 +18,7 @@
 # #!git rm --cached  push-to-github.md
 # -
 
-# !git commit -m"add postscript"
+# !git commit -m"revise layers"
 
 # +
 # #!git remote rm origin 
