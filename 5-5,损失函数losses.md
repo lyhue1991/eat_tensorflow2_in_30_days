@@ -103,7 +103,7 @@ _________________________________________________________________
 https://www.zhihu.com/question/63581984
 
 ```python
-def focal_loss(gamma=2., alpha=.25):
+def focal_loss(gamma=2., alpha=0.25):
     
     def focal_loss_fixed(y_true, y_pred):
         pt_1 = tf.where(tf.equal(y_true, 1), y_pred, tf.ones_like(y_pred))
