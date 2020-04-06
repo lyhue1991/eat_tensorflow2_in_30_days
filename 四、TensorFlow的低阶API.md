@@ -23,4 +23,6 @@ Autograph计算图我们将介绍使用Autograph的规范建议，Autograph的�
 
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
 
-![](./data/Python与算法之美logo.jpg)
+也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
+
+![image.png](./data/Python与算法之美logo.jpg)
