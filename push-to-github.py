@@ -19,9 +19,7 @@
 
 # !git commit -m"revise readme"
 
-# +
-# #!git remote rm origin 
-# -
+# !git remote rm origin 
 
 # !git remote add origin https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
@@ -29,7 +27,7 @@
 
 # !git pull  origin master 
 
-# !git push -f  origin master 
+# !git push   origin master 
 
 # !git push  gitee master 
 
