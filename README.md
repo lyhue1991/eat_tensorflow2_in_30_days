@@ -159,7 +159,7 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 本书全部源码在jupyter中编写测试通过，建议通过git克隆到本地，并在jupyter中交互式运行学习。
 
-为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipnb。
+为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipynb文件。
 
 ```python
 #克隆本书源码到本地,使用码云镜像仓库国内下载速度更快
