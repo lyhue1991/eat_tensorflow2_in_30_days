@@ -95,11 +95,11 @@
 
 # !git checkout -b english
 
+# !git add ./data/*  *.md *.py
 
+# !git commit -m "init branch"
 
-
-
-
+# !git push origin english:english
 
 
 
