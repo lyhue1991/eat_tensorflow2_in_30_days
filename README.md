@@ -1,4 +1,7 @@
-# 《30天吃掉那只 TensorFlow2.0 》开篇辞 🔥🔥
+# How to eat TensorFlow2 in 30 days ?🔥🔥
+
+
+English version repository is on 🔥 [english branch](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english) !  Just enjoy 🎈
 
 
 📚 gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
@@ -6,7 +9,7 @@
 🚀 github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
 
-### 一，TensorFlow2 🍎 还是 Pytorch🔥
+### 一，TensorFlow2 🍎 or Pytorch🔥
 
 先说结论:
 
@@ -31,7 +34,7 @@
 
 ```
 
-### 二，Keras🍏 和 tf.keras 🍎
+### 二，Keras🍏 and  tf.keras 🍎
 
 先说结论：
 
