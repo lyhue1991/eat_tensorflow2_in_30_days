@@ -18,7 +18,7 @@
 # #!git rm --cached  push-to-github.md
 # -
 
-# !git commit -m"revise layers"
+# !git commit -m"revise readme"
 
 # +
 # #!git remote rm origin 
