@@ -27,9 +27,11 @@
 
 # !git remote add gitee https://gitee.com/Python_Ai_Road/eat_tensorflow2_in_30_days
 
-# !git pull  origin master 
+# +
+# #!git pull  origin master 
+# -
 
-# !git push -f  origin master 
+# !git push  origin master 
 
 # !git push  gitee master 
 
@@ -56,7 +58,7 @@
 
 # !git checkout pages
 
-# ## 更新命令
+# ## 更新Pages分支
 
 # !git checkout master
 
@@ -86,3 +88,27 @@
 # !git push -f origin gh-pages
 
 # !git checkout master
+
+
+
+# ### 创建english分支
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
