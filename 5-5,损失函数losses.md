@@ -8,7 +8,7 @@
 
 对于二分类模型，通常使用的是二元交叉熵损失函数 binary_crossentropy。
 
-对于多分类模型，如果label是类别序号编码的，则使用类别交叉熵损失函数 categorical_crossentropy。如果label进行了one-hot编码，则需要使用稀疏类别交叉熵损失函数 sparse_categorical_crossentropy。
+对于多分类模型，如果label是one-hot编码的，则使用类别交叉熵损失函数 categorical_crossentropy。如果label是类别序号编码的，则需要使用稀疏类别交叉熵损失函数 sparse_categorical_crossentropy。
 
 如果有需要，也可以自定义损失函数，自定义损失函数需要接收两个张量y_true,y_pred作为输入参数，并输出一个标量作为损失函数值。
 
