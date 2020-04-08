@@ -307,7 +307,7 @@ Valid Loss:0.745884418,Valid Accuracy:0.854
 
 ```
 
-### 5. Model Usage
+### 5. Model Application
 
 
 Below are the available methods:
