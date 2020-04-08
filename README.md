@@ -109,10 +109,10 @@ This book could also be used as reference to the demonstrating libraries for the
 
 |Date |Contents                                                       | Difficulties   | Est. Time | Status|
 |----:|:--------------------------------------------------------------|-----------:|----------:|-----:|
-|&nbsp;|[**Chapter 1: Modeling Procedure of TensorFlow**](./一、TensorFlow的建模流程.md)    |⭐️   |   0hour   |🛠️    |
-|Day 1 |  [1-1 Example: Modeling Procedure for Structured Data](./1-1,结构化数据建模流程范例.md)    | ⭐️⭐️⭐️ |   1hour    |🛠️    |
-|Day 2 |[1-2 Example: Modeling Procedure for Images](./1-2,图片数据建模流程范例.md)    | ⭐️⭐️⭐️⭐️  |   2hour    |🛠️    |
-|Day 3 |  [1-3 Example: Modeling Procedure for Texts](./1-3,文本数据建模流程范例.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |🛠️    |
+|&nbsp;|[**Chapter 1: Modeling Procedure of TensorFlow**](./Chapter1.md)    |⭐️   |   0hour   |✅    |
+|Day 1 |  [1-1 Example: Modeling Procedure for Structured Data](./Chapter1-1.md)    | ⭐️⭐️⭐️ |   1hour    |✅    |
+|Day 2 |[1-2 Example: Modeling Procedure for Images](./Chapter1-2.md)    | ⭐️⭐️⭐️⭐️  |   2hour    |✅    |
+|Day 3 |  [1-3 Example: Modeling Procedure for Texts](./Chapter1-3.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |✅    |
 |Day 4 |  [1-4 Example: Modeling Procedure for Temporal Sequences](./1-4,时间序列数据建模流程范例.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |🛠️    |
 |&nbsp;    |[**Chapter 2: Key Concepts of TensorFlow**](./二、TensorFlow的核心概念.md)  | ⭐️  |  0hour |🛠️  |
 |Day 5 |  [2-1 Data Structure of Tensor](./2-1,张量数据结构.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️    |
