@@ -115,7 +115,7 @@ This book could also be used as reference to the demonstrating libraries for the
 |Day 3 |  [1-3 Example: Modeling Procedure for Texts](./Chapter1-3.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |✅    |
 |Day 4 |  [1-4 Example: Modeling Procedure for Temporal Sequences](./Chapter1-4.md)   | ⭐️⭐️⭐️⭐️⭐️  |   2hour    |✅    |
 |&nbsp;    |[**Chapter 2: Key Concepts of TensorFlow**](./Chapter2.md)  | ⭐️  |  0hour |✅  |
-|Day 5 |  [2-1 Data Structure of Tensor](./2-1,张量数据结构.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️    |
+|Day 5 |  [2-1 Data Structure of Tensor](./Chapter2-1.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅    |
 |Day 6 |  [2-2 Three Types of Graph](./2-2,三种计算图.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |🛠️    |
 |Day 7 |  [2-3 Automatic Differentiate](./2-3,自动微分机制.md)  | ⭐️⭐️⭐️   |   1hour    |🛠️    |
 |&nbsp; |[**Chapter 3: Hierarchy of TensorFlow**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |🛠️  |
