@@ -7,7 +7,7 @@
 * [1-3 Example: Modeling Procedure for Texts](./Chapter1-3.md)
 * [1-4 Example: Modeling Procedure for Temporal Sequences](./1-4,时间序列数据建模流程范例.md)
 
-* [Chapter 2: Key Concepts of TensorFlow (Translation in progress)](二、TensorFlow的核心概念.md)
+* [Chapter 2: Key Concepts of TensorFlow](./Chapter2.md)
 * [2-1 Data Structure of Tensor (Translation in progress)](./2-1,张量数据结构.md)
 * [2-2 Three Types of Graph (Translation in progress)](./2-2,三种计算图.md)
 * [2-3 Automatic Differentiate (Translation in progress)](./2-3,自动微分机制.md)

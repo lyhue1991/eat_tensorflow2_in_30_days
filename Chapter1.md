@@ -1,4 +1,4 @@
-# 一、Modeling Procedure of TensorFlow
+# Chapter 1: Modeling Procedure of TensorFlow
 
 
 Although Tensorflow is designed in a smart way to be adaptive to various complex numerical computations, the most popular usage is implementation of machine learning models, especially for those of neural networks.
