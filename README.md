@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 # Introduction to "Eat That TensorFlow2.0 in 30 Days" 🔥🔥
+=======
+# How to eat TensorFlow2 in 30 days ?🔥🔥
+
+
+English version repository is on 🔥 [english branch](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english) !  Just enjoy 🎈
+>>>>>>> master
 
 
 📚 URL to gitbook： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
@@ -6,7 +13,11 @@
 🚀 URL to github repo：https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 
 
+<<<<<<< HEAD
 ### 1. Should I choose TensorFlow2 🍎 or Pytorch🔥
+=======
+### 一，TensorFlow2 🍎 or Pytorch🔥
+>>>>>>> master
 
 TL; DR
 
@@ -31,7 +42,11 @@ Reasons:
 
 ```
 
+<<<<<<< HEAD
 ### 2. Keras🍏 and tf.keras 🍎
+=======
+### 二，Keras🍏 and  tf.keras 🍎
+>>>>>>> master
 
 TL; DR
 
