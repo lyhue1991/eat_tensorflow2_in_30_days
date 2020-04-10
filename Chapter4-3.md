@@ -10,9 +10,9 @@ Static graph has high efficiency in execution, but more difficult for debugging.
 
 Autograph mechanism transforms dynamic graph into static graph, making allowance for both executing and encoding efficiencies.
 
-There are certain rules for code that is able to converted by Autograph, or it could result in failure or unexpected results.
+There are certain rules for the code that is able to converted by Autograph, or it could result in failure or unexpected results.
 
-We are going to emphasize the coding rules of Autograph and its mechanism of converting into static graph, together with introduction about how to construct Autograph using `tf.Module`.
+We are going to introduce the coding rules of Autograph and its mechanism of converting into static graph, together with introduction about how to construct Autograph using `tf.Module`.
 
 This section introduce the coding rules of using Autograph.
 
