@@ -124,8 +124,8 @@ This book could also be used as reference to the demonstrating libraries for the
 |Day 9 |  [3-2 Mid-level API: Demonstration](./Chapter3-2.md)   | ⭐️⭐️⭐️   |   0.5hour    |✅  |
 |Day 10 |  [3-3 High-level API: Demonstration](./Chapter3-3.md)  | ⭐️⭐️⭐️   |   0.5hour    |✅  |
 |&nbsp; |[**Chapter 4: Low-level API in TensorFlow**](./Chapter4.md) |⭐️    | 0hour|✅  |
-|Day 11|  [4-1 Structural Operations of the Tensor](./Chapter4-1.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |🛠️   |
-|Day 12|  [4-2 Mathematical Operations of the Tensor](./Chapter4-2.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️  |
+|Day 11|  [4-1 Structural Operations of the Tensor](./Chapter4-1.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅   |
+|Day 12|  [4-2 Mathematical Operations of the Tensor](./Chapter4-2.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
 |Day 13|  [4-3 Rules of Using the AutoGraph](./Chapter4-3.md)| ⭐️⭐️⭐️   |   0.5hour    |🛠️  |
 |Day 14|  [4-4 Mechanisms of the AutoGraph](./Chapter4-4.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |🛠️  |
 |Day 15|  [4-5 AutoGraph and tf.Module](./Chapter4-5.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️  |
