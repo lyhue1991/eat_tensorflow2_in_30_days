@@ -97,7 +97,7 @@ for x,y in ds_train.take(1):
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using Sequential() function, arbitrary modeling using API functions, and customized modeling by inheriting base class Model.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
 
 Here we use API functions for modeling.
 

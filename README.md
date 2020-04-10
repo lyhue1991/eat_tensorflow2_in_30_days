@@ -119,10 +119,10 @@ This book could also be used as reference to the demonstrating libraries for the
 |Day 5 |  [2-1 Data Structure of Tensor](./Chapter2-1.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅    |
 |Day 6 |  [2-2 Three Types of Graph](./Chapter2-2.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |✅    |
 |Day 7 |  [2-3 Automatic Differentiate](./Chapter2-3.md)  | ⭐️⭐️⭐️   |   1hour    |✅    |
-|&nbsp; |[**Chapter 3: Hierarchy of TensorFlow**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |🛠️  |
-|Day 8 |  [3-1 Low-level API: Demonstration](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |🛠️   |
-|Day 9 |  [3-2 Mid-level API: Demonstration](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |🛠️  |
-|Day 10 |  [3-3 High-level API: Demonstration](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |🛠️  |
+|&nbsp; |[**Chapter 3: Hierarchy of TensorFlow**](./三、TensorFlow的层次结构.md) |   ⭐️  |  0hour   |✅  |
+|Day 8 |  [3-1 Low-level API: Demonstration](./3-1,低阶API示范.md)   | ⭐️⭐️   |   0.5hour    |✅   |
+|Day 9 |  [3-2 Mid-level API: Demonstration](./3-2,中阶API示范.md)   | ⭐️⭐️⭐️   |   0.5hour    |✅  |
+|Day 10 |  [3-3 High-level API: Demonstration](./3-3,高阶API示范.md)  | ⭐️⭐️⭐️   |   0.5hour    |✅  |
 |&nbsp; |[**Chapter 4: Low-level API in TensorFlow**](./四、TensorFlow的低阶API.md) |⭐️    | 0hour|🛠️  |
 |Day 11|  [4-1 Structural Operations of the Tensor](./4-1,张量的结构操作.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hour    |🛠️   |
 |Day 12|  [4-2 Mathematical Operations of the Tensor](./4-2,张量的数学运算.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️  |

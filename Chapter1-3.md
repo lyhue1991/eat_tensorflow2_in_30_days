@@ -99,9 +99,9 @@ ds_test = ds_test_raw.map(lambda text,label:(vectorize_layer(text),label)) \
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using Sequential() function, arbitrary modeling using API functions, and customized modeling by inheriting base class Model.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
 
-In this example, we use customized modeling by inheriting base class Model.
+In this example, we use customized modeling by inheriting base class `Model`.
 
 ```python
 # Actually, modeling with sequential() or API functions should be priorized.

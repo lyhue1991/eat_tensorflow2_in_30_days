@@ -81,7 +81,7 @@ ds_train = tf.data.Dataset.zip((ds_data,ds_label)).batch(38).cache()
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using Sequential() function, arbitrary modeling using API functions, and customized modeling by inheriting base class Model.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
 
 Here we use API functions for modeling.
 
