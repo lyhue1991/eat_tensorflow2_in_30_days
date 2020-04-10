@@ -13,7 +13,7 @@ We gave an intuitive introduction to the low-level API in the previous sections,
 
 Tensor operation can be devided into two sub-categories: the structural operation and the mathematical operation.
 
-The structural operation includes tensor creation, index slicing, dimension transformation, combining & splitting, etc.
+The structural operation includes tensor creation, indexing and slicing, dimension transformation, combining & splitting, etc.
 
 The mathematical operation includes scalar operation, vector operation, and matrix operation. We will also introduce the broadcasting mechanism of tensor operation.
 
