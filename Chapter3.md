@@ -9,7 +9,7 @@ The bottom one is hardware level. TensorFlow supports adding CPU, GPU or TPU to 
 
 The second level is the kernel implementing C++. These kernels are able to run on distributed cross platforms.
 
-The third level contains operators in written in Python, which provides low-level API instructions that packaging C++ kernels, including tensor operator, graph, automatic differentiate, etc.
+The third level contains operators in written in Python, which provides low-level API instructions that packaging C++ kernels, including tensor operation, graph, automatic differentiate, etc.
 For example: `tf.Variable`, `tf.constant`, `tf.function`, `tf.GradientTape`, `tf.nn.softmax`...
 If we compare a model to a house, then these third level APIs are the bricks.
 

@@ -2,7 +2,7 @@
 
 The examples below use low-level APIs in TensorFlow to implement a linear regression model.
 
-Low-level API includes tensor operator, graph and automatic differentiates.
+Low-level API includes tensor operation, graph and automatic differentiates.
 
 ```python
 import tensorflow as tf
