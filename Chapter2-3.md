@@ -110,7 +110,7 @@ tf.print(f(tf.constant(1.0)))
 
 ```
 
-### 二，利用梯度磁带和优化器求最小值
+### 2. Calculate the Minimal Value Through the Gradient Tape and the Optimizer
 
 ```python
 # Calculate the minimal value of f(x) = a*x**2 + b*x + c
