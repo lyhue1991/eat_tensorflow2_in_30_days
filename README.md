@@ -1,7 +1,9 @@
 # How to eat TensorFlow2 in 30 days ?🔥🔥
 
 
-English version repository is on 🔥 [english branch](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english) !  Just enjoy 🎈
+English version🔥 is [HERE](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english).
+
+Translation in progress. Looking forward to your contribution. 翻译进行中，欢迎你的加入和参与。
 
 
 📚 gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
