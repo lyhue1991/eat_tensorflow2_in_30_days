@@ -127,8 +127,8 @@ This book could also be used as library examples to consult when implementing ma
 |Day 13|  [4-3 Rules of Using the AutoGraph](./Chapter4-3.md)| ⭐️⭐️⭐️   |   0.5hour    ||✅  |
 |Day 14|  [4-4 Mechanisms of the AutoGraph](./Chapter4-4.md)    | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |✅  |
 |Day 15|  [4-5 AutoGraph and tf.Module](./Chapter4-5.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
-|&nbsp; |[**Chapter 5: Mid-level API in TensorFlow**](./五、TensorFlow的中阶API.md) |  ⭐️  | 0hour|🛠️ |
-|Day 16|  [5-1 Dataset](./5-1,数据管道Dataset.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |🛠️  |
+|&nbsp; |[**Chapter 5: Mid-level API in TensorFlow**](./Chapter5.md) |  ⭐️  | 0hour|✅ |
+|Day 16|  [5-1 Dataset](./Chapter5-1.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |✅  |
 |Day 17|  [5-2 feature_column](./5-2,特征列feature_column.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️  |
 |Day 18|  [5-3 activation](./5-3,激活函数activation.md)    | ⭐️⭐️⭐️   |   0.5hour    |🛠️   |
 |Day 19|  [5-4 layers](./5-4,模型层layers.md)  | ⭐️⭐️⭐️   |   1hour    |🛠️  |
@@ -194,7 +194,7 @@ hello tensorflow2
 
 **If you find this book helpful and want to support the author, please give a star ⭐️ to this repository and don't forget to share it to your friends 😊** 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegance of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 ![image.png](./data/Python与算法之美logo.jpg)
 
