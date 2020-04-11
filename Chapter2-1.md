@@ -2,7 +2,7 @@
 
 Program = Data Structure + Algorithm
 
-TensorFlow Program = Data Structure in Tensor + Algorithm in Graph
+TensorFlow Program = Data Structure of Tensor + Algorithm in Graph
 
 Tensor and graph are key concepts of TensorFlow.
 
@@ -51,9 +51,9 @@ Scalars are tensors with rank = 0, arrays are with rank = 1, matrix are with ran
 
 Colorful image has three channels (RGB), which can be represented as a tensor with rank = 3.
 
-There is temporal dimension for video so it could be represented as a rank 4 tensor.
+There is a temporal dimension for video so it could be represented as a rank 4 tensor.
 
-An intuitive way to understand: the number of the layers of square brackets equals to the rank of the tensor.
+An intuitive way to understand: the number of the square brackets equals to the rank of the tensor.
 
 ```python
 scalar = tf.constant(True)  #A scalar is a rank 0 tensor
@@ -217,7 +217,7 @@ print(id(v))
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 
