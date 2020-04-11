@@ -19,8 +19,6 @@ In this section, we introduce constructing Autograph using `tf.Module`.
 
 
 
-
-
 ### 1. Introduction to Autograph and `tf.Module`
 
 
@@ -30,16 +28,13 @@ However, it would seem to be a imperfect leaked package if we define `tf.Variabl
 
 One of the simple solutions is: defining a class and place the definition of `tf.Variable` inside the initial method, and leave the other methods/implementation elsewhere.
 
-After such an ingenious operation, it is so comfortable as if the chronic constipation was cured by the best laxative.
+After such an ingenious operation, it is so naturally as if the chronic constipation was cured by the best laxative.
 
-What's more, TensorFlow offers a base class `tf.Module`. It is supposed to be inherited for constructing child classes to manage variables and other `Module` conveniently. It is the most important that it allows us to save model through `tf.saved_model` and achieve cross-platform deployment. What a surprise!
+The surprise is that TensorFlow providing us a base class `tf.Module` to get the above naturally. What's more, It is supposed to be inherited for constructing child classes to manage variables and other `Module` conveniently. And the most important that it allows us to save model through `tf.saved_model` and achieve cross-platform deployment. What a surprise!
 
 In fact, `tf.keras.models.Model`, `tf.keras.layers.Layer` are both inherited from `tf.Module`. They provides the management to the variables and the referred sub-modules.
 
 **We are able to develop arbitrary learning model (not only neural network) and implement cross-platform deployment through the packaging provided by `tf.Module` and the low-level APIs in TensorFlow.**
-
-
-
 
 
 ### 2. Packaging Autograph Using `tf.Module`
@@ -373,7 +368,7 @@ sequential
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群 (join group)** in the WeChat official account to join the group chat with the other readers.
 

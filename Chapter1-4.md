@@ -72,7 +72,7 @@ ds_data = tf.data.Dataset.from_tensor_slices(tf.constant(dfdiff.values,dtype = t
 ds_label = tf.data.Dataset.from_tensor_slices(
     tf.constant(dfdiff.values[WINDOW_SIZE:],dtype = tf.float32))
 
-#We can put all data into one batch to enhance the performance since the data volume is small.
+#We put all data into one batch for better efficiency since the data volume is small.
 ds_train = tf.data.Dataset.zip((ds_data,ds_label)).batch(38).cache()
 
 
@@ -81,9 +81,9 @@ ds_train = tf.data.Dataset.zip((ds_data,ds_label)).batch(38).cache()
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using functional API, and customized modeling by inheriting base class `Model`.
 
-Here we use API functions for modeling.
+Here we use functional API for modeling.
 
 ```python
 #We design the following block since the daily increment of confirmed, discharged and deceased cases are equal or larger than zero.
@@ -568,7 +568,7 @@ model_loaded.predict(ds_train)
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 

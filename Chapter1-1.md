@@ -4,7 +4,7 @@
 ### 1. Data Preparation
 
 
-The purpose of the Titanic dataset is to predict whether the given passengers could be survived after Titinic hit the iceburg titanic, according to their personal information.
+The purpose of the Titanic dataset is to predict whether the given passengers could be survived after Titinic hit the iceburg, according to their personal information.
 
 We usually use DataFrame from the pandas library to pre-process the structured data.
 
@@ -147,7 +147,7 @@ x_test.shape = (179, 15)
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using functional API, and customized modeling by inheriting base class `Model`.
 
 Here we take the simplest way: sequential modeling using function `Sequential()`.
 
@@ -436,7 +436,7 @@ model_loaded.evaluate(x_test,y_test)
 ```
 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 

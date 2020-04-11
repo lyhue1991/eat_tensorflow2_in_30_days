@@ -430,7 +430,7 @@ The rules of broadcasting in TensorFlow is the same as numpy:
 * 2. If two tensors has the same length along certain dimension, or one of the tensors has length 1 along certain dimension, then these two tensors are compatible along this dimension.
 * 3. Two tensors that are compatible along all dimensions are able to broadcast.
 * 4. After broadcasting, the length of each dimension equals to the larger one among two tensors.
-* 5. When a tensor has length = 1 along any dimension while the length of corresponding dimension of the other tensor > 1, this only element is duplicated along this dimension.
+* 5. When a tensor has length = 1 along any dimension while the length of corresponding dimension of the other tensor > 1, in the broadcast result, this only element is jusk like been duplicated along this dimension.
 
 `tf.broadcast_to` expand the dimension of tensor explicitly.
 
@@ -494,7 +494,7 @@ array([[2, 3, 4],
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群 (join group)** in the WeChat official account to join the group chat with the other readers.
 

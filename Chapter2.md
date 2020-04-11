@@ -12,10 +12,10 @@ Advantages of TensorFlow:
 * Distributed computation: Allows distributed parallel computation and designating calculation devices for specific operator
 
 
-"Mighty oaks from little acorns grow", and TensorFlow also has its base, which are the key concepts of tensor, graph and automatic differenciate.
+"High buildings rise from the ground", and TensorFlow also has its base, which are the key concepts of tensor, graph and automatic differenciate.
 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 

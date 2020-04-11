@@ -8,7 +8,7 @@
 
 ### 1. TensorFlow2 🍎 or Pytorch🔥
 
-TL; DR
+Conclusion first：
 
 **For the engineers, priority goes to TensorFlow2.**
 
@@ -19,13 +19,13 @@ TL; DR
 
 Reasons:
 
-* 1. **Model implementation is the most important in the industry. Only deployment ONLY supports tensorflow models （not Pytorch） for the majority of the domestic enterprises (in China).** What's more, the industry prefers the models with higher availability; in most cases, they use well-validated modeling architectures with the minimized requirements of adjustment.
+* 1. **Model implementation is the most important in the industry. Only deployment supports for tensorflow models （not Pytorch） is the present situation in the majority of the internet enterprises (in China).** What's more, the industry prefers the models with higher availability; in most cases, they use well-validated modeling architectures with the minimized requirements of adjustment.
 
 
 * 2. **Fast iterative development and publication is the most important for the researchers since they need to test a lot of new models. Pytorch has advantages in accessing and debugging comparing with TensorFlow2.** Pytorch is most frequently used in academy since 2019 with a large amount of the cutting-edge results.
 
 
-* 3. Overall, TensorFlow2 and Pytorch is quite similar in programming nowadays, so mastering one helps learning the other. Mastering both framework provides you a lot more open-sourced models and helps you switching between them.
+* 3. Overall, TensorFlow2 and Pytorch are quite similar in programming nowadays, so mastering one helps learning the other. Mastering both framework provides you a lot more open-sourced models and helps you switching between them.
 
 ```python
 
@@ -33,7 +33,7 @@ Reasons:
 
 ### 2. Keras🍏 and tf.keras 🍎
 
-TL; DR
+Conclusion first：
 
 **Keras will be discontinued in development after version 2.3.0, so use tf.keras.**
 
@@ -46,14 +46,13 @@ tf.keras is the high-level API just for Tensorflow, which is based on low-level 
 
 Most but not all of the functions in tf.keras are the same for those in Keras (which is compatible to many kinds of backend). tf.keras has a tighter combination to TensorFlow comparing to Keras.
 
-Keras will not update after version 2.3.0 after being acquired by Google; thus the users should use tr.keras from now on, instead of using Keras installed by pip.
+With acquired by Google, Keras will not update after version 2.3.0 , thus the users should use tf.keras from now on, instead of using Keras installed by pip.
 
 ```python
 
 ```
 
-### 3. Readers 👼: Before you read this book📖
-
+### 3. what should you knonw before reading this book 📖?
 
 **It is suggested that the readers have foundamental knowledges of machine/deep learning and experience of modeling using Keras or TensorFlow 1.0.**
 
@@ -61,7 +60,7 @@ Keras will not update after version 2.3.0 after being acquired by Google; thus t
 
 ["Deep Learning with Python"](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438/ref=sr_1_1?dchild=1&keywords=Deep+Learning+with+Python&qid=1586194568&sr=8-1) is written by François Chollet, the inventor of Keras. This book is based on Keras and has no machine learning related prerequisites to the reader.
 
-"Deep Learning with Python" is easy to understand as it uses various example to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuitive to the deep learning.**
+"Deep Learning with Python" is easy to understand as it uses various examples to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuitive to the deep learning.**
 
 The Chinese version of this book could be downloaded here：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA password：wtzo 
 
@@ -70,18 +69,18 @@ The Chinese version of this book could be downloaded here：https://pan.baidu.co
 
 ```
 
-### 4. Writing style 🍉
+### 4. Writing style 🍉 of this book
 
 
 **This is a introduction reference book which is extremely friendly to human being. The lowest goal of the authors is to avoid giving up due to the difficulties, while "Don't let the readers think" is the highest target.**
 
 This book is mainly based on the official documents of TensorFlow together with its functions.
 
-HOWEVER, the authors made a thorough restructuring and made a lot optimizations on the demonstrations.
+However, the authors made a thorough restructuring and made a lot optimizations on the demonstrations.
 
 It is different from the official documents, which is disordered and contains both tutorial and guidance with lack of systematic logic, that our book redesigns the content according to the difficulties, readers' searching habits, and the architecture of TensorFlow. We now make it progressive for TensorFlow studying with a clear path, and an easy access to the corresponding examples.
 
-In contrast to the verbose demonstrating code, the authors of this book try to minimize the length of the examples to make it easy for reading and implementation. What's more, most of the code cells can be executed instantaneously.
+In contrast to the verbose demonstrating code, the authors of this book try to minimize the length of the examples to make it easy for reading and implementation. What's more, most of the code cells can be used in your project instantaneously.
 
 **Given the level of difficulty as 9 for learning Tensorflow through official documents, it would be reduced to 3 if learning through this book.**
 
@@ -98,16 +97,16 @@ This difference could be demonstrated as the following figure:
 
 **(1) Study Plan**
 
-The authors wrote this book using the spare time, especially the two month unexpected "holiday" of COVID-19. Most readers should be able to completely master all the content within 30 days.
+The authors wrote this book using the spare time, especially the two months unexpected "holiday" of COVID-19. Most readers should be able to completely master all the content within 30 days.
 
 Time required everyday would be between 30 minutes to 2 hours.
 
-This book could also be used as reference to the demonstrating libraries for the implementation of projects.
+This book could also be used as examples library to consult when implementing machine learning projects with TensorFlow2.
 
 **Click the blue captions to enter the corresponding chapter.**
 
 
-|Date |Contents                                                       | Difficulties   | Est. Time | Status|
+|Date |Contents                                                       | Difficulties   | Est. Time | Update Status|
 |----:|:--------------------------------------------------------------|-----------:|----------:|-----:|
 |&nbsp;|[**Chapter 1: Modeling Procedure of TensorFlow**](./Chapter1.md)    |⭐️   |   0hour   |✅    |
 |Day 1 |  [1-1 Example: Modeling Procedure for Structured Data](./Chapter1-1.md)    | ⭐️⭐️⭐️ |   1hour    |✅    |
@@ -119,9 +118,9 @@ This book could also be used as reference to the demonstrating libraries for the
 |Day 6 |  [2-2 Three Types of Graph](./Chapter2-2.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |✅    |
 |Day 7 |  [2-3 Automatic Differentiate](./Chapter2-3.md)  | ⭐️⭐️⭐️   |   1hour    |✅    |
 |&nbsp; |[**Chapter 3: Hierarchy of TensorFlow**](./Chapter3.md) |   ⭐️  |  0hour   |✅  |
-|Day 8 |  [3-1 Low-level API: Demonstration](./Chapter3-1.md)   | ⭐️⭐️   |   0.5hour    |✅   |
-|Day 9 |  [3-2 Mid-level API: Demonstration](./Chapter3-2.md)   | ⭐️⭐️⭐️   |   0.5hour    |✅  |
-|Day 10 |  [3-3 High-level API: Demonstration](./Chapter3-3.md)  | ⭐️⭐️⭐️   |   0.5hour    |✅  |
+|Day 8 |  [3-1 Low-level API: Demonstration](./Chapter3-1.md)   | ⭐️⭐️⭐️⭐️ |   1hour    |✅   |
+|Day 9 |  [3-2 Mid-level API: Demonstration](./Chapter3-2.md)   | ⭐️⭐️⭐️   |   1hour    |✅  |
+|Day 10 |  [3-3 High-level API: Demonstration](./Chapter3-3.md)  | ⭐️⭐️⭐️   |   1hour    |✅  |
 |&nbsp; |[**Chapter 4: Low-level API in TensorFlow**](./Chapter4.md) |⭐️    | 0hour|✅  |
 |Day 11|  [4-1 Structural Operations of the Tensor](./Chapter4-1.md)  | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |✅   |
 |Day 12|  [4-2 Mathematical Operations of the Tensor](./Chapter4-2.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
@@ -193,9 +192,9 @@ hello tensorflow2
 ### 6. Contact and support the author 🎈🎈
 
 
-**If you find this book helpful and want to support the author, please give a star ⭐️ to this repo and don't forget to share it to your friends 😊** 
+**If you find this book helpful and want to support the author, please give a star ⭐️ to this repository and don't forget to share it to your friends 😊** 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 ![image.png](./data/Python与算法之美logo.jpg)
 

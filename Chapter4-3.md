@@ -24,7 +24,7 @@ This section introduce the coding rules of using Autograph.
 
 * 2. Avoid defining `tf.Variable` inside the decorator `@tf.function`.
 
-* 3. Functions that are decorated by `@tf.function` cannot modify the variables outside the function with the data types such as Python list, dictionary, etc.
+* 3. Functions that are decorated by `@tf.function` cannot modify the struct data types variables outside the function such as Python list, dictionary, etc.
 
 <!-- #endregion -->
 ```python
@@ -136,7 +136,7 @@ ValueError: tf.function-decorated function tried to create variables on non-firs
 ```
 
 
-**3.3 Functions that are decorated by `@tf.function` cannot modify the variables outside the function with the data types such as Python list, dictionary, etc.**
+**2.3  Functions that are decorated by `@tf.function` cannot modify the struct data types variables outside the function such as Python list, dictionary, etc.**
 
 ```python
 tensor_list = []
@@ -179,7 +179,7 @@ print(tensor_list)
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群 (join group)** in the WeChat official account to join the group chat with the other readers.
 
