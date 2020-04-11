@@ -4,7 +4,7 @@
 ### 1. Data Preparation
 
 
-The purpose of the imdb dataset is to predict the emotion label according to the movie reviews.
+The purpose of the imdb dataset is to predict the sentiment label according to the movie reviews.
 
 There are 20000 text reviews in the training dataset and 5000 in the testing dataset, with half positive and half negative, respectively.
 
@@ -14,7 +14,7 @@ There are two popular mothods of text preparation in TensorFlow.
 
 The first one is constructing the text data generator using Tokenizer in `tf.keras.preprocessing`, together with `tf.keras.utils.Sequence`.
 
-The second one is using `tf.data.Dataset` to have it work with the pre-processing layer `tf.keras.layers.experimental.preprocessing.TextVectorization`.
+The second one is using `tf.data.Dataset`, together with the pre-processing layer `tf.keras.layers.experimental.preprocessing.TextVectorization`.
 
 The former is more complex and is demonstrated [here](https://zhuanlan.zhihu.com/p/67697840).
 
@@ -393,7 +393,7 @@ array([[0.7864823 ],
 ```
 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 
