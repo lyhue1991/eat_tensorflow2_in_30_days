@@ -15,7 +15,7 @@
 
 # !git rm --cached  .ipynb_checkpoints/* 
 
-# !git commit -m"revise readme"
+# !git commit -m"add examples in chapter3"
 
 # !git remote rm origin 
 
@@ -27,7 +27,7 @@
 
 # !git push   origin master 
 
-# !git push  gitee master 
+# !git push gitee master 
 
 # ## 创建pages分支
 
