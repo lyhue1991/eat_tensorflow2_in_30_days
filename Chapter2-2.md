@@ -9,7 +9,7 @@ For TensorFlow 2.X, dynamic graph is used. The operator will be added to the inv
 
 Using dynamic graph (i.e. Eager Execution) is convenient for debugging, as it improves performance of TensorFlow code just as original Python code, with possibilities of log output and flow control, etc.
 
-The drawback of dynamic graph is a relatively lower execution efficiency comparing to static graph. This is because multiple times of communication between the Pythona thread and the C++ thread of TensorFlow is required for dynamic graph, while the static graph is executed almost all on the TensorFlow kernel using C++ code with higher efficiency. What's more, the static graph optimizes the computation, reducing the steps that are not relevant to the result.
+The drawback of dynamic graph is a relatively lower execution efficiency comparing to static graph. This is because multiple times of communication between the Python thread and the C++ thread of TensorFlow Kernel is required for dynamic graph, while the static graph is executed almost all on the TensorFlow kernel using C++ code with higher efficiency. What's more, the static graph optimizes the computation, reducing the steps that are not relevant to the result.
 
 It is possible to use the decorator `@tf.function` to construct code by converting normal Python function to TensorFlow graph. Executing this function is identical to executing `Session` in TensorFlow 1.X. This method, which uses decorator `@tf.function` to create static graph, is called Autograph.
 
@@ -131,7 +131,7 @@ We can use the decorator `@tf.function` to convert the original Python functions
 
 In TensorFlow 1.X, the static graph is impelmented in two steps: defining the graph and executing it in `Session`.
 
-In TensorFlow 2.X, the two steps for Autographs are: defining the function and calling this function.
+In TensorFlow 2.X, the two steps for Autographs are: defining the function with a decorator '@tf.function' and calling this function.
 
 The is no need to use `Session`, so the syntax is as smooth as that of original Python.
 
@@ -164,7 +164,7 @@ tf.Tensor(b'hello world', shape=(), dtype=string)
 ```python
 import datetime
 
-# Create log
+# Create logdir
 stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 logdir = './data/autograph/%s' % stamp
 writer = tf.summary.create_file_writer(logdir)
@@ -199,7 +199,7 @@ with writer.as_default():
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 
