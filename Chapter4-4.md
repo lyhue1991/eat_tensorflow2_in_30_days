@@ -21,7 +21,7 @@ The coding rules of Autograph was introduced in the last section. Here we introd
 ### 1. Mechanisms of Autograph
 
 
-**What happens to the first function subsequent the decorator `@tf.function`?**
+**What happens when we define a function using decorator `@tf.function` ?**
 
 Consider the following code.
 
@@ -58,7 +58,9 @@ tracing
 <!-- #region -->
 There are two incidents:
 
-First, the graph is created, which means a static graph is created. The Python code inside this function is executed, the tensor type of each variable is determined, and the operator is added to the graph according to the order of execution. During this period, the argument autograph=True (default) convert the controlling flow of Python to the one inside TensorFlow graph. The majority of the work are: replacing `if` to `tf.cond` operator; replacing `while` and `for` looping to `tf.while_loop`; when necessary, add `tf.control_dependencies` to specify the dependencies of executing orders.
+First, the graph is created.
+
+A static graph is created. The Python code inside this function is executed, the tensor type of each variable is determined, and the operator is added to the graph according to the order of execution. During this period, if the argument autograph=True (default) is setted, convertting of the controlling flow in Python to the one inside TensorFlow graph will happen. The majority of the work are: replacing `if` to `tf.cond` operator; replacing `while` and `for` looping to `tf.while_loop`; when necessary, add `tf.control_dependencies` to specify the dependencies of executing orders.
 
 This is identical to the following expressions in TensorFlow 1.X:
 
@@ -188,7 +190,7 @@ Explanations: Static graph is executed in the TensorFlow kernels, which are comp
 
 ```
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群 (join group)** in the WeChat official account to join the group chat with the other readers.
 
