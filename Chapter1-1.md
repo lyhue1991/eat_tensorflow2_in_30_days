@@ -147,7 +147,7 @@ x_test.shape = (179, 15)
 ### 2. Model Definition
 
 
-Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using API functions, and customized modeling by inheriting base class `Model`.
+Usually there are three ways of modeling using APIs of Keras: sequential modeling using `Sequential()` function, arbitrary modeling using functional API, and customized modeling by inheriting base class `Model`.
 
 Here we take the simplest way: sequential modeling using function `Sequential()`.
 
