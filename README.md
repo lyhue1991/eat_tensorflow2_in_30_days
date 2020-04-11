@@ -46,13 +46,13 @@ tf.keras is the high-level API just for Tensorflow, which is based on low-level 
 
 Most but not all of the functions in tf.keras are the same for those in Keras (which is compatible to many kinds of backend). tf.keras has a tighter combination to TensorFlow comparing to Keras.
 
-With acquired by Google, Keras will not update after version 2.3.0 , thus the users should use tf.keras from now on, instead of using Keras installed by pip.
+With the acquisition by Google, Keras will not update after version 2.3.0 , thus the users should use tf.keras from now on, instead of using Keras installed by pip.
 
 ```python
 
 ```
 
-### 3. what should you knonw before reading this book 📖?
+### 3. What Should You Know Before Reading This Book 📖?
 
 **It is suggested that the readers have foundamental knowledges of machine/deep learning and experience of modeling using Keras or TensorFlow 1.0.**
 
@@ -69,14 +69,14 @@ The Chinese version of this book could be downloaded here：https://pan.baidu.co
 
 ```
 
-### 4. Writing style 🍉 of this book
+### 4. Writing Style 🍉 of This Book
 
 
 **This is a introduction reference book which is extremely friendly to human being. The lowest goal of the authors is to avoid giving up due to the difficulties, while "Don't let the readers think" is the highest target.**
 
 This book is mainly based on the official documents of TensorFlow together with its functions.
 
-However, the authors made a thorough restructuring and made a lot optimizations on the demonstrations.
+However, the authors made a thorough restructuring and a lot optimizations on the demonstrations.
 
 It is different from the official documents, which is disordered and contains both tutorial and guidance with lack of systematic logic, that our book redesigns the content according to the difficulties, readers' searching habits, and the architecture of TensorFlow. We now make it progressive for TensorFlow studying with a clear path, and an easy access to the corresponding examples.
 
@@ -93,15 +93,15 @@ This difference could be demonstrated as the following figure:
 
 ```
 
-### 5. How to learn with this book ⏰
+### 5. How to Learn With This Book ⏰
 
 **(1) Study Plan**
 
-The authors wrote this book using the spare time, especially the two months unexpected "holiday" of COVID-19. Most readers should be able to completely master all the content within 30 days.
+The authors wrote this book using the spare time, especially the two-month unexpected "holiday" of COVID-19. Most readers should be able to completely master all the content within 30 days.
 
 Time required everyday would be between 30 minutes to 2 hours.
 
-This book could also be used as examples library to consult when implementing machine learning projects with TensorFlow2.
+This book could also be used as library examples to consult when implementing machine learning projects with TensorFlow2.
 
 **Click the blue captions to enter the corresponding chapter.**
 
