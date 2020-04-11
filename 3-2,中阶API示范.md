@@ -121,11 +121,6 @@ train_step(model,features,labels)
 ```
 
 ```python
-model.variables[0]
-model.variables[1]
-```
-
-```python
 @tf.function
 def train_model(model,epochs):
     for epoch in tf.range(1,epochs+1):
