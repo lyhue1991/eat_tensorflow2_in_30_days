@@ -27,12 +27,12 @@ The common procedures of implementing neural networks using TensorFlow are:
 
 The most common data types are structured data, images, texts, and temporal sequences.
 
-We are demonstrating the steps of modeling for these four data types through the following examples, respectively: (1) Predicting the survival on the Titanic; (2) Image classification on CIFAR2 set; (3) Classification of movie reviews on IMDB; (4) Predicting the terminate time of the COVID-19 pandemic in China.
+We are demonstrating the steps of modeling for these four data types through the following examples, respectively: (1) Predicting the survival on the Titanic; (2) Image classification on CIFAR2 set; (3) Classification of movie reviews on IMDB; (4) Predicting the terminate date of the COVID-19 pandemic in China.
 
 
 <!-- #endregion -->
 
-Please leave comments in the WeChat official account "Python与算法之美" (Beauty of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 
