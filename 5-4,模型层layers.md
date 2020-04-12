@@ -20,9 +20,6 @@ layers.Embedding,layers.GRU,layers.LSTM,layers.Bidirectional等等。
 
 ### 一，内置模型层
 
-```python
-
-```
 
 一些常用的内置模型层简单介绍如下。
 
@@ -147,22 +144,23 @@ class Linear(layers.Layer):
     def __init__(self, units=32, **kwargs):
         super(Linear, self).__init__(**kwargs)
         self.units = units
-
+    
     #build方法一般定义Layer需要被训练的参数。    
     def build(self, input_shape): 
-        self.w = self.add_weight(shape=(input_shape[-1], self.units),
+        self.w = self.add_weight("w",shape=(input_shape[-1], self.units),
                                  initializer='random_normal',
-                                 trainable=True)
-        self.b = self.add_weight(shape=(self.units,),
+                                 trainable=True) #注意必须要有参数名称"w",否则会报错
+        self.b = self.add_weight("b",shape=(self.units,),
                                  initializer='random_normal',
                                  trainable=True)
         super(Linear,self).build(input_shape) # 相当于设置self.built = True
 
-    #call方法一般定义正向传播运算逻辑，__call__方法调用了它。    
+    #call方法一般定义正向传播运算逻辑，__call__方法调用了它。  
+    @tf.function
     def call(self, inputs): 
         return tf.matmul(inputs, self.w) + self.b
     
-    #如果要让自定义的Layer通过Functional API 组合成模型时可以序列化，需要自定义get_config方法。
+    #如果要让自定义的Layer通过Functional API 组合成模型时可以被保存成h5模型，需要自定义get_config方法。
     def get_config(self):  
         config = super(Linear, self).get_config()
         config.update({'units': self.units})
@@ -216,36 +214,59 @@ tf.keras.backend.clear_session()
 
 model = models.Sequential()
 #注意该处的input_shape会被模型加工，无需使用None代表样本数量维
-model.add(Linear(units = 16,input_shape = (64,)))  
+model.add(Linear(units = 1,input_shape = (2,)))  
 print("model.input_shape: ",model.input_shape)
 print("model.output_shape: ",model.output_shape)
 model.summary()
 ```
 
 ```
-model.input_shape:  (None, 64)
-model.output_shape:  (None, 16)
+model.input_shape:  (None, 2)
+model.output_shape:  (None, 1)
 Model: "sequential"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-linear (Linear)              (None, 16)                1040      
+linear (Linear)              (None, 1)                 3         
 =================================================================
-Total params: 1,040
-Trainable params: 1,040
+Total params: 3
+Trainable params: 3
 Non-trainable params: 0
+_________________________________________________________________
 ```
 
 ```python
+model.compile(optimizer = "sgd",loss = "mse",metrics=["mae"])
+print(model.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
+
+
+# 保存成 h5模型
+model.save("./data/linear_model.h5",save_format = "h5")
+model_loaded_keras = tf.keras.models.load_model(
+    "./data/linear_model.h5",custom_objects={"Linear":Linear})
+print(model_loaded_keras.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
+
+
+# 保存成 tf模型
+model.save("./data/linear_model",save_format = "tf")
+model_loaded_tf = tf.keras.models.load_model("./data/linear_model")
+print(model_loaded_tf.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
 
 ```
+
+```
+[[-0.04092304]
+ [-0.06150477]]
+[[-0.04092304]
+ [-0.06150477]]
+INFO:tensorflow:Assets written to: ./data/linear_model/assets
+[[-0.04092304]
+ [-0.06150477]]
+```
+
 
 如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。
 
 也可以在公众号后台回复关键字：**加群**，加入读者交流群和大家讨论。
 
 ![image.png](./data/Python与算法之美logo.jpg)
-
-```python
-
-```

@@ -15,7 +15,7 @@
 
 # !git rm --cached  .ipynb_checkpoints/* 
 
-# !git commit -m"add examples in chapter3"
+# !git commit -m "revise chapter1, chapter5" 
 
 # !git remote rm origin 
 
