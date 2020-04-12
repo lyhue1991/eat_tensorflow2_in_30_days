@@ -130,7 +130,7 @@ This book could also be used as library examples to consult when implementing ma
 |&nbsp; |[**Chapter 5: Mid-level API in TensorFlow**](./Chapter5.md) |  ⭐️  | 0hour|✅ |
 |Day 16|  [5-1 Dataset](./Chapter5-1.md)   | ⭐️⭐️⭐️⭐️⭐️   |   2hours    |✅  |
 |Day 17|  [5-2 feature_column](./Chapter5-2.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅  |
-|Day 18|  [5-3 activation](./5-3,激活函数activation.md)    | ⭐️⭐️⭐️   |   0.5hour    |🛠️   |
+|Day 18|  [5-3 activation](./Chapter5-3.md)    | ⭐️⭐️⭐️   |   0.5hour    |✅   |
 |Day 19|  [5-4 layers](./5-4,模型层layers.md)  | ⭐️⭐️⭐️   |   1hour    |🛠️  |
 |Day 20|  [5-5 losses](./5-5,损失函数losses.md)    | ⭐️⭐️⭐️   |   1hour    |🛠️  |
 |Day 21|  [5-6 metrics](./5-6,评估指标metrics.md)    | ⭐️⭐️⭐️   |   1hour    |🛠️   |
