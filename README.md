@@ -135,7 +135,7 @@ This book could also be used as library examples to consult when implementing ma
 |Day 20|  [5-5 losses](./Chapter5-5.md)    | ⭐️⭐️⭐️   |   1hour    |✅  |
 |Day 21|  [5-6 metrics](./Chapter5-6.md)    | ⭐️⭐️⭐️   |   1hour    |✅   |
 |Day 22|  [5-7 optimizers](./Chapter5-7.md)    | ⭐️⭐️⭐️   |   0.5hour    |✅   |
-|Day 23|  [5-8 callbacks](./5-8,回调函数callbacks.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️   |
+|Day 23|  [5-8 callbacks](./Chapter5-8.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️   |
 |&nbsp; |[**Chapter 6: High-level API in TensorFlow**](./六、TensorFlow的高阶API.md)|    ⭐️ | 0hour|🛠️  |
 |Day 24|  [6-1 Three Ways of Modeling](./6-1,构建模型的3种方法.md)   | ⭐️⭐️⭐️   |   1hour    |🛠️ |
 |Day 25|  [6-2 Three Ways of Training](./6-2,训练模型的3种方法.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️   |
