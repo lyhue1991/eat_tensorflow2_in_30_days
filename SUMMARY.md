@@ -34,7 +34,7 @@
 * [5-7 optimizers](./Chapter5-7.md)
 * [5-8 callbacks](./Chapter5-8.md)
 
-* [Chapter 6: High-level API in TensorFlow](六、TensorFlow的高阶API.md)
+* [Chapter 6: High-level API in TensorFlow](./Chapter6.md)
 * [6-1 Three Ways of Modeling](./6-1,构建模型的3种方法.md)
 * [6-2 Three Ways of Training](./6-2,训练模型的3种方法.md)
 * [6-3 Model Training Using Single GPU](./6-3,使用单GPU训练模型.md)
