@@ -16,16 +16,16 @@
 
 由于训练的过程通常是分批次训练的，而评估指标要跑完一个epoch才能够得到整体的指标结果。因此，类形式的评估指标更为常见。即需要编写初始化方法以创建与计算指标结果相关的一些中间变量，编写update_state方法在每个batch后更新相关中间变量的状态，编写result方法输出最终指标结果。
 
-如果编写函数形式的评估指标，则只能取epoch中各个batch计算的评估指标结果的平均值作为整个epoch上的评估指标结果，这个结果通常会偏离拿整个epoch数据一次计算的结果。
+如果编写函数形式的评估指标，则只能取epoch中各个batch计算的评估指标结果的平均值作为整个epoch上的评估指标结果，这个结果通常会偏离整个epoch数据一次计算的结果。
 
 
 
 ### 一，常用的内置评估指标
 
 
-* MeanSquaredError（平方差误差，用于回归，可以简写为MSE，函数形式为mse）
+* MeanSquaredError（均方误差，用于回归，可以简写为MSE，函数形式为mse）
 
-* MeanAbsoluteError (绝对值误差，用于回归，可以简写为MAE，函数形式为mae)
+* MeanAbsoluteError (平均绝对值误差，用于回归，可以简写为MAE，函数形式为mae)
 
 * MeanAbsolutePercentageError (平均百分比误差，用于回归，可以简写为MAPE，函数形式为mape)
 
