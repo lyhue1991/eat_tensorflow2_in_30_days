@@ -31,7 +31,7 @@
 * [5-4 layers](./Chapter5-4.md)
 * [5-5 losses](./Chapter5-5.md)
 * [5-6 metrics](./Chapter5-6.md)
-* [5-7 optimizers](./5-7,优化器optimizers.md)
+* [5-7 optimizers](./Chapter5-7.md)
 * [5-8 callbacks](./5-8,回调函数callbacks.md)
 
 * [Chapter 6: High-level API in TensorFlow](六、TensorFlow的高阶API.md)
