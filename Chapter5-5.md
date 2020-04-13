@@ -8,7 +8,7 @@ Loss function is designated during the compilation of the model. For the regress
 
 For binary classification model, the most popular loss function is binary cross entropy `binary_crossentropy`.
 
-For multiple classification model, when the labels are one-hot encoded, we should use categorical cross entropy `categorical_crossentropy` as loss function; for the category order encoded labels, the sparse categorical cross entropy `sparse_categorical_crossentropy` should be used as the loss funcion.
+For multiple classification model, when the labels are one-hot encoded, we should use categorical cross entropy `categorical_crossentropy` as loss function; for the category with ordinal encoding, the sparse categorical cross entropy `sparse_categorical_crossentropy` should be used as the loss funcion.
 
 We may define customized loss function when necessary. The customzed loss function requires two tensors `y_true` and `y_pred` as input,and it output a scalar as the value of the caluclated loss function.
 
@@ -75,7 +75,7 @@ The most frequently used pre-defined loss functions are:
 
 * categorical_crossentropy (Categorical Cross Entropy, for multiple classification, requires one-hot encoding for the label; the class-type implementation is `CategoricalCrossentropy`)
 
-* sparse_categorical_crossentropy (Sparse Categorical Cross Entropy, used for multiple classification, requires label to be encoded by order; the class-type implementation is `SparseCategoricalCrossentropy`)
+* sparse_categorical_crossentropy (Sparse Categorical Cross Entropy, used for multiple classification, requires ordinal encoding; the class-type implementation is `SparseCategoricalCrossentropy`)
 
 * hinge (Hinge loss function, for binary classification, famous for the application as loss function in Support Vector Machine (SVM); the class-type implementation is `Hinge`)
 

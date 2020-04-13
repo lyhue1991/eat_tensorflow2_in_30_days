@@ -133,7 +133,7 @@ This book could also be used as library examples to consult when implementing ma
 |Day 18|  [5-3 activation](./Chapter5-3.md)    | ⭐️⭐️⭐️   |   0.5hour    |✅   |
 |Day 19|  [5-4 layers](./Chapter5-4.md)  | ⭐️⭐️⭐️   |   1hour    |✅  |
 |Day 20|  [5-5 losses](./Chapter5-5.md)    | ⭐️⭐️⭐️   |   1hour    |✅  |
-|Day 21|  [5-6 metrics](./5-6,评估指标metrics.md)    | ⭐️⭐️⭐️   |   1hour    |🛠️   |
+|Day 21|  [5-6 metrics](./Chapter5-6.md)    | ⭐️⭐️⭐️   |   1hour    |✅   |
 |Day 22|  [5-7 optimizers](./5-7,优化器optimizers.md)    | ⭐️⭐️⭐️   |   0.5hour    |🛠️   |
 |Day 23|  [5-8 callbacks](./5-8,回调函数callbacks.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |🛠️   |
 |&nbsp; |[**Chapter 6: High-level API in TensorFlow**](./六、TensorFlow的高阶API.md)|    ⭐️ | 0hour|🛠️  |

@@ -29,8 +29,8 @@
 * [5-2 feature_column](./Chapter5-2.md)
 * [5-3 activation](./Chapter5-3.md)
 * [5-4 layers](./Chapter5-4.md)
-* [5-5 losses](./5-5,损失函数losses.md)
-* [5-6 metrics](./5-6,评估指标metrics.md)
+* [5-5 losses](./Chapter5-5.md)
+* [5-6 metrics](./Chapter5-6.md)
 * [5-7 optimizers](./5-7,优化器optimizers.md)
 * [5-8 callbacks](./5-8,回调函数callbacks.md)
 
