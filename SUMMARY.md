@@ -37,7 +37,7 @@
 * [Chapter 6: High-level API in TensorFlow](./Chapter6.md)
 * [6-1 Three Ways of Modeling](./Chapter6-1.md)
 * [6-2 Three Ways of Training](./Chapter6-2.md)
-* [6-3 Model Training Using Single GPU](./6-3,使用单GPU训练模型.md)
+* [6-3 Model Training Using Single GPU](./Chapter6-3.md)
 * [6-4 Model Training Using Multiple GPUs](./6-4,使用多GPU训练模型.md)
 * [6-5 Model Training Using TPU](./6-5,使用TPU训练模型.md)
 * [6-6 Model Deploying Using tensorflow-serving](./6-6,使用tensorflow-serving部署模型.md)
