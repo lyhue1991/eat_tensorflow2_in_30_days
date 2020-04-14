@@ -6,7 +6,7 @@ In Colab notebook, choose GPU in Edit -> Notebook Settings -> Hardware Accelerat
 
 Note: the following code only executes on Colab.
 
-You may use the following link for testing (tf_singleGPU, in Chinese)
+You may use the following link for testing (tf_multiGPU, in Chinese)
 
 https://colab.research.google.com/drive/1j2kp_t0S_cofExSN7IyJ4QtMscbVlXU-
 

@@ -6,7 +6,7 @@ In Colab notebook, choose TPU in Edit -> Notebook Settings -> Hardware Accelerat
 
 Note: the following code only executes on Colab.
 
-You may use the following link for testing (tf_singleGPU, in Chinese)
+You may use the following link for testing (tf_TPU, in Chinese)
 
 https://colab.research.google.com/drive/1XCIhATyE1R7lq6uwFlYlRsUr5d9_-r1s
 
