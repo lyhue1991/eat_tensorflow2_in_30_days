@@ -143,7 +143,7 @@ This book could also be used as library examples to consult when implementing ma
 |Day 27|  [6-4 Model Training Using Multiple GPUs](./Chapter6-4.md)    | ⭐️⭐️   |   0.5hour    |✅  |
 |Day 28|  [6-5 Model Training Using TPU](./Chapter6-5.md)   | ⭐️⭐️   |   0.5hour    |✅  |
 |Day 29| [6-6 Model Deploying Using tensorflow-serving](./Chapter6-6.md) | ⭐️⭐️⭐️⭐️| 1hour |✅   |
-|Day 30| [6-7 Call Tensorflow Model Using spark-scala](./6-7,使用spark-scala调用tensorflow模型.md) | ⭐️⭐️⭐️⭐️⭐️|2hours|🛠️  |
+|Day 30| [6-7 Call Tensorflow Model Using spark-scala](./Chapter6-7.md) | ⭐️⭐️⭐️⭐️⭐️|2hours|✅  |
 |&nbsp;| [Epilogue：A Story Between a Foodie and a Cuisine](./后记：一个吃货和一道菜的故事.md) | ⭐️|0hour|🛠️  |
 
 ```python

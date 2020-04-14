@@ -41,7 +41,7 @@
 * [6-4 Model Training Using Multiple GPUs](./Chapter6-4.md)
 * [6-5 Model Training Using TPU](./Chapter6-5.md)
 * [6-6 Model Deploying Using tensorflow-serving](./Chapter6-6.md)
-* [6-7 Call Tensorflow Model Using spark-scala](./6-7,使用spark-scala调用tensorflow模型.md)
+* [6-7 Call Tensorflow Model Using spark-scala](./Chapter6-7.md)
 * [Epilogue：A Story Between a Foodie and a Cuisine](./后记：一个吃货和一道菜的故事.md)
 
 
