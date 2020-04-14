@@ -4,7 +4,7 @@
 
 本文内容的学习需要一定的spark和scala基础。
 
-如果使用pyspark的话会比较简单，只需要在每个excutor上用Python加载模型分别预测就可以了。
+如果使用pyspark的话会比较简单，只需要在每个executor上用Python加载模型分别预测就可以了。
 
 但工程上为了性能考虑，通常使用的是scala版本的spark。
 
@@ -30,9 +30,9 @@
 
 （3）在spark(scala)项目中driver端加载tensorflow模型调试成功
 
-（4）在spark(scala)项目中通过RDD在excutor上加载tensorflow模型调试成功
+（4）在spark(scala)项目中通过RDD在executor上加载tensorflow模型调试成功
 
-（5） 在spark(scala)项目中通过DataFrame在excutor上加载tensorflow模型调试成功
+（5） 在spark(scala)项目中通过DataFrame在executor上加载tensorflow模型调试成功
 
 
 ```python
@@ -156,7 +156,7 @@ val bundle = tf.SavedModelBundle
    .load("/Users/liangyun/CodeFiles/eat_tensorflow2_in_30_days/data/linear_model/1","serve")
 
 //注：在java版本的tensorflow中还是类似tensorflow1.0中静态计算图的模式，需要建立Session, 指定feed的数据和fetch的结果, 然后 run.
-//注：如果有多个数据需要喂入，可以连续用用多个feed方法
+//注：如果有多个数据需要喂入，可以连续使用多个feed方法
 //注：输入必须是float类型
 
 val sess = bundle.session()
@@ -190,10 +190,10 @@ Array(Array(3.019596), Array(3.9878292))
 
 ```
 
-### 四，在spark(scala)项目中通过RDD在excutor上加载tensorflow模型调试成功
+### 四，在spark(scala)项目中通过RDD在executor上加载tensorflow模型调试成功
 
 
-下面我们通过广播机制将Driver端加载的TensorFlow模型传递到各个excutor上，并在excutor上分布式地调用模型进行推断。
+下面我们通过广播机制将Driver端加载的TensorFlow模型传递到各个executor上，并在executor上分布式地调用模型进行推断。
 
 
 <!-- #region -->
@@ -214,7 +214,7 @@ val sc = spark.sparkContext
 val bundle = tf.SavedModelBundle 
    .load("/Users/liangyun/CodeFiles/master_tensorflow2_in_20_hours/data/linear_model/1","serve")
 
-//利用广播将模型发送到excutor上
+//利用广播将模型发送到executor上
 val broads = sc.broadcast(bundle)
 
 //构造数据集
@@ -260,7 +260,7 @@ Array(Array(3.019596), Array(3.9264367), Array(7.8607616), Array(15.974984))
 
 ```
 
-### 五， 在spark(scala)项目中通过DataFrame在excutor上加载tensorflow模型调试成功
+### 五， 在spark(scala)项目中通过DataFrame在executor上加载tensorflow模型调试成功
 
 
 除了可以在Spark的RDD数据上调用tensorflow模型进行分布式推断，
