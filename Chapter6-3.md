@@ -15,7 +15,7 @@ There is no need to modify source code for switching from CPU to GPU when using 
 However, for the case of using shared GPU with multiple users, sucha as using server of the company or the lab, we need to add following code to specify the GPU ID and the GPU memory size that we are going to use, in order to avoid the GPU resources to be occupied by a single user (actually TensorFlow acquires all GPU cors and all GPU memories by default) and allows multiple users perform training on it.
 
 
-In Colab notebook, choose GPU in Modify -> Notebook Config -> Hardware Accelerator
+In Colab notebook, choose GPU in Edit -> Notebook Settings -> Hardware Accelerator
 
 Note: the following code only executes on Colab.
 
