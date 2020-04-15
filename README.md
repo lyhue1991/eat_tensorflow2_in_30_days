@@ -62,9 +62,6 @@ With the acquisition by Google, Keras will not update after version 2.3.0 , thus
 
 "Deep Learning with Python" is easy to understand as it uses various examples to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuitive to the deep learning.**
 
-The Chinese version of this book could be downloaded here：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA password：wtzo 
-
-
 ```python
 
 ```
