@@ -8,7 +8,7 @@ tf.keras的回调函数实际上是一个类，一般是在model.fit时作为参
 
 所有回调函数都继承至 keras.callbacks.Callbacks基类，拥有params和model这两个属性。
 
-其中params 是一个dict，记录了 training parameters (eg. verbosity, batch size, number of epochs...).
+其中params 是一个dict，记录了训练相关参数 (例如 verbosity, batch size, number of epochs 等等)。
 
 model即当前关联的模型的引用。
 

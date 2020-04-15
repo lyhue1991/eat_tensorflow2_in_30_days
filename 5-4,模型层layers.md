@@ -70,7 +70,7 @@ layers.Embedding,layers.GRU,layers.LSTM,layers.Bidirectional等等。
 
 * LocallyConnected2D: 二维局部连接层。类似Conv2D，唯一的差别是没有空间上的权值共享，所以其参数个数远高于二维卷积。
 
-* MaxPooling2D: 二维最大池化层。也称作下采样层。池化层无参数，主要作用是降维。
+* MaxPool2D: 二维最大池化层。也称作下采样层。池化层无可训练参数，主要作用是降维。
 
 * AveragePooling2D: 二维平均池化层。
 
@@ -120,9 +120,9 @@ layers.Embedding,layers.GRU,layers.LSTM,layers.Bidirectional等等。
 
 如果自定义模型层有需要被训练的参数，则可以通过对Layer基类子类化实现。
 
-Lamda层由于没有需要被训练的参数，只需要定义正向传播逻辑即可，使用比Layer基类子类化更加简单。
+Lambda层由于没有需要被训练的参数，只需要定义正向传播逻辑即可，使用比Layer基类子类化更加简单。
 
-Lamda层的正向逻辑可以使用Python的lambda函数来表达，也可以用def关键字定义函数来表达。
+Lambda层的正向逻辑可以使用Python的lambda函数来表达，也可以用def关键字定义函数来表达。
 
 ```python
 import tensorflow as tf
