@@ -68,9 +68,6 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 使用丰富的范例示范深度学习的最佳实践，该书通俗易懂，**全书没有一个数学公式，注重培养读者的深度学习直觉。**。
 
-该书电子版下载链接：https://pan.baidu.com/s/1-4q6VjLTb3ZxcefyNCbjSA 提取码：wtzo 
-
-
 ```python
 
 ```
