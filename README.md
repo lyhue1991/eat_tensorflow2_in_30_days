@@ -1,12 +1,13 @@
 # How to eat TensorFlow2 in 30 days ?🔥🔥
 
-快速切换至[中文版](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master) 🎈
+Switching to Chinese version: [中文版](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master) 🎈
 
 📚 URL to gitbook (Only in Chinese version for now):  https://lyhue1991.github.io/eat_tensorflow2_in_30_days
 
-🚀 URL to github repo (Chinese Version): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master
+🚀 URL to github repo (Chinese): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master
 
-🚀 URL to github repo (English Version): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english
+🚀 URL to github repo (English): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english
+
 
 
 ### 1. TensorFlow2 🍎 or Pytorch🔥
@@ -61,9 +62,11 @@ With the acquisition by Google, Keras will not update after version 2.3.0 , thus
 
 **For those who have zero experience of machine/deep learning, it is strongly suggested to refer to ["Deep Learning with Python"](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438/ref=sr_1_1?dchild=1&keywords=Deep+Learning+with+Python&qid=1586194568&sr=8-1) along with reading this book.**
 
+
 ["Deep Learning with Python"](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438/ref=sr_1_1?dchild=1&keywords=Deep+Learning+with+Python&qid=1586194568&sr=8-1) is written by François Chollet, the inventor of Keras. This book is based on Keras and has no machine learning related prerequisites to the reader.
 
 "Deep Learning with Python" is easy to understand as it uses various examples to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuitive to the deep learning.**
+
 
 ```python
 

@@ -186,7 +186,7 @@ tf.print("loss=",model(tf.constant(0.0)))
 
 在keras.optimizers子模块中，它们基本上都有对应的类的实现。
 
-* SGD, 默认参数为纯SGD, 设置momentum参数不为0实际上变成SGDM, 考虑了一阶动量, 设置 nesterov为True后变成NAG，即 Nesterov Acceleration Gradient，在计算梯度时计算的是向前走一步所在位置的梯度。
+* SGD, 默认参数为纯SGD, 设置momentum参数不为0实际上变成SGDM, 考虑了一阶动量, 设置 nesterov为True后变成NAG，即 Nesterov Accelerated Gradient，在计算梯度时计算的是向前走一步所在位置的梯度。
 
 * Adagrad, 考虑了二阶动量，对于不同的参数有不同的学习率，即自适应学习率。缺点是学习率单调下降，可能后期学习速率过慢乃至提前停止学习。
 
@@ -194,7 +194,7 @@ tf.print("loss=",model(tf.constant(0.0)))
 
 * Adadelta, 考虑了二阶动量，与RMSprop类似，但是更加复杂一些，自适应性更强。
 
-* Adam, 同时考虑了一阶动量和二阶动量，可以看成RMSprop上进一步考虑了Momentum。
+* Adam, 同时考虑了一阶动量和二阶动量，可以看成RMSprop上进一步考虑了一阶动量。
 
 * Nadam, 在Adam基础上进一步考虑了 Nesterov Acceleration。
 
