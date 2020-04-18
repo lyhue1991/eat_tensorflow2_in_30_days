@@ -1,7 +1,7 @@
 # Chapter 3: Hierarchy of TensorFlow
 
 
-We are going to introduce five levels of TensorFlow in this chapter: Hardware Level, Kernel Level, Low-level API, Mid-level API, High-level API. We are also showing the differences when implementing the same model for linear regression at different API levels.
+We are going to introduce five levels of TensorFlow in this chapter: Hardware Level, Kernel Level, Low-level API, Mid-level API, High-level API. We demonstrate the differences in model implementation at different API levels with two examples: a linear regression model and a DNN binary classification model.
 
 From lower to higher, there are five levels in TensorFlow hierarchy.
 
