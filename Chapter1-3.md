@@ -393,8 +393,8 @@ array([[0.7864823 ],
 ```
 
 
-Please leave comments in the WeChat official account "Python与算法之美" (Elegant Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
+Please leave comments in the WeChat official account "Python与算法之美" (Elegance of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.
 
-You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
+You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
 ![image.png](./data/Python与算法之美logo.jpg)

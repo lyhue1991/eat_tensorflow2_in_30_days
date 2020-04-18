@@ -2,13 +2,16 @@
 
 快速切换至[中文版](https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master) 🎈
 
-📚 URL to gitbook： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
-🚀 URL to github repo：https://github.com/lyhue1991/eat_tensorflow2_in_30_days
+📚 URL to gitbook (Only in Chinese version for now):  https://lyhue1991.github.io/eat_tensorflow2_in_30_days
+
+🚀 URL to github repo (Chinese Version): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/master
+
+🚀 URL to github repo (English Version): https://github.com/lyhue1991/eat_tensorflow2_in_30_days/tree/english
 
 
 ### 1. TensorFlow2 🍎 or Pytorch🔥
 
-Conclusion first：
+Conclusion first: 
 
 **For the engineers, priority goes to TensorFlow2.**
 
@@ -33,7 +36,7 @@ Reasons:
 
 ### 2. Keras🍏 and tf.keras 🍎
 
-Conclusion first：
+Conclusion first: 
 
 **Keras will be discontinued in development after version 2.3.0, so use tf.keras.**
 
@@ -135,13 +138,13 @@ This book could also be used as library examples to consult when implementing ma
 |Day 23|  [5-8 callbacks](./Chapter5-8.md)   | ⭐️⭐️⭐️⭐️   |   1hour    |✅   |
 |&nbsp; |[**Chapter 6: High-level API in TensorFlow**](./Chapter6.md)|    ⭐️ | 0hour|✅  |
 |Day 24|  [6-1 Three Ways of Modeling](./Chapter6-1.md)   | ⭐️⭐️⭐️   |   1hour    |✅ |
-|Day 25|  [6-2 Three aWys of Training](./Chapter6-2.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅   |
+|Day 25|  [6-2 Three Ways of Training](./Chapter6-2.md)  | ⭐️⭐️⭐️⭐️   |   1hour    |✅   |
 |Day 26|  [6-3 Model Training Using Single GPU](./Chapter6-3.md)    | ⭐️⭐️   |   0.5hour    |✅   |
 |Day 27|  [6-4 Model Training Using Multiple GPUs](./Chapter6-4.md)    | ⭐️⭐️   |   0.5hour    |✅  |
 |Day 28|  [6-5 Model Training Using TPU](./Chapter6-5.md)   | ⭐️⭐️   |   0.5hour    |✅  |
 |Day 29| [6-6 Model Deploying Using tensorflow-serving](./Chapter6-6.md) | ⭐️⭐️⭐️⭐️| 1hour |✅   |
 |Day 30| [6-7 Call Tensorflow Model Using spark-scala](./Chapter6-7.md) | ⭐️⭐️⭐️⭐️⭐️|2hours|✅  |
-|&nbsp;| [Epilogue：A Story Between a Foodie and a Cuisine](./后记：一个吃货和一道菜的故事.md) | ⭐️|0hour|🛠️  |
+|&nbsp;| [Epilogue: A Story Between a Foodie and a Cuisine](./后记：一个吃货和一道菜的故事.md) | ⭐️|0hour|🛠️  |
 
 ```python
 
