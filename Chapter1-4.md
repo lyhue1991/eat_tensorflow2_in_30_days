@@ -170,12 +170,13 @@ class MSPE(losses.Loss):
 ```
 
 ```python
+import os
 import datetime
 
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 model.compile(optimizer=optimizer,loss=MSPE(name = "MSPE"))
 
-logdir = "./data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = os.path.join("./data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 tb_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 #Half the learning rate if loss is not improved after 100 epoches

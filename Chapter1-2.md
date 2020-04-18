@@ -38,7 +38,7 @@ from tensorflow.keras import datasets,layers,models
 BATCH_SIZE = 100
 
 def load_image(img_path,size = (32,32)):
-    label = tf.constant(1,tf.int8) if tf.strings.regex_full_match(img_path,".*/automobile/.*") \
+    label = tf.constant(1,tf.int8) if tf.strings.regex_full_match(img_path,".*automobile.*") \
             else tf.constant(0,tf.int8)
     img = tf.io.read_file(img_path)
     img = tf.image.decode_jpeg(img) #In jpeg format
@@ -159,8 +159,9 @@ There are three usual ways for model training: use internal function fit, use in
 
 ```python
 import datetime
+import os
 
-logdir = "./data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = os.path.join("./data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 
 model.compile(
@@ -205,7 +206,7 @@ Epoch 10/10
 ### 4. Model Evaluation
 
 ```python
-#%load_ext tensorboard
+%load_ext tensorboard
 #%tensorboard --logdir ./data/keras_model
 ```
 

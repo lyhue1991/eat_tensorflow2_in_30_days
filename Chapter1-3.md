@@ -174,11 +174,11 @@ _________________________________________________________________
 There are three usual ways for model training: use internal function fit, use internal function train_on_batch, and customized training loop. Here we use the customized training loop.
 
 ```python
-#Temporal mark
+# Time Stamp
 @tf.function
 def printbar():
     ts = tf.timestamp()
-    today_ts = ts%(24*60*60)
+    today_ts = tf.timestamp()%(24*60*60)
 
     hour = tf.cast(today_ts//3600+8,tf.int32)%tf.constant(24)
     minite = tf.cast((today_ts%3600)//60,tf.int32)
@@ -192,8 +192,7 @@ def printbar():
     
     timestring = tf.strings.join([timeformat(hour),timeformat(minite),
                 timeformat(second)],separator = ":")
-    tf.print("=========="*8,end = "")
-    tf.print(timestring)
+    tf.print("=========="*8+timestring)
 ```
 
 ```python
