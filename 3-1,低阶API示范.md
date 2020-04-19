@@ -423,7 +423,7 @@ class DNNModel(tf.Module):
     @tf.function(input_signature=[tf.TensorSpec(shape = [None,1], dtype = tf.float32),
                               tf.TensorSpec(shape = [None,1], dtype = tf.float32)])  
     def loss_func(self,y_true,y_pred):  
-        #将预测值限制在1e-7以上, 1-e-7以下，避免log(0)错误
+        #将预测值限制在 1e-7 以上, 1 - 1e-7 以下，避免log(0)错误
         eps = 1e-7
         y_pred = tf.clip_by_value(y_pred,eps,1.0-eps)
         bce = - y_true*tf.math.log(y_pred) - (1-y_true)*tf.math.log(1-y_pred)
