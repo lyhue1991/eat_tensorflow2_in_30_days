@@ -10,7 +10,7 @@ So how long this pandemic is going to last, and when will we be free again?
 This example is about predicting the time of COVID-19 termination in China using RNN model established by TensorFlow 2.
 
 
-![](../data/疫情前后对比.png)
+![](../data/疫情前后对比_en.png)
 
 
 ### 1. Data Preparation
