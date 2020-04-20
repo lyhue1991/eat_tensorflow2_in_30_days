@@ -55,7 +55,7 @@ def printbar():
     
 ```
 
-### 一，GPU设置
+### 1. GPU Configuration
 
 ```python
 gpus = tf.config.list_physical_devices("GPU")

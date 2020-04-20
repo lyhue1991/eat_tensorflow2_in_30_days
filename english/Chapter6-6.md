@@ -201,9 +201,9 @@ MacOs: https://www.runoob.com/docker/macos-docker-install.html
 
 CentOS: https://www.runoob.com/docker/centos-docker-install.html
 
-安装Docker成功后，使用如下命令加载 tensorflow/serving 镜像到Docker中
+After successful installation of Docker, run the following command to load the tensorflow/serving image.
 
-docker pull tensorflow/serving
+`docker pull tensorflow/serving`
 
 
 ```python
