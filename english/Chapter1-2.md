@@ -161,7 +161,14 @@ There are three usual ways for model training: use internal function fit, use in
 import datetime
 import os
 
-logdir = os.path.join("../data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = os.path.join('data', 'autograph', stamp)
+
+## We recommend using pathlib under Python3
+# from pathlib import Path
+# stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+# logdir = str(Path('../data/autograph/' + stamp))
+
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 
 model.compile(

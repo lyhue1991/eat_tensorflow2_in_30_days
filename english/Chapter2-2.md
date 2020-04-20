@@ -165,8 +165,15 @@ tf.Tensor(b'hello world', shape=(), dtype=string)
 import datetime
 
 # Create logdir
+import os
 stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-logdir = '../data/autograph/%s' % stamp
+logdir = os.path.join('data', 'autograph', stamp)
+
+## We recommend using pathlib under Python3
+# from pathlib import Path
+# stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+# logdir = str(Path('../data/autograph/' + stamp))
+
 writer = tf.summary.create_file_writer(logdir)
 
 # Start tracing on Autograph

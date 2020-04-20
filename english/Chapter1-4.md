@@ -176,7 +176,13 @@ import datetime
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 model.compile(optimizer=optimizer,loss=MSPE(name = "MSPE"))
 
-logdir = os.path.join("../data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = os.path.join('data', 'autograph', stamp)
+
+## We recommend using pathlib under Python3
+# from pathlib import Path
+# stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+# logdir = str(Path('../data/autograph/' + stamp))
 
 tb_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 #Half the learning rate if loss is not improved after 100 epoches
