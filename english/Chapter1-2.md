@@ -12,7 +12,7 @@ The goal for this task is to train a model to classify images as airplane or aut
 
 The files of cifar2 are organized as below:
 
-![](./data/cifar2.jpg)
+![](../data/cifar2.jpg)
 
 ```python
 
@@ -49,12 +49,12 @@ def load_image(img_path,size = (32,32)):
 
 ```python
 #Parallel pre-processing using num_parallel_calls and caching data with prefetch function to improve the performance
-ds_train = tf.data.Dataset.list_files("./data/cifar2/train/*/*.jpg") \
+ds_train = tf.data.Dataset.list_files("../data/cifar2/train/*/*.jpg") \
            .map(load_image, num_parallel_calls=tf.data.experimental.AUTOTUNE) \
            .shuffle(buffer_size = 1000).batch(BATCH_SIZE) \
            .prefetch(tf.data.experimental.AUTOTUNE)  
 
-ds_test = tf.data.Dataset.list_files("./data/cifar2/test/*/*.jpg") \
+ds_test = tf.data.Dataset.list_files("../data/cifar2/test/*/*.jpg") \
            .map(load_image, num_parallel_calls=tf.data.experimental.AUTOTUNE) \
            .batch(BATCH_SIZE) \
            .prefetch(tf.data.experimental.AUTOTUNE)  
@@ -79,7 +79,7 @@ plt.show()
 
 ```
 
-![](./data/1-2-图片预览.jpg)
+![](../data/1-2-图片预览.jpg)
 
 ```python
 for x,y in ds_train.take(1):
@@ -161,7 +161,7 @@ There are three usual ways for model training: use internal function fit, use in
 import datetime
 import os
 
-logdir = os.path.join("./data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+logdir = os.path.join("../data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 
 model.compile(
@@ -207,7 +207,7 @@ Epoch 10/10
 
 ```python
 %load_ext tensorboard
-#%tensorboard --logdir ./data/keras_model
+#%tensorboard --logdir ../data/keras_model
 ```
 
 ```python
@@ -217,14 +217,14 @@ notebook.list()
 
 ```python
 #Checking model in tensorboard
-notebook.start("--logdir ./data/keras_model")
+notebook.start("--logdir ../data/keras_model")
 ```
 
 ```python
 
 ```
 
-![](./data/1-2-tensorboard.jpg)
+![](../data/1-2-tensorboard.jpg)
 
 ```python
 import pandas as pd 
@@ -235,7 +235,7 @@ dfhistory.index.name = 'epoch'
 dfhistory
 ```
 
-![](./data/1-2-dfhistory.jpg)
+![](../data/1-2-dfhistory.jpg)
 
 ```python
 %matplotlib inline
@@ -260,13 +260,13 @@ def plot_metric(history, metric):
 plot_metric(history,"loss")
 ```
 
-![](./data/1-2-Loss曲线.jpg)
+![](../data/1-2-Loss曲线.jpg)
 
 ```python
 plot_metric(history,"accuracy")
 ```
 
-![](./data/1-2-Accuracy曲线.jpg)
+![](../data/1-2-Accuracy曲线.jpg)
 
 ```python
 #Evaluating data using model.evaluate function
@@ -344,16 +344,16 @@ We recommend model saving with the original way of TensorFlow.
 
 ```python
 # Saving the weights, this way only save the tensors of the weights
-model.save_weights('./data/tf_model_weights.ckpt',save_format = "tf")
+model.save_weights('../data/tf_model_weights.ckpt',save_format = "tf")
 ```
 
 ```python
 # Saving model structure and parameters to a file, so the model allows cross-platform deployment
 
-model.save('./data/tf_model_savedmodel', save_format="tf")
+model.save('../data/tf_model_savedmodel', save_format="tf")
 print('export saved model.')
 
-model_loaded = tf.keras.models.load_model('./data/tf_model_savedmodel')
+model_loaded = tf.keras.models.load_model('../data/tf_model_savedmodel')
 model_loaded.evaluate(ds_test)
 ```
 
@@ -369,4 +369,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

@@ -90,7 +90,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Defining a generator to read image from a folder
 image_generator = ImageDataGenerator(rescale=1.0/255).flow_from_directory(
-                    "./data/cifar2/test/",
+                    "../data/cifar2/test/",
                     target_size=(32, 32),
                     batch_size=20,
                     class_mode='binary')
@@ -118,7 +118,7 @@ for i,(img,label) in enumerate(ds3.unbatch().take(9)):
 plt.show()
 ```
 
-![](./data/5-1-cifar2预览.jpg)
+![](../data/5-1-cifar2预览.jpg)
 
 ```python
 
@@ -129,7 +129,7 @@ plt.show()
 ```python
 # Constructing Data Pipeline through csv file
 ds4 = tf.data.experimental.make_csv_dataset(
-      file_pattern = ["./data/titanic/train.csv","./data/titanic/test.csv"],
+      file_pattern = ["../data/titanic/train.csv","../data/titanic/test.csv"],
       batch_size=3, 
       label_name="Survived",
       na_value="",
@@ -159,7 +159,7 @@ array([b'Culumovic, Mr. Jeso', b'Moubarek, Master. Gerios',
 # Constructing Data Pipeline through text file
 
 ds5 = tf.data.TextLineDataset(
-    filenames = ["./data/titanic/train.csv","./data/titanic/test.csv"]
+    filenames = ["../data/titanic/train.csv","../data/titanic/test.csv"]
     ).skip(1) # Omitting the header on the first line
 
 for line in ds5.take(5):
@@ -181,17 +181,17 @@ tf.Tensor(b'687,0,3,"Panula, Mr. Jaako Arnold",male,14.0,4,1,3101295,39.6875,,S'
 **1.6 Constructing Data Pipeline through file path**
 
 ```python
-ds6 = tf.data.Dataset.list_files("./data/cifar2/train/*/*.jpg")
+ds6 = tf.data.Dataset.list_files("../data/cifar2/train/*/*.jpg")
 for file in ds6.take(5):
     print(file)
 ```
 
 ```
-tf.Tensor(b'./data/cifar2/train/automobile/1263.jpg', shape=(), dtype=string)
-tf.Tensor(b'./data/cifar2/train/airplane/2837.jpg', shape=(), dtype=string)
-tf.Tensor(b'./data/cifar2/train/airplane/4264.jpg', shape=(), dtype=string)
-tf.Tensor(b'./data/cifar2/train/automobile/4241.jpg', shape=(), dtype=string)
-tf.Tensor(b'./data/cifar2/train/automobile/192.jpg', shape=(), dtype=string)
+tf.Tensor(b'../data/cifar2/train/automobile/1263.jpg', shape=(), dtype=string)
+tf.Tensor(b'../data/cifar2/train/airplane/2837.jpg', shape=(), dtype=string)
+tf.Tensor(b'../data/cifar2/train/airplane/4264.jpg', shape=(), dtype=string)
+tf.Tensor(b'../data/cifar2/train/automobile/4241.jpg', shape=(), dtype=string)
+tf.Tensor(b'../data/cifar2/train/automobile/192.jpg', shape=(), dtype=string)
 ```
 
 ```python
@@ -213,7 +213,7 @@ for i,(img,label) in enumerate(ds6.map(load_image).take(2)):
     plt.yticks([])
 ```
 
-![](./data/5-1-car2.jpg)
+![](../data/5-1-car2.jpg)
 
 ```python
 
@@ -244,7 +244,7 @@ def create_tfrecords(inpath,outpath):
             writer.write(example.SerializeToString())
     writer.close()
     
-create_tfrecords("./data/cifar2/test/","./data/cifar2_test.tfrecords/")
+create_tfrecords("../data/cifar2/test/","../data/cifar2_test.tfrecords/")
 
 ```
 
@@ -260,7 +260,7 @@ def parse_example(proto):
     label = example["label"]
     return(img,label)
 
-ds7 = tf.data.TFRecordDataset("./data/cifar2_test.tfrecords").map(parse_example).shuffle(3000)
+ds7 = tf.data.TFRecordDataset("../data/cifar2_test.tfrecords").map(parse_example).shuffle(3000)
 
 %matplotlib inline
 %config InlineBackend.figure_format = 'svg'
@@ -275,7 +275,7 @@ plt.show()
 
 ```
 
-![](./data/5-1-car9.jpg)
+![](../data/5-1-car9.jpg)
 
 ```python
 
@@ -721,7 +721,7 @@ tf.print(tf.constant("end training..."))
 **3.2 Use the method `interleave` to read data with multi-process and interleave the data from different sources.**
 
 ```python
-ds_files = tf.data.Dataset.list_files("./data/titanic/*.csv")
+ds_files = tf.data.Dataset.list_files("../data/titanic/*.csv")
 ds = ds_files.flat_map(lambda x:tf.data.TextLineDataset(x).skip(1))
 for line in ds.take(4):
     print(line)
@@ -735,7 +735,7 @@ tf.Tensor(b'192,0,2,"Carbines, Mr. William",male,19.0,0,0,28424,13.0,,S', shape=
 ```
 
 ```python
-ds_files = tf.data.Dataset.list_files("./data/titanic/*.csv")
+ds_files = tf.data.Dataset.list_files("../data/titanic/*.csv")
 ds = ds_files.interleave(lambda x:tf.data.TextLineDataset(x).skip(1))
 for line in ds.take(8):
     print(line)
@@ -759,7 +759,7 @@ tf.Tensor(b'192,0,2,"Carbines, Mr. William",male,19.0,0,0,28424,13.0,,S', shape=
 **3.3 Set `num_parallel_calls` during using `map`, allowing data conversion with multiple process.**
 
 ```python
-ds = tf.data.Dataset.list_files("./data/cifar2/train/*/*.jpg")
+ds = tf.data.Dataset.list_files("../data/cifar2/train/*/*.jpg")
 def load_image(img_path,size = (32,32)):
     label = 1 if tf.strings.regex_full_match(img_path,".*/automobile/.*") else 0
     img = tf.io.read_file(img_path)
@@ -901,7 +901,7 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
 
 ```python
 

@@ -74,7 +74,7 @@ plt.show()
 
 ```
 
-![](./data/3-2-01-回归数据可视化.png)
+![](../data/3-2-01-回归数据可视化.png)
 
 ```python
 # Creating generator of data pipeline
@@ -192,7 +192,7 @@ plt.show()
 
 ```
 
-![](./data/3-2-02-回归结果可视化.png)
+![](../data/3-2-02-回归结果可视化.png)
 
 ```python
 
@@ -243,7 +243,7 @@ plt.legend(["positive","negative"]);
 
 ```
 
-![](./data/3-1-03-分类数据可视化.png)
+![](../data/3-1-03-分类数据可视化.png)
 
 ```python
 # Create pipeline for the input data
@@ -392,7 +392,7 @@ ax2.set_title("y_pred");
 
 ```
 
-![](./data/3-2-04-分类结果可视化.png)
+![](../data/3-2-04-分类结果可视化.png)
 
 ```python
 
@@ -402,4 +402,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

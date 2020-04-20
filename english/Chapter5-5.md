@@ -137,7 +137,7 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
 
 ```python
 

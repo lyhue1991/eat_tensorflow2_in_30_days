@@ -20,39 +20,39 @@ Here are two review papers to the activation function (in Chinese).
 
 * `tf.nn.sigmoid`: Compressing real number between 0 to 1, usually used in the output layer for binary classification; the main drawbacks are vanishing gradient, high computing complexity, and the non-zero center of the output.
 
-![](./data/sigmoid.png)
+![](../data/sigmoid.png)
 
 * `tf.nn.softmax`: Extended version of sigmoid for multiple categories, usually used in the output layer for multiple classifications.
 
-![](./data/softmax说明.jpg)
+![](../data/softmax说明.jpg)
 
 * `tf.nn.tanh`：Compressing real number between -1 to 1, expectation of the output is zero; the main drawbacks are vanishing gradient and high computing complexity.
 
-![](./data/tanh.png)
+![](../data/tanh.png)
 
 * `tf.nn.relu`：Linear rectified unit, the most popular activation function, usually used in the hidden layer; the main drawbacks are non-zero center of the output and vanishing gradient for the inputs < 0 (dying relu).
 
-![](./data/relu.png)
+![](../data/relu.png)
 
 * `tf.nn.leaky_relu`：Improved ReLU, resolving the dying ReLU problem.
 
-![](./data/leaky_relu.png)
+![](../data/leaky_relu.png)
 
 * `tf.nn.elu`：Exponential linear unit, which is an improvement to the ReLU, alleviate the dying ReLU problem.
 
-![](./data/elu.png)
+![](../data/elu.png)
 
 * `tf.nn.selu`：Scaled exponential linear unit, which is able to normalize the neural network automatically if the weights are initialized through `tf.keras.initializers.lecun_normal`. No gradient exploding/vanishing problems, but need to apply together with AlphaDropout (an alternation of Dropout).
 
-![](./data/selu.png)
+![](../data/selu.png)
 
 * `tf.nn.swish`：Self-gated activation function, a research product form Google. The literature prove that it brings slight improvement comparing to ReLU.
 
-![](./data/swish.png)
+![](../data/swish.png)
 
 * `gelu`：Gaussian error linear unit, which has the best performance in Transformer; however `tf.nn` hasn't implemented it.
 
-![](./data/gelu.png)
+![](../data/gelu.png)
 
 ```python
 
@@ -87,7 +87,7 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
 
 ```python
 

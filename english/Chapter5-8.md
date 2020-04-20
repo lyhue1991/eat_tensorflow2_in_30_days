@@ -63,7 +63,7 @@ import tensorflow.keras.backend as K
 # Example of the simple callback using LambdaCallback
 
 import json
-json_log = open('./data/keras_log.json', mode='wt', buffering=1)
+json_log = open('../data/keras_log.json', mode='wt', buffering=1)
 json_logging_callback = callbacks.LambdaCallback(
     on_epoch_end=lambda epoch, logs: json_log.write(
         json.dumps(dict(epoch = epoch,**logs)) + '\n'),
@@ -114,4 +114,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

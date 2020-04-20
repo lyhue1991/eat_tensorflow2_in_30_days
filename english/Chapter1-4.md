@@ -10,7 +10,7 @@ So how long this pandemic is going to last, and when will we be free again?
 This example is about predicting the time of COVID-19 termination in China using RNN model established by TensorFlow 2.
 
 
-![](./data/疫情前后对比.png)
+![](../data/疫情前后对比.png)
 
 
 ### 1. Data Preparation
@@ -20,7 +20,7 @@ This example is about predicting the time of COVID-19 termination in China using
 
 The dataset is extracted from "tushare". The details of the data acquisition is [here (in Chinese)](https://zhuanlan.zhihu.com/p/109556102).
 
-![](./data/1-4-新增人数.png)
+![](../data/1-4-新增人数.png)
 
 <!-- #endregion -->
 
@@ -37,13 +37,13 @@ from tensorflow.keras import models,layers,losses,metrics,callbacks
 %matplotlib inline
 %config InlineBackend.figure_format = 'svg'
 
-df = pd.read_csv("./data/covid-19.csv",sep = "\t")
+df = pd.read_csv("../data/covid-19.csv",sep = "\t")
 df.plot(x = "date",y = ["confirmed_num","cured_num","dead_num"],figsize=(10,6))
 plt.xticks(rotation=60)
 
 ```
 
-![](./data/1-4-累积曲线.png)
+![](../data/1-4-累积曲线.png)
 
 ```python
 dfdata = df.set_index("date")
@@ -56,7 +56,7 @@ dfdiff = dfdiff.drop("date",axis = 1).astype("float32")
 
 ```
 
-![](./data/1-4-新增曲线.png)
+![](../data/1-4-新增曲线.png)
 
 ```python
 #Use the data of an eight-day window priorier of the date we are investigating as input for prediction
@@ -176,7 +176,7 @@ import datetime
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.01)
 model.compile(optimizer=optimizer,loss=MSPE(name = "MSPE"))
 
-logdir = os.path.join("./data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
+logdir = os.path.join("../data/keras_model/",datetime.datetime.now().strftime("%Y%m%d-%H%M%S"))
 
 tb_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 #Half the learning rate if loss is not improved after 100 epoches
@@ -483,7 +483,7 @@ def plot_metric(history, metric):
 plot_metric(history,"loss")
 ```
 
-![](./data/1-4-损失函数曲线.png)
+![](../data/1-4-损失函数曲线.png)
 
 
 ### 5. Model Application
@@ -497,7 +497,7 @@ dfresult = dfdiff[["confirmed_num","cured_num","dead_num"]].copy()
 dfresult.tail()
 ```
 
-![](./data/1-4-日期3月10.png)
+![](../data/1-4-日期3月10.png)
 
 ```python
 #Predicting the daily increment of the new confirmed cases of the next 100 days; add this result into dfresult
@@ -516,7 +516,7 @@ dfresult.query("confirmed_num==0").head()
 # Note: this prediction is TOO optimistic
 ```
 
-![](./data/1-4-预测确诊.png)
+![](../data/1-4-预测确诊.png)
 
 ```python
 
@@ -529,7 +529,7 @@ dfresult.query("cured_num==0").head()
 # Note: this prediction is TOO pessimistic and problematic: the total sum of the daily increment of discharged cases is larger than cumulated confirmed cases.
 ```
 
-![](./data/1-4-预测治愈.png)
+![](../data/1-4-预测治愈.png)
 
 ```python
 
@@ -542,7 +542,7 @@ dfresult.query("dead_num==0").head()
 # Note: This prediction is relatively reasonable.
 ```
 
-![](./data/1-4-预测死亡.png)
+![](../data/1-4-预测死亡.png)
 
 ```python
 
@@ -554,12 +554,12 @@ dfresult.query("dead_num==0").head()
 Model saving with the original way of TensorFlow is recommended.
 
 ```python
-model.save('./data/tf_model_savedmodel', save_format="tf")
+model.save('../data/tf_model_savedmodel', save_format="tf")
 print('export saved model.')
 ```
 
 ```python
-model_loaded = tf.keras.models.load_model('./data/tf_model_savedmodel',compile=False)
+model_loaded = tf.keras.models.load_model('../data/tf_model_savedmodel',compile=False)
 optimizer = tf.keras.optimizers.Adam(learning_rate=0.001)
 model_loaded.compile(optimizer=optimizer,loss=MSPE(name = "MSPE"))
 model_loaded.predict(ds_train)
@@ -573,4 +573,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

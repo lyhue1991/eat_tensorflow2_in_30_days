@@ -111,12 +111,12 @@ demo.submodules
 
 ```python
 # Save the model using tf.saved_model and specify the method of cross-platform deployment.
-tf.saved_model.save(demo,"./data/demo/1",signatures = {"serving_default":demo.addprint})
+tf.saved_model.save(demo,"../data/demo/1",signatures = {"serving_default":demo.addprint})
 ```
 
 ```python
 # Load the modle
-demo2 = tf.saved_model.load("./data/demo/1")
+demo2 = tf.saved_model.load("../data/demo/1")
 demo2.addprint(tf.constant(5.0))
 ```
 
@@ -126,10 +126,10 @@ demo2.addprint(tf.constant(5.0))
 
 ```python
 # Check the info of the model file. The info in the red rectangulars could be used during the deployment and the cross-platform usage.
-!saved_model_cli show --dir ./data/demo/1 --all
+!saved_model_cli show --dir ../data/demo/1 --all
 ```
 
-![](./data/查看模型文件信息.jpg)
+![](../data/查看模型文件信息.jpg)
 
 ```python
 
@@ -142,7 +142,7 @@ import datetime
 
 # Creating log
 stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-logdir = './data/demomodule/%s' % stamp
+logdir = '../data/demomodule/%s' % stamp
 writer = tf.summary.create_file_writer(logdir)
 
 # Start tracing of the Autograph
@@ -176,10 +176,10 @@ notebook.list()
 ```
 
 ```python
-notebook.start("--logdir ./data/demomodule/")
+notebook.start("--logdir ../data/demomodule/")
 ```
 
-![](./data/demomodule的计算图结构.jpg)
+![](../data/demomodule的计算图结构.jpg)
 
 ```python
 
@@ -218,16 +218,16 @@ print(mymodule.variables)
 
 ```python
 # Save model using tf.saved_model
-tf.saved_model.save(mymodule,"./data/mymodule",
+tf.saved_model.save(mymodule,"../data/mymodule",
     signatures = {"serving_default":mymodule.addprint})
 
 # Load the model
-mymodule2 = tf.saved_model.load("./data/mymodule")
+mymodule2 = tf.saved_model.load("../data/mymodule")
 mymodule2.addprint(tf.constant(5.0))
 ```
 
 ```
-INFO:tensorflow:Assets written to: ./data/mymodule/assets
+INFO:tensorflow:Assets written to: ../data/mymodule/assets
 5
 ```
 
@@ -372,4 +372,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

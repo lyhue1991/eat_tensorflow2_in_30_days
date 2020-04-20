@@ -14,7 +14,7 @@ Before creating feature column, please call the functions in the module `tf.feat
 Be careful: all the Categorical-Column class have to be converted into Dense-Column class through `indicator_column` before input to the model.
 
 
-![](./data/特征列9种.jpg)
+![](../data/特征列9种.jpg)
 
 <!-- #region -->
 * `numeric_column`, the most frequently used function.
@@ -75,8 +75,8 @@ def printlog(info):
 printlog("step1: prepare dataset...")
 
 
-dftrain_raw = pd.read_csv("./data/titanic/train.csv")
-dftest_raw = pd.read_csv("./data/titanic/test.csv")
+dftrain_raw = pd.read_csv("../data/titanic/train.csv")
+dftest_raw = pd.read_csv("../data/titanic/test.csv")
 
 dfraw = pd.concat([dftrain_raw,dftest_raw])
 
@@ -256,7 +256,7 @@ _________________________________________________________________
 ```
 
 
-![](./data/5-2-01-模型评估.jpg)
+![](../data/5-2-01-模型评估.jpg)
 
 ```python
 
@@ -266,4 +266,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

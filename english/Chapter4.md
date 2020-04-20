@@ -23,4 +23,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to reply **加群(join group)** in the WeChat official account to join the group chat with the other readers.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

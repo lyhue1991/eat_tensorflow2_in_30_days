@@ -18,8 +18,8 @@ from tqdm import tqdm
 from tensorflow.keras import *
 
 
-train_token_path = "./data/imdb/train_token.csv"
-test_token_path = "./data/imdb/test_token.csv"
+train_token_path = "../data/imdb/train_token.csv"
+test_token_path = "../data/imdb/test_token.csv"
 
 MAX_WORDS = 10000  # We will only consider the top 10,000 words in the dataset
 MAX_LEN = 200  # We will cut reviews after 200 words
@@ -70,12 +70,12 @@ model.compile(optimizer='Nadam',
 model.summary()
 ```
 
-![](./data/Sequential模型结构.png)
+![](../data/Sequential模型结构.png)
 
 ```python
 import datetime
 baselogger = callbacks.BaseLogger(stateful_metrics=["AUC"])
-logdir = "./data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = "../data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 history = model.fit(ds_train,validation_data = ds_test,
         epochs = 6,callbacks=[baselogger,tensorboard_callback])
@@ -109,7 +109,7 @@ plot_metric(history,"AUC")
 
 ```
 
-![](./data/6-1-fit模型.jpg)
+![](../data/6-1-fit模型.jpg)
 
 ```python
 
@@ -201,11 +201,11 @@ ________________________________________________________________________________
 ```
 
 
-![](./data/FunctionalAPI模型结构.png)
+![](../data/FunctionalAPI模型结构.png)
 
 ```python
 import datetime
-logdir = "./data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = "../data/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 history = model.fit(ds_train,validation_data = ds_test,epochs = 6,callbacks=[tensorboard_callback])
 
@@ -230,7 +230,7 @@ Epoch 6/6
 plot_metric(history,"AUC")
 ```
 
-![](./data/6-1-2-train.jpg)
+![](../data/6-1-2-train.jpg)
 
 ```python
 
@@ -343,7 +343,7 @@ _________________________________________________________________
 
 ```
 
-![](./data/Model子类化模型结构.png)
+![](../data/Model子类化模型结构.png)
 
 ```python
 
@@ -352,7 +352,7 @@ _________________________________________________________________
 ```python
 import datetime
 
-logdir = "./tflogs/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = "../tflogs/keras_model/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 history = model.fit(ds_train,validation_data = ds_test,
                     epochs = 6,callbacks=[tensorboard_callback])
@@ -382,7 +382,7 @@ plot_metric(history,"AUC")
 
 ```
 
-![](./data/6-1-3-fit模型.jpg)
+![](../data/6-1-3-fit模型.jpg)
 
 ```python
 
@@ -392,7 +392,7 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
 
 ```python
 

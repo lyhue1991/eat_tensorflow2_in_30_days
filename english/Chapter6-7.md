@@ -77,7 +77,7 @@ tf.print("w = ",linear.layers[1].kernel)
 tf.print("b = ",linear.layers[1].bias)
 
 ## Save the model as pb format
-export_path = "./data/linear_model/"
+export_path = "../data/linear_model/"
 version = "1"       # Version could be used for management of further updates
 linear.save(export_path+version, save_format="tf") 
 
@@ -102,7 +102,7 @@ linear.save(export_path+version, save_format="tf")
 
 The model file information marked red could be used later.
 
-![](./data/模型文件信息.png)
+![](../data/模型文件信息.png)
 
 ```python
 
@@ -182,7 +182,7 @@ Array(Array(3.019596), Array(3.9878292))
 ```
 
 
-![](./data/TfDriver.png)
+![](../data/TfDriver.png)
 
 ```python
 
@@ -252,7 +252,7 @@ Array(Array(3.019596), Array(3.9264367), Array(7.8607616), Array(15.974984))
 ```
 
 
-![](./data/TfRDD.png)
+![](../data/TfRDD.png)
 
 ```python
 
@@ -361,4 +361,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

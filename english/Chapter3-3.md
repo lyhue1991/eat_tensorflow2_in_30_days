@@ -79,7 +79,7 @@ plt.show()
 
 ```
 
-![](./data/3-3-01-回归数据可视化.png)
+![](../data/3-3-01-回归数据可视化.png)
 
 ```python
 
@@ -164,7 +164,7 @@ plt.ylabel("y",rotation = 0)
 plt.show()
 ```
 
-![](./data/3-3-02-回归结果可视化.png)
+![](../data/3-3-02-回归结果可视化.png)
 
 ```python
 
@@ -221,7 +221,7 @@ plt.legend(["positive","negative"]);
 
 ```
 
-![](./data/3-3-03-分类数据可视化.png)
+![](../data/3-3-03-分类数据可视化.png)
 
 ```python
 ds_train = tf.data.Dataset.from_tensor_slices((X[0:n*3//4,:],Y[0:n*3//4,:])) \
@@ -395,7 +395,7 @@ ax2.legend(["positive","negative"]);
 ax2.set_title("y_pred");
 ```
 
-![](./data/3-3-04-分类结果可视化.png)
+![](../data/3-3-04-分类结果可视化.png)
 
 ```python
 
@@ -405,4 +405,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

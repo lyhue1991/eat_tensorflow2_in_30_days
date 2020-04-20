@@ -24,7 +24,7 @@ The solid edge (line) represents the dependency with data (tensor) transmission.
 
 The dotted edge (line) represents the dependency of control, i.e. the order of execution.
 
-![](./data/strjoin_graph.png)
+![](../data/strjoin_graph.png)
 
 
 ### 2. The Static Graph
@@ -166,7 +166,7 @@ import datetime
 
 # Create logdir
 stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-logdir = './data/autograph/%s' % stamp
+logdir = '../data/autograph/%s' % stamp
 writer = tf.summary.create_file_writer(logdir)
 
 # Start tracing on Autograph
@@ -190,10 +190,10 @@ with writer.as_default():
 
 ```python
 # Launch tensorboard
-%tensorboard --logdir ./data/autograph/
+%tensorboard --logdir ../data/autograph/
 ```
 
-![](./data/2-2-tensorboard计算图.jpg)
+![](../data/2-2-tensorboard计算图.jpg)
 
 ```python
 
@@ -203,4 +203,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

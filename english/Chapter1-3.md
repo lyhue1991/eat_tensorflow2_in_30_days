@@ -23,7 +23,7 @@ The latter is the original method of TensorFlow, which is simpler.
 Below is the introduction to the second method.
 
 
-![](./data/电影评论.jpg)
+![](../data/电影评论.jpg)
 
 ```python
 import numpy as np 
@@ -34,8 +34,8 @@ from tensorflow.keras import models,layers,preprocessing,optimizers,losses,metri
 from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
 import re,string
 
-train_data_path = "./data/imdb/train.csv"
-test_data_path =  "./data/imdb/test.csv"
+train_data_path = "../data/imdb/train.csv"
+test_data_path =  "../data/imdb/test.csv"
 
 MAX_WORDS = 10000  # Consider the 10000 words with the highest frequency of appearance
 MAX_LEN = 200  # For each sample, preserve the first 200 words
@@ -374,10 +374,10 @@ tf.Tensor(
 Model saving with the original way of TensorFlow is recommended.
 
 ```python
-model.save('./data/tf_model_savedmodel', save_format="tf")
+model.save('../data/tf_model_savedmodel', save_format="tf")
 print('export saved model.')
 
-model_loaded = tf.keras.models.load_model('./data/tf_model_savedmodel')
+model_loaded = tf.keras.models.load_model('../data/tf_model_savedmodel')
 model_loaded.predict(ds_test)
 ```
 
@@ -396,4 +396,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

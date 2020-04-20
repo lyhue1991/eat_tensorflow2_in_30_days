@@ -80,7 +80,7 @@ TPR curve is the cumulative distribution function (CDF) of the positive samples,
 
 K-S statistic is the maximum of the difference between the CDF of positive and negative samples.
 
-![](./data/KS_curve.png)
+![](../data/KS_curve.png)
 
 ```python
 import numpy as np
@@ -175,4 +175,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)

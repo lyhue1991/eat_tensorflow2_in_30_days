@@ -79,7 +79,7 @@ tf.print("w = ",linear.layers[1].kernel)
 tf.print("b = ",linear.layers[1].bias)
 
 ## Save the model as pb format
-export_path = "./data/linear_model/"
+export_path = "../data/linear_model/"
 version = "1"       # Version could be used for management of further updates
 linear.save(export_path+version, save_format="tf") 
 ```
@@ -263,7 +263,7 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
 
 ```python
 

@@ -241,15 +241,15 @@ print(model.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
 
 
 # Save as h5 formatted model
-model.save("./data/linear_model.h5",save_format = "h5")
+model.save("../data/linear_model.h5",save_format = "h5")
 model_loaded_keras = tf.keras.models.load_model(
-    "./data/linear_model.h5",custom_objects={"Linear":Linear})
+    "../data/linear_model.h5",custom_objects={"Linear":Linear})
 print(model_loaded_keras.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
 
 
 # Save as tf formatted model
-model.save("./data/linear_model",save_format = "tf")
-model_loaded_tf = tf.keras.models.load_model("./data/linear_model")
+model.save("../data/linear_model",save_format = "tf")
+model_loaded_tf = tf.keras.models.load_model("../data/linear_model")
 print(model_loaded_tf.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
 
 ```
@@ -259,7 +259,7 @@ print(model_loaded_tf.predict(tf.constant([[3.0,2.0],[4.0,5.0]])))
  [-0.06150477]]
 [[-0.04092304]
  [-0.06150477]]
-INFO:tensorflow:Assets written to: ./data/linear_model/assets
+INFO:tensorflow:Assets written to: ../data/linear_model/assets
 [[-0.04092304]
  [-0.06150477]]
 ```
@@ -269,4 +269,4 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 
 You are also welcomed to join the group chat with the other readers through replying **加群 (join group)** in the WeChat official account.
 
-![image.png](./data/Python与算法之美logo.jpg)
+![image.png](../data/Python与算法之美logo.jpg)
