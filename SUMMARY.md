@@ -5,7 +5,7 @@
 * [1-1 Example: Modeling Procedure for Structured Data](./english/Chapter1-1.md)
 * [1-2 Example: Modeling Procedure for Images](./english/Chapter1-2.md)
 * [1-3 Example: Modeling Procedure for Texts](./english/Chapter1-3.md)
-* [1-4 Example: Modeling Procedure for Temporal Sequences](./english/1-4,时间序列数据建模流程范例.md)
+* [1-4 Example: Modeling Procedure for Temporal Sequences](./english/Chapter1-4.md)
 
 * [Chapter 2: Key Concepts of TensorFlow](./english/Chapter2.md)
 * [2-1 Data Structure of Tensor](./english/Chapter2-1.md)
