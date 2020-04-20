@@ -121,7 +121,6 @@ train_step(model,features,labels)
 ```
 
 ```python
-@tf.function
 def train_model(model,epochs):
     for epoch in tf.range(1,epochs+1):
         loss = tf.constant(0.0)
@@ -341,7 +340,6 @@ train_step(model,features,labels)
 ```
 
 ```python
-@tf.function
 def train_model(model,epochs):
     for epoch in tf.range(1,epochs+1):
         loss, metric = tf.constant(0.0),tf.constant(0.0)
