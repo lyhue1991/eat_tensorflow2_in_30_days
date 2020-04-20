@@ -327,7 +327,6 @@ def valid_step(model, features, labels):
     valid_metric.update_state(labels, predictions)
     
 
-@tf.function
 def train_model(model,ds_train,ds_valid,epochs):
     for epoch in tf.range(1,epochs+1):
         for features, labels in ds_train:
