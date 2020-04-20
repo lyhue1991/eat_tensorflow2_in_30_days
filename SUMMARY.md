@@ -42,6 +42,6 @@
 * [6-5 Model Training Using TPU](./Chapter6-5.md)
 * [6-6 Model Deploying Using tensorflow-serving](./Chapter6-6.md)
 * [6-7 Call Tensorflow Model Using spark-scala](./Chapter6-7.md)
-* [Epilogue：A Story Between a Foodie and a Cuisine](./后记：一个吃货和一道菜的故事.md)
+* [Epilogue：A Story Between a Foodie and Cuisine](./Epilogue.md)
 
 
