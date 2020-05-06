@@ -198,14 +198,13 @@ Please leave comments in the WeChat official account "Python与算法之美" (El
 ```python
 
 ```
-
-
-
 # 30天吃掉那只 TensorFlow2
 
 📚 gitbook电子书地址： https://lyhue1991.github.io/eat_tensorflow2_in_30_days
 
 🚀 github项目地址：https://github.com/lyhue1991/eat_tensorflow2_in_30_days
+
+🐳 kesci专栏地址：https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0
 
 
 ### 一，TensorFlow2 🍎 or Pytorch🔥
@@ -360,6 +359,10 @@ tf.keras绝大部分功能和兼容多种后端的Keras库用法完全一样，�
 
 为了直接能够在jupyter中打开markdown文件，建议安装jupytext，将markdown转换成ipynb文件。
 
+**此外，本项目也与和鲸社区达成了合作，可以在和鲸专栏fork本项目，并直接在云笔记本上运行代码，避免环境配置痛苦。** 
+
+🐳和鲸专栏地址：https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0
+
 ```python
 #克隆本书源码到本地,使用码云镜像仓库国内下载速度更快
 #!git clone https://gitee.com/Python_Ai_Road/eat_tensorflow2_in_30_days
@@ -387,6 +390,9 @@ tf.print(c)
 tensorflow version: 2.1.0
 hello tensorflow2
 ```
+
+
+
 
 ```python
 

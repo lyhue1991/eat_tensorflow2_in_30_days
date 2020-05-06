@@ -26,7 +26,6 @@ def printbar():
                 timeformat(second)],separator = ":")
     tf.print("=========="*8+timestring)
 
-    
 ```
 
 ```python
@@ -86,7 +85,7 @@ def data_iter(features, labels, batch_size=8):
     np.random.shuffle(indices)  #样本的读取顺序是随机的
     for i in range(0, num_examples, batch_size):
         indexs = indices[i: min(i + batch_size, num_examples)]
-        yield tf.gather(X,indexs), tf.gather(Y,indexs)
+        yield tf.gather(features,indexs), tf.gather(labels,indexs)
         
 # 测试数据管道效果   
 batch_size = 8
@@ -356,7 +355,7 @@ def data_iter(features, labels, batch_size=8):
     np.random.shuffle(indices)  #样本的读取顺序是随机的
     for i in range(0, num_examples, batch_size):
         indexs = indices[i: min(i + batch_size, num_examples)]
-        yield tf.gather(X,indexs), tf.gather(Y,indexs)
+        yield tf.gather(features,indexs), tf.gather(labels,indexs)
         
 # 测试数据管道效果   
 batch_size = 10

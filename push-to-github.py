@@ -27,7 +27,7 @@
 
 # !git push   origin master 
 
-# !git push gitee master 
+# !git push -f gitee master 
 
 # ## 创建pages分支
 
