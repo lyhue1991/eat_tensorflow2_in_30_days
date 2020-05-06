@@ -33,7 +33,7 @@ model.add(layers.Dense(64, input_dim=64,
 model.add(layers.Dense(10,
         kernel_regularizer=regularizers.l1_l2(0.01,0.01),activation = "sigmoid"))
 model.compile(optimizer = "rmsprop",
-        loss = "sparse_categorical_crossentropy",metrics = ["AUC"])
+        loss = "binary_crossentropy",metrics = ["AUC"])
 model.summary()
 
 ```
