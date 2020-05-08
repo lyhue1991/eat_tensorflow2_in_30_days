@@ -9,7 +9,7 @@
 
 # !git init
 
-# !git add  ./data/*  *.md *.py
+# !git add  ./data/*  ./english/* *.md *.py
 
 
 

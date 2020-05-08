@@ -115,8 +115,9 @@ class CnnModel(models.Model):
     def build(self,input_shape):
         self.embedding = layers.Embedding(MAX_WORDS,7,input_length=MAX_LEN)
         self.conv_1 = layers.Conv1D(16, kernel_size= 5,name = "conv_1",activation = "relu")
-        self.pool = layers.MaxPool1D()
+        self.pool_1 = layers.MaxPool1D(name = "pool_1")
         self.conv_2 = layers.Conv1D(128, kernel_size=2,name = "conv_2",activation = "relu")
+        self.pool_2 = layers.MaxPool1D(name = "pool_2")
         self.flatten = layers.Flatten()
         self.dense = layers.Dense(1,activation = "sigmoid")
         super(CnnModel,self).build(input_shape)
@@ -124,12 +125,19 @@ class CnnModel(models.Model):
     def call(self, x):
         x = self.embedding(x)
         x = self.conv_1(x)
-        x = self.pool(x)
+        x = self.pool_1(x)
         x = self.conv_2(x)
-        x = self.pool(x)
+        x = self.pool_2(x)
         x = self.flatten(x)
         x = self.dense(x)
         return(x)
+    
+    # To show Output Shape
+    def summary(self):
+        x_input = layers.Input(shape = MAX_LEN)
+        output = self.call(x_input)
+        model = tf.keras.Model(inputs = x_input,outputs = output)
+        model.summary()
     
 model = CnnModel()
 model.build(input_shape =(None,MAX_LEN))
@@ -142,21 +150,25 @@ model.summary()
 ```
 
 ```
-Model: "cnn_model"
+Model: "model"
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-embedding (Embedding)        multiple                  70000     
+input_1 (InputLayer)         [(None, 200)]             0         
 _________________________________________________________________
-conv_1 (Conv1D)              multiple                  576       
+embedding (Embedding)        (None, 200, 7)            70000     
 _________________________________________________________________
-max_pooling1d (MaxPooling1D) multiple                  0         
+conv_1 (Conv1D)              (None, 196, 16)           576       
 _________________________________________________________________
-conv_2 (Conv1D)              multiple                  4224      
+pool_1 (MaxPooling1D)        (None, 98, 16)            0         
 _________________________________________________________________
-flatten (Flatten)            multiple                  0         
+conv_2 (Conv1D)              (None, 97, 128)           4224      
 _________________________________________________________________
-dense (Dense)                multiple                  6145      
+pool_2 (MaxPooling1D)        (None, 48, 128)           0         
+_________________________________________________________________
+flatten (Flatten)            (None, 6144)              0         
+_________________________________________________________________
+dense (Dense)                (None, 1)                 6145      
 =================================================================
 Total params: 80,945
 Trainable params: 80,945
