@@ -186,8 +186,19 @@ tf.print(tf.minimum(a,b))
 ```
 
 ```python
+# clip value
+x = tf.constant([0.9,-0.8,100.0,-20.0,0.7])
+y = tf.clip_by_value(x,clip_value_min=-1,clip_value_max=1)
+z = tf.clip_by_norm(x,clip_norm = 3)
+tf.print(y)
+tf.print(z)
+```
 
 ```
+[0.9 -0.8 1 -1 0.7]
+[0.0264732055 -0.0235317405 2.94146752 -0.588293493 0.0205902718]
+```
+
 
 ### 2. Vector Operation
 
@@ -399,18 +410,30 @@ tf.print(q@r)
 
 ```python
 # SVD decomposition
-a  = tf.constant([[1.0,2.0],[3.0,4.0]],dtype = tf.float32)
-v,s,d = tf.linalg.svd(a)
-tf.matmul(tf.matmul(s,tf.linalg.diag(v)),d)
+a  = tf.constant([[1.0,2.0],[3.0,4.0],[5.0,6.0]], dtype = tf.float32)
+s,u,v = tf.linalg.svd(a)
+tf.print(u,"\n")
+tf.print(s,"\n")
+tf.print(v,"\n")
+tf.print(u@tf.linalg.diag(s)@tf.transpose(v))
 
 # SVD decomposition is used for dimension reduction in PCA
 
 ```
 
 ```
-<tf.Tensor: shape=(2, 2), dtype=float32, numpy=
-array([[0.9999996, 1.9999996],
-       [2.9999998, 4.       ]], dtype=float32)>
+[[0.229847744 -0.88346082]
+ [0.524744868 -0.240782902]
+ [0.819642067 0.401896209]] 
+
+[9.52551842 0.51429987] 
+
+[[0.619629562 0.784894466]
+ [0.784894466 -0.619629562]] 
+
+[[1.00000119 2]
+ [3.00000095 4.00000048]
+ [5.00000143 6.00000095]]
 ```
 
 ```python
