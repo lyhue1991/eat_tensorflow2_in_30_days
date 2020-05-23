@@ -15,7 +15,7 @@
 
 # !git rm --cached  .ipynb_checkpoints/* 
 
-# !git commit -m "revise readme" 
+# !git commit -m "revise 4-2" 
 
 # !git remote rm origin 
 

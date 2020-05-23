@@ -383,11 +383,12 @@ tf.linalg.det(a)
 
 ```python
 # Eigenvalues
-tf.linalg.eigvalsh(a)
+a = tf.constant([[1.0,2],[5,4]])
+tf.linalg.eigvals(a)
 ```
 
 ```
-<tf.Tensor: shape=(2,), dtype=float32, numpy=array([-0.8541021,  5.854102 ], dtype=float32)>
+<tf.Tensor: shape=(2,), dtype=complex64, numpy=array([-0.99999994+0.j,  5.9999995 +0.j], dtype=complex64)>
 ```
 
 ```python
