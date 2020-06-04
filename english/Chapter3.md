@@ -18,7 +18,7 @@ For example: `tf.keras.layers`, `tf.keras.losses`, `tf.keras.metrics`, `tf.keras
 If we compare a model to a house, then these fourth level APIs are the walls.
 
 The fifth level contains well-designed models implemented in Python. Most of them are high-level APIs packaged by OOP, typically are the class interfaces for `tf.keras.models`.
-If we compare a model to a house, then these fourth level APIs are the houses themselves.
+If we compare a model to a house, then these fifth level APIs are the houses themselves.
 
 
 <img src="../data/tensorflow_structure_eng.jpg">
