@@ -27,7 +27,6 @@ tf.print(a)
 ```
 [1 2 3]
 ```
-
 ```python
 b = tf.range(1,10,delta = 2)
 tf.print(b)
@@ -218,7 +217,7 @@ tf.print(tf.slice(t,[1,0],[3,5])) #tf.slice(input,begin_vector,size_vector)
 ```
 
 ```python
-# From row 1 to the last row, and from column 0 to the last one with an increment of 2
+# From row 1 to the last row, and from column 0 to the last but one with an increment of 2
 tf.print(t[1:4,:4:2])
 ```
 
@@ -262,9 +261,14 @@ tf.print(a)
 ```python
 # Ellipsis represents multiple colons
 tf.print(a[...,1])
+# This is equal to
+tf.print(a[:,:,1])
 ```
 
 ```
+[[3 0 6]
+ [3 8 1]
+ [0 2 9]]
 [[3 0 6]
  [3 8 1]
  [0 2 9]]
