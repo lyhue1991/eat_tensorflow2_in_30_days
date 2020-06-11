@@ -43,7 +43,7 @@ Here are the introductions for the most popular layers.
 
 * Reshape:Reshape layer, reform the shape of the input tensor.
 
-* Concatenate:Concatenating layer to linke multiple tensors along the specific dimension.
+* Concatenate:Concatenating layer to link multiple tensors along the specific dimension.
 
 * Add: Adding layer.
 
