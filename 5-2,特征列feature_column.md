@@ -130,8 +130,7 @@ printlog("step2: make feature columns...")
 feature_columns = []
 
 # 数值列
-for col in ['age','fare','parch','sibsp'] + [
-    c for c in dfdata.columns if c.endswith('_nan')]:
+for col in ['age','fare','parch','sibsp']:
     feature_columns.append(tf.feature_column.numeric_column(col))
 
 # 分桶列
@@ -142,6 +141,14 @@ feature_columns.append(age_buckets)
 
 # 类别列
 # 注意：所有的Catogorical Column类型最终都要通过indicator_column转换成Dense Column类型才能传入模型！！
+for col in [c for c in dfdata.columns if c.endswith('_nan')]:
+    feature_columns.append(
+        tf.feature_column.indicator_column(
+            tf.feature_column.categorical_column_with_vocabulary_list(
+                key=col,vocabulary_list=[0,1])
+        )
+    )
+
 sex = tf.feature_column.indicator_column(
       tf.feature_column.categorical_column_with_vocabulary_list(
       key='sex',vocabulary_list=["male", "female"]))
