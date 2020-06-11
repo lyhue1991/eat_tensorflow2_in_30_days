@@ -129,8 +129,7 @@ printlog("step2: make feature columns...")
 feature_columns = []
 
 # Numerical column
-for col in ['age','fare','parch','sibsp'] + [
-    c for c in dfdata.columns if c.endswith('_nan')]:
+for col in ['age','fare','parch','sibsp']:
     feature_columns.append(tf.feature_column.numeric_column(col))
 
 # Bucketized column
@@ -141,6 +140,14 @@ feature_columns.append(age_buckets)
 
 # Category column
 # NOTE: all the Categorical-Column class have to be converted into Dense-Column class through `indicator_column` before input to the model.
+for col in [c for c in dfdata.columns if c.endswith('_nan')]:
+    feature_columns.append(
+        tf.feature_column.indicator_column(
+            tf.feature_column.categorical_column_with_vocabulary_list(
+                key=col,vocabulary_list=[0,1])
+        )
+    )
+
 sex = tf.feature_column.indicator_column(
       tf.feature_column.categorical_column_with_vocabulary_list(
       key='sex',vocabulary_list=["male", "female"]))
