@@ -4,7 +4,7 @@ The training procedure of deep learning is usually time consuming. It even takes
 
 The time is mainly consumpted by two stages, data preparation and parameter iteration.
 
-We can increase the number of process to alleviate this issue if data preparation takes the majority of time.
+We can leverage multi-thread or multi-processor to alleviate this issue if data preparation takes the majority of time.
 
 However, if the majority of time is taken by parameter iteration, we need to use GPU or Google TPU for acceleration.
 
@@ -12,7 +12,7 @@ You may refer to this article for further details: ["GPU acceleration for Keras 
 
 There is no need to modify source code for switching from CPU to GPU when using the pre-defined `fit` method or the customized training loops. When GPU is available and the device is not specified, TensorFlow automatically chooses GPU for tensor creating and computing.
 
-However, for the case of using shared GPU with multiple users, sucha as using server of the company or the lab, we need to add following code to specify the GPU ID and the GPU memory size that we are going to use, in order to avoid the GPU resources to be occupied by a single user (actually TensorFlow acquires all GPU cors and all GPU memories by default) and allows multiple users perform training on it.
+However, for the case of using shared GPU with multiple users, such as using servers of company or lab, we need to add following code to specify the GPU ID and the GPU memory size that we are going to use, in order to avoid the GPU resources to be occupied by a single user (actually TensorFlow acquires all GPU cors and all GPU memories by default) and allows multiple users perform training on it.
 
 
 In Colab notebook, choose GPU in Edit -> Notebook Settings -> Hardware Accelerator
