@@ -8,7 +8,7 @@ For the models with nonsequenced structures such as multiple input/output, share
 
 Modeling through child class of `Model` should be AVOIDED unless with special requirements. This method is flexible, but also fallible.
 
-Here is are the examples of modeling using the three above-mentioned methods to classify IMDB movie reviews.
+Here are the examples of modeling using the three above-mentioned methods to classify IMDB movie reviews.
 
 ```python
 import numpy as np 
