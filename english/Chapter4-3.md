@@ -14,7 +14,7 @@ There are certain rules for the code that is able to converted by Autograph, or 
 
 We are going to introduce the coding rules of Autograph and its mechanism of converting into static graph, together with introduction about how to construct Autograph using `tf.Module`.
 
-This section introduce the coding rules of using Autograph.
+This section introduce the coding rules of using Autograph. We will introduce the mechanisms of Autograph in next section and explain the logic behind the rules there.
 
 <!-- #region -->
 ### 1. Summarization of the Coding Rules of Autograph
