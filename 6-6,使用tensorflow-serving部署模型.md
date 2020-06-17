@@ -229,13 +229,13 @@ docker pull tensorflow/serving
 可以使用任何编程语言的http功能发送请求，下面示范linux的 curl 命令发送请求，以及Python的requests库发送请求。
 
 ```python
-!curl -d '{"instances": [1.0, 2.0, 5.0]}' \
+!curl -d '{"instances": [[1.0, 2.0], [5.0,7.0]]}' \
     -X POST http://localhost:8501/v1/models/linear_model:predict
 ```
 
 ```
 {
-    "predictions": [[3.06546211], [5.01313448]
+    "predictions": [[3.06546211], [6.02843142]
     ]
 }
 ```
