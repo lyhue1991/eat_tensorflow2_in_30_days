@@ -295,7 +295,7 @@ plot_metric(history,"loss")
 ![](../data/1-1-Loss曲线.jpg)
 
 ```python
-plot_metric(history,"AUC")
+plot_metric(history,"auc")
 ```
 
 ![](../data/1-1-AUC曲线.jpg)
