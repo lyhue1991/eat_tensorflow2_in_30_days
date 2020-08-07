@@ -4,11 +4,11 @@ Click here for [Chinese Version（中文版）](#30天吃掉那只-tensorflow2)
 
 **《30天吃掉那只TensorFlow2》**
 * 🚀 github项目地址: https://github.com/lyhue1991/eat_tensorflow2_in_30_days
-* 🐳 和鲸专栏地址： https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0 【代码可直接fork后在和鲸平台云端运行，无需配置环境】
+* 🐳 和鲸专栏地址: https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0 【代码可直接fork后云端运行，无需配置环境】
 
 **《20天吃掉那只Pytorch》**
 * 🚀 github项目地址: https://github.com/lyhue1991/eat_pytorch_in_20_days
-* 🐳 和鲸专栏地址： https://www.kesci.com/home/column/5f2ac5d8af3980002cb1bc08 【代码可直接fork后在和鲸平台云端运行，无需配置环境】
+* 🐳 和鲸专栏地址: https://www.kesci.com/home/column/5f2ac5d8af3980002cb1bc08 【代码可直接fork后云端运行，无需配置环境】
 
 
 ### 1. TensorFlow2 🍎 or Pytorch🔥
