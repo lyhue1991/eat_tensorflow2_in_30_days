@@ -189,6 +189,7 @@ from tensorflow.keras import layers,losses,metrics,optimizers
 
 #正负样本数量
 n_positive,n_negative = 2000,2000
+n = n_positive+n_negative
 
 #生成正样本, 小圆环分布
 r_p = 5.0 + tf.random.truncated_normal([n_positive,1],0.0,1.0)
