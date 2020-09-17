@@ -24,13 +24,13 @@ Conclusion first:
 
 Reasons:
 
-* 1. **Model implementation is the most important in the industry. Deployment supporting tensorflow models (not Pytorch) exclusively is the present situation in the majority of the Internet enterprises in China.** What's more, the industry prefers the models with higher availability; in most cases, they use well-validated modeling architectures with the minimized requirements of adjustment.
+* 1. **Model implementation is the most important in the industry. Deployment supporting tensorflow models (not Pytorch) exclusively is the current requirement in the majority of the Internet enterprises in China.** What's more, the industry prefers the models with higher availability; in most cases, they use well-validated modeling architectures with the minimized requirements of adjustment.
 
 
-* 2. **Fast iterative development and publication is the most important for the researchers since they need to test a lot of new models. Pytorch has advantages in accessing and debugging comparing with TensorFlow2.** Pytorch is most frequently used in academy since 2019 with a large amount of the cutting-edge results.
+* 2. **Fast iterative development and publication is the most important for the researchers since they need to test a lot of new models. Pytorch has advantages in accessing and debugging compared to TensorFlow2.** Pytorch is most frequently used in academy since 2019 with a large amount of the cutting-edge results.
 
 
-* 3. Overall, TensorFlow2 and Pytorch are quite similar in programming nowadays, so mastering one helps learning the other. Mastering both framework provides you a lot more open-sourced models and helps you switching between them.
+* 3. Overall, TensorFlow2 and Pytorch are quite similar in programming nowadays, so mastering one helps in learning the other. Mastering both framework provides you with a lot more open-sourced models and helps you switch between them easily.
 
 ```python
 
@@ -43,13 +43,13 @@ Conclusion first:
 **Keras will be discontinued in development after version 2.3.0, so use tf.keras.**
 
 
-Keras is a high-level API for the deep learning frameworks. It help the users to define and training DL networks with a more intuitive way.
+Keras is a high-level API for the deep learning frameworks. It help the users to define and train DL networks with a more intuitive way.
 
 The Keras libraries installed by pip implement this high-level API for the backends in tensorflow, theano, CNTK, etc.
 
 tf.keras is the high-level API just for Tensorflow, which is based on low-level APIs in Tensorflow.
 
-Most but not all of the functions in tf.keras are the same for those in Keras (which is compatible to many kinds of backend). tf.keras has a tighter combination to TensorFlow comparing to Keras.
+Most but not all of the functions in tf.keras are the same for those in Keras (which is compatible with many kinds of backend). tf.keras has a tighter connection to TensorFlow compared to Keras.
 
 With the acquisition by Google, Keras will not update after version 2.3.0 , thus the users should use tf.keras from now on, instead of using Keras installed by pip.
 
@@ -66,7 +66,7 @@ With the acquisition by Google, Keras will not update after version 2.3.0 , thus
 
 ["Deep Learning with Python"](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438/ref=sr_1_1?dchild=1&keywords=Deep+Learning+with+Python&qid=1586194568&sr=8-1) is written by François Chollet, the inventor of Keras. This book is based on Keras and has no machine learning related prerequisites to the reader.
 
-"Deep Learning with Python" is easy to understand as it uses various examples to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuitive to the deep learning.**
+"Deep Learning with Python" is easy to understand as it uses various examples to demonstrate. **No mathematical equation is in this book since it focuses on cultivating the intuition to the deep learning.**
 
 
 ```python
@@ -76,13 +76,13 @@ With the acquisition by Google, Keras will not update after version 2.3.0 , thus
 ### 4. Writing Style 🍉 of This Book
 
 
-**This is a introduction reference book which is extremely friendly to human being. The lowest goal of the authors is to avoid giving up due to the difficulties, while "Don't let the readers think" is the highest target.**
+**This is an introduction reference book which is extremely friendly to human being. The lowest goal of the authors is to avoid giving up due to the difficulties, while "Don't let the readers think" is the highest target.**
 
 This book is mainly based on the official documents of TensorFlow together with its functions.
 
-However, the authors made a thorough restructuring and a lot optimizations on the demonstrations.
+However, the authors thoroughly restructured and optimized the demonstrations.
 
-It is different from the official documents, which is disordered and contains both tutorial and guidance with lack of systematic logic, that our book redesigns the content according to the difficulties, readers' searching habits, and the architecture of TensorFlow. We now make it progressive for TensorFlow studying with a clear path, and an easy access to the corresponding examples.
+It is different from the official documents, which are disordered and contain both tutorial and guidance with lack of systematic logic, that our book redesigns the content according to the difficulties, readers' searching habits, and the architecture of TensorFlow. We now make it progressive for TensorFlow studying with a clear path, and an easy access to the corresponding examples.
 
 In contrast to the verbose demonstrating code, the authors of this book try to minimize the length of the examples to make it easy for reading and implementation. What's more, most of the code cells can be used in your project instantaneously.
 
