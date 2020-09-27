@@ -2,7 +2,7 @@
 # mkdocs-material: https://squidfunk.github.io/mkdocs-material/
 # mkdocs: https://www.mkdocs.org/user-guide/configuration/
 
-site_name: 30天吃掉那只Pytorch
+site_name: 30天吃掉那只Tensorflow2
 repo_url: https://github.com/lyhue1991/eat_tensorflow2_in_30_days
 theme:
   name: material
