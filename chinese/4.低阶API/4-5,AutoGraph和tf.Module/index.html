@@ -1,0 +1,1960 @@
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>4-5,AutoGraph和tf.Module - 30天吃掉那只Tensorflow2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-5autograph和tfmodule" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-header-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            30天吃掉那只Tensorflow2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              4-5,AutoGraph和tf.Module
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        How to eat TensorFlow2 in 30 days ?🔥🔥
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          Chinese
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../english/" class="md-tabs__link">
+          English
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    30天吃掉那只Tensorflow2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Chinese
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chinese" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Chinese
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../%E5%90%8E%E8%AE%B0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%90%83%E8%B4%A7%E5%92%8C%E4%B8%80%E9%81%93%E8%8F%9C%E7%9A%84%E6%95%85%E4%BA%8B/" title="一个吃货和一道菜的故事" class="md-nav__link">
+      一个吃货和一道菜的故事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      1.建模流程
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="1.建模流程" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        1.建模流程
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-nav__link">
+      一、TensorFlow的建模流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-1%2C%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-1,结构化数据建模流程范例" class="md-nav__link">
+      1-1,结构化数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-2%2C%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-2,图片数据建模流程范例" class="md-nav__link">
+      1-2,图片数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-3%2C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-3,文本数据建模流程范例" class="md-nav__link">
+      1-3,文本数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-4%2C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-4,时间序列数据建模流程范例" class="md-nav__link">
+      1-4,时间序列数据建模流程范例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      2.核心概念
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="2.核心概念" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        2.核心概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="二、TensorFlow的核心概念" class="md-nav__link">
+      二、TensorFlow的核心概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-1%2C%E5%BC%A0%E9%87%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="2-1,张量数据结构" class="md-nav__link">
+      2-1,张量数据结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-2%2C%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E5%9B%BE/" title="2-2,三种计算图" class="md-nav__link">
+      2-2,三种计算图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-3%2C%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%9C%BA%E5%88%B6/" title="2-3,自动微分机制" class="md-nav__link">
+      2-3,自动微分机制
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      3.层次结构
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="3.层次结构" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        3.层次结构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" title="三、TensorFlow的层次结构" class="md-nav__link">
+      三、TensorFlow的层次结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-1%2C%E4%BD%8E%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-1,低阶API示范" class="md-nav__link">
+      3-1,低阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-2%2C%E4%B8%AD%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-2,中阶API示范" class="md-nav__link">
+      3-2,中阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-3%2C%E9%AB%98%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-3,高阶API示范" class="md-nav__link">
+      3-3,高阶API示范
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6" checked>
+    
+    <label class="md-nav__link" for="nav-2-6">
+      4.低阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="4.低阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        4.低阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="四、TensorFlow的低阶API" class="md-nav__link">
+      四、TensorFlow的低阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4-1%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C/" title="4-1,张量的结构操作" class="md-nav__link">
+      4-1,张量的结构操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4-2%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97/" title="4-2,张量的数学运算" class="md-nav__link">
+      4-2,张量的数学运算
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4-3%2CAutoGraph%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" title="4-3,AutoGraph的使用规范" class="md-nav__link">
+      4-3,AutoGraph的使用规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-nav__link">
+      4-4,AutoGraph的机制原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4-5,AutoGraph和tf.Module
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="4-5,AutoGraph和tf.Module" class="md-nav__link md-nav__link--active">
+      4-5,AutoGraph和tf.Module
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一autograph和tfmodule概述" class="md-nav__link">
+    一，Autograph和tf.Module概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二应用tfmodule封装autograph" class="md-nav__link">
+    二，应用tf.Module封装Autograph
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三tfmodule和tfkerasmodeltfkeraslayerslayer" class="md-nav__link">
+    三，tf.Module和tf.keras.Model，tf.keras.layers.Layer
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      5.中阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="5.中阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        5.中阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/" title="五、TensorFlow的中阶API" class="md-nav__link">
+      五、TensorFlow的中阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-1%2C%E6%95%B0%E6%8D%AE%E7%AE%A1%E9%81%93Dataset/" title="5-1,数据管道Dataset" class="md-nav__link">
+      5-1,数据管道Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-nav__link">
+      5-2,特征列feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-3%2C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activation/" title="5-3,激活函数activation" class="md-nav__link">
+      5-3,激活函数activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-4%2C%E6%A8%A1%E5%9E%8B%E5%B1%82layers/" title="5-4,模型层layers" class="md-nav__link">
+      5-4,模型层layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-5%2C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0losses/" title="5-5,损失函数losses" class="md-nav__link">
+      5-5,损失函数losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-6%2C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics/" title="5-6,评估指标metrics" class="md-nav__link">
+      5-6,评估指标metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-7%2C%E4%BC%98%E5%8C%96%E5%99%A8optimizers/" title="5-7,优化器optimizers" class="md-nav__link">
+      5-7,优化器optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../5.%E4%B8%AD%E9%98%B6API/5-8%2C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks/" title="5-8,回调函数callbacks" class="md-nav__link">
+      5-8,回调函数callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      6.高阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="6.高阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        6.高阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/" title="六、TensorFlow的高阶API" class="md-nav__link">
+      六、TensorFlow的高阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-1%2C%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-1,构建模型的3种方法" class="md-nav__link">
+      6-1,构建模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-2%2C%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-2,训练模型的3种方法" class="md-nav__link">
+      6-2,训练模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-3%2C%E4%BD%BF%E7%94%A8%E5%8D%95GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-3,使用单GPU训练模型" class="md-nav__link">
+      6-3,使用单GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-4%2C%E4%BD%BF%E7%94%A8%E5%A4%9AGPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-4,使用多GPU训练模型" class="md-nav__link">
+      6-4,使用多GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-5%2C%E4%BD%BF%E7%94%A8TPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-5,使用TPU训练模型" class="md-nav__link">
+      6-5,使用TPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-6%2C%E4%BD%BF%E7%94%A8tensorflow-serving%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/" title="6-6,使用tensorflow-serving部署模型" class="md-nav__link">
+      6-6,使用tensorflow-serving部署模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-7%2C%E4%BD%BF%E7%94%A8spark-scala%E8%B0%83%E7%94%A8tensorflow%E6%A8%A1%E5%9E%8B/" title="6-7,使用spark-scala调用tensorflow2.0训练好的模型" class="md-nav__link">
+      6-7,使用spark-scala调用tensorflow2.0训练好的模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      English
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="English" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        English
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Epilogue/" title="Epilogue: A Story Between a Foodie and Cuisine" class="md-nav__link">
+      Epilogue: A Story Between a Foodie and Cuisine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Chapter1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter1" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/" title="Chapter 1: Modeling Procedure of TensorFlow" class="md-nav__link">
+      Chapter 1: Modeling Procedure of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-1/" title="1-1 Example: Modeling Procedure for Structured Data" class="md-nav__link">
+      1-1 Example: Modeling Procedure for Structured Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-2/" title="1-2 Example: Modeling Procedure for Images" class="md-nav__link">
+      1-2 Example: Modeling Procedure for Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-3/" title="1-3 Example: Modeling Procedure for Texts" class="md-nav__link">
+      1-3 Example: Modeling Procedure for Texts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-4/" title="1-4 Example: Modeling Procedure for Temporal Sequences" class="md-nav__link">
+      1-4 Example: Modeling Procedure for Temporal Sequences
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Chapter2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter2" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/" title="Chapter 2: Key Concepts of TensorFlow" class="md-nav__link">
+      Chapter 2: Key Concepts of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-1/" title="2-1 Data Structure" class="md-nav__link">
+      2-1 Data Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-2/" title="2-2 Three Types of Graph" class="md-nav__link">
+      2-2 Three Types of Graph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-3/" title="2-3 Automatic Differentiate" class="md-nav__link">
+      2-3 Automatic Differentiate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Chapter3
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter3" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/" title="Chapter 3: Hierarchy of TensorFlow" class="md-nav__link">
+      Chapter 3: Hierarchy of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-1/" title="3-1 Low-level API: Demonstration" class="md-nav__link">
+      3-1 Low-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-2/" title="3-2 Mid-level API: Demonstration" class="md-nav__link">
+      3-2 Mid-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-3/" title="3-3 High-level API: Demonstration" class="md-nav__link">
+      3-3 High-level API: Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Chapter4
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter4" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/" title="Chapter 4: Low-level API in TensorFlow" class="md-nav__link">
+      Chapter 4: Low-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-1/" title="4-1 Structural Operations of the Tensor" class="md-nav__link">
+      4-1 Structural Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-2/" title="4-2 Mathematical Operations of the Tensor" class="md-nav__link">
+      4-2 Mathematical Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-3/" title="4-3 Rules of Using the AutoGraph" class="md-nav__link">
+      4-3 Rules of Using the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-4/" title="4-4 Mechanisms of the AutoGraph" class="md-nav__link">
+      4-4 Mechanisms of the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-5/" title="4-5 AutoGraph and tf.Module" class="md-nav__link">
+      4-5 AutoGraph and tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Chapter5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter5" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/" title="Chapter 5: Mid-level API in TensorFlow" class="md-nav__link">
+      Chapter 5: Mid-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-1/" title="5-1 Dataset" class="md-nav__link">
+      5-1 Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-2/" title="5-2 feature_column" class="md-nav__link">
+      5-2 feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-3/" title="5-3 activation" class="md-nav__link">
+      5-3 activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-4/" title="5-4 layers" class="md-nav__link">
+      5-4 layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-5/" title="5-5 losses" class="md-nav__link">
+      5-5 losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-6/" title="5-6 metrics" class="md-nav__link">
+      5-6 metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-7/" title="5-7 optimizers" class="md-nav__link">
+      5-7 optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-8/" title="5-8 callbacks" class="md-nav__link">
+      5-8 callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8">
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Chapter6
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter6" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/" title="Chapter 6: High-level API in TensorFlow" class="md-nav__link">
+      Chapter 6: High-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-1/" title="6-1 Three Ways of Modeling" class="md-nav__link">
+      6-1 Three Ways of Modeling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-2/" title="6-2 Three Ways of Training" class="md-nav__link">
+      6-2 Three Ways of Training
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-3/" title="6-3 Model Training Using Single GPU" class="md-nav__link">
+      6-3 Model Training Using Single GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-4/" title="6-4 Model Training Using Multiple GPUs" class="md-nav__link">
+      6-4 Model Training Using Multiple GPUs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-5/" title="6-5 Model Training Using TPU" class="md-nav__link">
+      6-5 Model Training Using TPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-nav__link">
+      6-6 Model Deploying Using tensorflow-serving
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-7/" title="6-7 Call Tensorflow Model Using spark-scala" class="md-nav__link">
+      6-7 Call Tensorflow Model Using spark-scala
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一autograph和tfmodule概述" class="md-nav__link">
+    一，Autograph和tf.Module概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二应用tfmodule封装autograph" class="md-nav__link">
+    二，应用tf.Module封装Autograph
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三tfmodule和tfkerasmodeltfkeraslayerslayer" class="md-nav__link">
+    三，tf.Module和tf.keras.Model，tf.keras.layers.Layer
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/edit/master/docs/chinese/4.低阶API/4-5,AutoGraph和tf.Module.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="4-5autograph和tfmodule">4-5,AutoGraph和tf.Module<a class="headerlink" href="#4-5autograph和tfmodule" title="Permanent link">#</a></h1>
+<p>有三种计算图的构建方式：静态计算图，动态计算图，以及Autograph。</p>
+<p>TensorFlow 2.0主要使用的是动态计算图和Autograph。</p>
+<p>动态计算图易于调试，编码效率较高，但执行效率偏低。</p>
+<p>静态计算图执行效率很高，但较难调试。</p>
+<p>而Autograph机制可以将动态图转换成静态计算图，兼收执行效率和编码效率之利。</p>
+<p>当然Autograph机制能够转换的代码并不是没有任何约束的，有一些编码规范需要遵循，否则可能会转换失败或者不符合预期。</p>
+<p>前面我们介绍了Autograph的编码规范和Autograph转换成静态图的原理。</p>
+<p>本篇我们介绍使用tf.Module来更好地构建Autograph。</p>
+<h3 id="一autograph和tfmodule概述">一，Autograph和tf.Module概述<a class="headerlink" href="#一autograph和tfmodule概述" title="Permanent link">#</a></h3>
+<p>前面在介绍Autograph的编码规范时提到构建Autograph时应该避免在@tf.function修饰的函数内部定义tf.Variable. </p>
+<p>但是如果在函数外部定义tf.Variable的话，又会显得这个函数有外部变量依赖，封装不够完美。</p>
+<p>一种简单的思路是定义一个类，并将相关的tf.Variable创建放在类的初始化方法中。而将函数的逻辑放在其他方法中。</p>
+<p>这样一顿猛如虎的操作之后，我们会觉得一切都如同人法地地法天天法道道法自然般的自然。</p>
+<p>惊喜的是，TensorFlow提供了一个基类tf.Module，通过继承它构建子类，我们不仅可以获得以上的自然而然，而且可以非常方便地管理变量，还可以非常方便地管理它引用的其它Module，最重要的是，我们能够利用tf.saved_model保存模型并实现跨平台部署使用。</p>
+<p>实际上，tf.keras.models.Model,tf.keras.layers.Layer 都是继承自tf.Module的，提供了方便的变量管理和所引用的子模块管理的功能。</p>
+<p><strong>因此，利用tf.Module提供的封装，再结合TensoFlow丰富的低阶API，实际上我们能够基于TensorFlow开发任意机器学习模型(而非仅仅是神经网络模型)，并实现跨平台部署使用。</strong></p>
+<h3 id="二应用tfmodule封装autograph">二，应用tf.Module封装Autograph<a class="headerlink" href="#二应用tfmodule封装autograph" title="Permanent link">#</a></h3>
+<p>定义一个简单的function。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span> 
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1">#在tf.function中用input_signature限定输入张量的签名类型：shape和dtype</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">input_signature</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)])</span>    
+<span class="k">def</span> <span class="nf">add_print</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">add_print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>
+<span class="c1">#add_print(tf.constant(3)) #输入不符合张量签名的参数将报错</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>4
+</code></pre></div>
+<p>下面利用tf.Module的子类化将其封装一下。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">DemoModule</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">init_value</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DemoModule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">:</span>  <span class="c1">#相当于with tf.name_scope(&quot;demo_module&quot;)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">init_value</span><span class="p">,</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span><span class="n">trainable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+    <span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">input_signature</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)])</span>  
+    <span class="k">def</span> <span class="nf">addprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">name_scope</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#执行</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="n">DemoModule</span><span class="p">(</span><span class="n">init_value</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">addprint</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>6
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#查看模块中的全部变量和全部可训练变量</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo</span><span class="o">.</span><span class="n">trainable_variables</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(&lt;tf.Variable &#39;demo_module/Variable:0&#39; shape=() dtype=float32, numpy=6.0&gt;,)
+(&lt;tf.Variable &#39;demo_module/Variable:0&#39; shape=() dtype=float32, numpy=6.0&gt;,)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#查看模块中的全部子模块</span>
+<span class="n">demo</span><span class="o">.</span><span class="n">submodules</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#使用tf.saved_model 保存模型，并指定需要跨平台部署的方法</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">demo</span><span class="p">,</span><span class="s2">&quot;../../data/demo/1&quot;</span><span class="p">,</span><span class="n">signatures</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;serving_default&quot;</span><span class="p">:</span><span class="n">demo</span><span class="o">.</span><span class="n">addprint</span><span class="p">})</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#加载模型</span>
+<span class="n">demo2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;../../data/demo/1&quot;</span><span class="p">)</span>
+<span class="n">demo2</span><span class="o">.</span><span class="n">addprint</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>11
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看模型文件相关信息，红框标出来的输出信息在模型部署和跨平台使用时有可能会用到</span>
+<span class="err">!</span><span class="n">saved_model_cli</span> <span class="n">show</span> <span class="o">--</span><span class="nb">dir</span> <span class="o">../../</span><span class="n">data</span><span class="o">/</span><span class="n">demo</span><span class="o">/</span><span class="mi">1</span> <span class="o">--</span><span class="nb">all</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/%E6%9F%A5%E7%9C%8B%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>在tensorboard中查看计算图，模块会被添加模块名demo_module,方便层次化呈现计算图结构。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># 创建日志</span>
+<span class="n">stamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">logdir</span> <span class="o">=</span> <span class="s1">&#39;../../data/demomodule/</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">stamp</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">create_file_writer</span><span class="p">(</span><span class="n">logdir</span><span class="p">)</span>
+
+<span class="c1">#开启autograph跟踪</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">trace_on</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">profiler</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="c1">#执行autograph</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="n">DemoModule</span><span class="p">(</span><span class="n">init_value</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">demo</span><span class="o">.</span><span class="n">addprint</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+
+<span class="c1">#将计算图信息写入日志</span>
+<span class="k">with</span> <span class="n">writer</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">summary</span><span class="o">.</span><span class="n">trace_export</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;demomodule&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">profiler_outdir</span><span class="o">=</span><span class="n">logdir</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#启动 tensorboard在jupyter中的魔法命令</span>
+<span class="o">%</span><span class="n">reload_ext</span> <span class="n">tensorboard</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tensorboard</span> <span class="kn">import</span> <span class="n">notebook</span>
+<span class="n">notebook</span><span class="o">.</span><span class="n">list</span><span class="p">()</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">notebook</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;--logdir ../../data/demomodule/&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/demomodule%E7%9A%84%E8%AE%A1%E7%AE%97%E5%9B%BE%E7%BB%93%E6%9E%84.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>除了利用tf.Module的子类化实现封装，我们也可以通过给tf.Module添加属性的方法进行封装。</p>
+<div class="highlight"><pre><span></span><code><span class="n">mymodule</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">()</span>
+<span class="n">mymodule</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="n">input_signature</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)])</span>  
+<span class="k">def</span> <span class="nf">addprint</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">mymodule</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">mymodule</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">mymodule</span><span class="o">.</span><span class="n">addprint</span> <span class="o">=</span> <span class="n">addprint</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">mymodule</span><span class="o">.</span><span class="n">addprint</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>1.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">mymodule</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(&lt;tf.Variable &#39;Variable:0&#39; shape=() dtype=float32, numpy=0.0&gt;,)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#使用tf.saved_model 保存模型</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">mymodule</span><span class="p">,</span><span class="s2">&quot;../../data/mymodule&quot;</span><span class="p">,</span>
+    <span class="n">signatures</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;serving_default&quot;</span><span class="p">:</span><span class="n">mymodule</span><span class="o">.</span><span class="n">addprint</span><span class="p">})</span>
+
+<span class="c1">#加载模型</span>
+<span class="n">mymodule2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;../../data/mymodule&quot;</span><span class="p">)</span>
+<span class="n">mymodule2</span><span class="o">.</span><span class="n">addprint</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>INFO:tensorflow:Assets written to: ../../data/mymodule/assets
+5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="三tfmodule和tfkerasmodeltfkeraslayerslayer">三，tf.Module和tf.keras.Model，tf.keras.layers.Layer<a class="headerlink" href="#三tfmodule和tfkerasmodeltfkeraslayerslayer" title="Permanent link">#</a></h3>
+<p>tf.keras中的模型和层都是继承tf.Module实现的，也具有变量管理和子模块管理功能。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span><span class="n">layers</span><span class="p">,</span><span class="n">losses</span><span class="p">,</span><span class="n">metrics</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">Module</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>True
+True
+True
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span> 
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense (Dense)                (None, 4)                 44        
+_________________________________________________________________
+dense_1 (Dense)              (None, 2)                 10        
+_________________________________________________________________
+dense_2 (Dense)              (None, 1)                 3         
+=================================================================
+Total params: 57
+Trainable params: 57
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">variables</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&lt;tf.Variable &#39;dense/kernel:0&#39; shape=(10, 4) dtype=float32, numpy=
+ array([[-0.06741005,  0.45534766,  0.5190817 , -0.01806331],
+        [-0.14258742, -0.49711505,  0.26030976,  0.18607801],
+        [-0.62806034,  0.5327399 ,  0.42206633,  0.29201728],
+        [-0.16602087, -0.18901917,  0.55159235, -0.01091868],
+        [ 0.04533798,  0.326845  , -0.582667  ,  0.19431782],
+        [ 0.6494713 , -0.16174704,  0.4062966 ,  0.48760796],
+        [ 0.58400524, -0.6280886 , -0.11265379, -0.6438277 ],
+        [ 0.26642334,  0.49275804,  0.20793378, -0.43889117],
+        [ 0.4092741 ,  0.09871006, -0.2073121 ,  0.26047975],
+        [ 0.43910992,  0.00199282, -0.07711256, -0.27966842]],
+       dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense/bias:0&#39; shape=(4,) dtype=float32, numpy=array([0., 0., 0., 0.], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(4, 2) dtype=float32, numpy=
+ array([[ 0.5022683 , -0.0507431 ],
+        [-0.61540484,  0.9369011 ],
+        [-0.14412141, -0.54607415],
+        [ 0.2027781 , -0.4651153 ]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/bias:0&#39; shape=(2,) dtype=float32, numpy=array([0., 0.], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_2/kernel:0&#39; shape=(2, 1) dtype=float32, numpy=
+ array([[-0.244825 ],
+        [-1.2101456]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_2/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1">#冻结第0层的变量,使其不可训练</span>
+<span class="n">model</span><span class="o">.</span><span class="n">trainable_variables</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&lt;tf.Variable &#39;dense_1/kernel:0&#39; shape=(4, 2) dtype=float32, numpy=
+ array([[ 0.5022683 , -0.0507431 ],
+        [-0.61540484,  0.9369011 ],
+        [-0.14412141, -0.54607415],
+        [ 0.2027781 , -0.4651153 ]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_1/bias:0&#39; shape=(2,) dtype=float32, numpy=array([0., 0.], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_2/kernel:0&#39; shape=(2, 1) dtype=float32, numpy=
+ array([[-0.244825 ],
+        [-1.2101456]], dtype=float32)&gt;,
+ &lt;tf.Variable &#39;dense_2/bias:0&#39; shape=(1,) dtype=float32, numpy=array([0.], dtype=float32)&gt;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">submodules</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>(&lt;tensorflow.python.keras.engine.input_layer.InputLayer at 0x144d8c080&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x144daada0&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x144d8c5c0&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x144d7aa20&gt;)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="o">.</span><span class="n">layers</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&lt;tensorflow.python.keras.layers.core.Dense at 0x144daada0&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x144d8c5c0&gt;,
+ &lt;tensorflow.python.keras.layers.core.Dense at 0x144d7aa20&gt;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">name_scope</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>sequential
+sequential
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。</p>
+<p>也可以在公众号后台回复关键字：<strong>加群</strong>，加入读者交流群和大家讨论。</p>
+<p><img alt="image.png" src="../../../data/Python%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8Elogo.jpg" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                4-4,AutoGraph的机制原理
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../5.%E4%B8%AD%E9%98%B6API/" title="五、TensorFlow的中阶API" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                五、TensorFlow的中阶API
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["navigation.expand", "tabs"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

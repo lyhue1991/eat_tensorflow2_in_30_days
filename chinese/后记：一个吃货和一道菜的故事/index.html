@@ -1,0 +1,1852 @@
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>一个吃货和一道菜的故事 - 30天吃掉那只Tensorflow2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#一个吃货和一道菜的故事" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="30天吃掉那只Tensorflow2" class="md-header-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            30天吃掉那只Tensorflow2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              一个吃货和一道菜的故事
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        How to eat TensorFlow2 in 30 days ?🔥🔥
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" class="md-tabs__link md-tabs__link--active">
+          Chinese
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../english/" class="md-tabs__link">
+          English
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="30天吃掉那只Tensorflow2" class="md-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    30天吃掉那只Tensorflow2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Chinese
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chinese" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Chinese
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        一个吃货和一道菜的故事
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="一个吃货和一道菜的故事" class="md-nav__link md-nav__link--active">
+      一个吃货和一道菜的故事
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一一个吃货转行算法的心路历程" class="md-nav__link">
+    一，一个吃货转行算法的心路历程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二吃货为什么要写这本书" class="md-nav__link">
+    二，吃货为什么要写这本书？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三吃货写的这本书怎么样" class="md-nav__link">
+    三，吃货写的这本书怎么样？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四如何获取吃货写的这本书" class="md-nav__link">
+    四，如何获取吃货写的这本书?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#五鼓励和联系这个吃货" class="md-nav__link">
+    五，鼓励和联系这个吃货
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      1.建模流程
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="1.建模流程" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        1.建模流程
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-nav__link">
+      一、TensorFlow的建模流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-1%2C%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-1,结构化数据建模流程范例" class="md-nav__link">
+      1-1,结构化数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-2%2C%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-2,图片数据建模流程范例" class="md-nav__link">
+      1-2,图片数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-3%2C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-3,文本数据建模流程范例" class="md-nav__link">
+      1-3,文本数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-4%2C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-4,时间序列数据建模流程范例" class="md-nav__link">
+      1-4,时间序列数据建模流程范例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      2.核心概念
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="2.核心概念" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        2.核心概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="二、TensorFlow的核心概念" class="md-nav__link">
+      二、TensorFlow的核心概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-1%2C%E5%BC%A0%E9%87%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="2-1,张量数据结构" class="md-nav__link">
+      2-1,张量数据结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-2%2C%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E5%9B%BE/" title="2-2,三种计算图" class="md-nav__link">
+      2-2,三种计算图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-3%2C%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%9C%BA%E5%88%B6/" title="2-3,自动微分机制" class="md-nav__link">
+      2-3,自动微分机制
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      3.层次结构
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="3.层次结构" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        3.层次结构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" title="三、TensorFlow的层次结构" class="md-nav__link">
+      三、TensorFlow的层次结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-1%2C%E4%BD%8E%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-1,低阶API示范" class="md-nav__link">
+      3-1,低阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-2%2C%E4%B8%AD%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-2,中阶API示范" class="md-nav__link">
+      3-2,中阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-3%2C%E9%AB%98%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-3,高阶API示范" class="md-nav__link">
+      3-3,高阶API示范
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      4.低阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="4.低阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        4.低阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/" title="四、TensorFlow的低阶API" class="md-nav__link">
+      四、TensorFlow的低阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/4-1%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C/" title="4-1,张量的结构操作" class="md-nav__link">
+      4-1,张量的结构操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/4-2%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97/" title="4-2,张量的数学运算" class="md-nav__link">
+      4-2,张量的数学运算
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/4-3%2CAutoGraph%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" title="4-3,AutoGraph的使用规范" class="md-nav__link">
+      4-3,AutoGraph的使用规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-nav__link">
+      4-4,AutoGraph的机制原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.%E4%BD%8E%E9%98%B6API/4-5%2CAutoGraph%E5%92%8Ctf.Module/" title="4-5,AutoGraph和tf.Module" class="md-nav__link">
+      4-5,AutoGraph和tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      5.中阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="5.中阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        5.中阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/" title="五、TensorFlow的中阶API" class="md-nav__link">
+      五、TensorFlow的中阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-1%2C%E6%95%B0%E6%8D%AE%E7%AE%A1%E9%81%93Dataset/" title="5-1,数据管道Dataset" class="md-nav__link">
+      5-1,数据管道Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-nav__link">
+      5-2,特征列feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-3%2C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activation/" title="5-3,激活函数activation" class="md-nav__link">
+      5-3,激活函数activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-4%2C%E6%A8%A1%E5%9E%8B%E5%B1%82layers/" title="5-4,模型层layers" class="md-nav__link">
+      5-4,模型层layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-5%2C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0losses/" title="5-5,损失函数losses" class="md-nav__link">
+      5-5,损失函数losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-6%2C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics/" title="5-6,评估指标metrics" class="md-nav__link">
+      5-6,评估指标metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-7%2C%E4%BC%98%E5%8C%96%E5%99%A8optimizers/" title="5-7,优化器optimizers" class="md-nav__link">
+      5-7,优化器optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5.%E4%B8%AD%E9%98%B6API/5-8%2C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks/" title="5-8,回调函数callbacks" class="md-nav__link">
+      5-8,回调函数callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      6.高阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="6.高阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        6.高阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/" title="六、TensorFlow的高阶API" class="md-nav__link">
+      六、TensorFlow的高阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-1%2C%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-1,构建模型的3种方法" class="md-nav__link">
+      6-1,构建模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-2%2C%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-2,训练模型的3种方法" class="md-nav__link">
+      6-2,训练模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-3%2C%E4%BD%BF%E7%94%A8%E5%8D%95GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-3,使用单GPU训练模型" class="md-nav__link">
+      6-3,使用单GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-4%2C%E4%BD%BF%E7%94%A8%E5%A4%9AGPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-4,使用多GPU训练模型" class="md-nav__link">
+      6-4,使用多GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-5%2C%E4%BD%BF%E7%94%A8TPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-5,使用TPU训练模型" class="md-nav__link">
+      6-5,使用TPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-6%2C%E4%BD%BF%E7%94%A8tensorflow-serving%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/" title="6-6,使用tensorflow-serving部署模型" class="md-nav__link">
+      6-6,使用tensorflow-serving部署模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../6.%E9%AB%98%E9%98%B6API/6-7%2C%E4%BD%BF%E7%94%A8spark-scala%E8%B0%83%E7%94%A8tensorflow%E6%A8%A1%E5%9E%8B/" title="6-7,使用spark-scala调用tensorflow2.0训练好的模型" class="md-nav__link">
+      6-7,使用spark-scala调用tensorflow2.0训练好的模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      English
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="English" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        English
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Epilogue/" title="Epilogue: A Story Between a Foodie and Cuisine" class="md-nav__link">
+      Epilogue: A Story Between a Foodie and Cuisine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Chapter1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter1" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter1/" title="Chapter 1: Modeling Procedure of TensorFlow" class="md-nav__link">
+      Chapter 1: Modeling Procedure of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter1/Chapter1-1/" title="1-1 Example: Modeling Procedure for Structured Data" class="md-nav__link">
+      1-1 Example: Modeling Procedure for Structured Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter1/Chapter1-2/" title="1-2 Example: Modeling Procedure for Images" class="md-nav__link">
+      1-2 Example: Modeling Procedure for Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter1/Chapter1-3/" title="1-3 Example: Modeling Procedure for Texts" class="md-nav__link">
+      1-3 Example: Modeling Procedure for Texts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter1/Chapter1-4/" title="1-4 Example: Modeling Procedure for Temporal Sequences" class="md-nav__link">
+      1-4 Example: Modeling Procedure for Temporal Sequences
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Chapter2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter2" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter2/" title="Chapter 2: Key Concepts of TensorFlow" class="md-nav__link">
+      Chapter 2: Key Concepts of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter2/Chapter2-1/" title="2-1 Data Structure" class="md-nav__link">
+      2-1 Data Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter2/Chapter2-2/" title="2-2 Three Types of Graph" class="md-nav__link">
+      2-2 Three Types of Graph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter2/Chapter2-3/" title="2-3 Automatic Differentiate" class="md-nav__link">
+      2-3 Automatic Differentiate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Chapter3
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter3" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter3/" title="Chapter 3: Hierarchy of TensorFlow" class="md-nav__link">
+      Chapter 3: Hierarchy of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter3/Chapter3-1/" title="3-1 Low-level API: Demonstration" class="md-nav__link">
+      3-1 Low-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter3/Chapter3-2/" title="3-2 Mid-level API: Demonstration" class="md-nav__link">
+      3-2 Mid-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter3/Chapter3-3/" title="3-3 High-level API: Demonstration" class="md-nav__link">
+      3-3 High-level API: Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Chapter4
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter4" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/" title="Chapter 4: Low-level API in TensorFlow" class="md-nav__link">
+      Chapter 4: Low-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/Chapter4-1/" title="4-1 Structural Operations of the Tensor" class="md-nav__link">
+      4-1 Structural Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/Chapter4-2/" title="4-2 Mathematical Operations of the Tensor" class="md-nav__link">
+      4-2 Mathematical Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/Chapter4-3/" title="4-3 Rules of Using the AutoGraph" class="md-nav__link">
+      4-3 Rules of Using the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/Chapter4-4/" title="4-4 Mechanisms of the AutoGraph" class="md-nav__link">
+      4-4 Mechanisms of the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter4/Chapter4-5/" title="4-5 AutoGraph and tf.Module" class="md-nav__link">
+      4-5 AutoGraph and tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Chapter5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter5" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/" title="Chapter 5: Mid-level API in TensorFlow" class="md-nav__link">
+      Chapter 5: Mid-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-1/" title="5-1 Dataset" class="md-nav__link">
+      5-1 Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-2/" title="5-2 feature_column" class="md-nav__link">
+      5-2 feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-3/" title="5-3 activation" class="md-nav__link">
+      5-3 activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-4/" title="5-4 layers" class="md-nav__link">
+      5-4 layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-5/" title="5-5 losses" class="md-nav__link">
+      5-5 losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-6/" title="5-6 metrics" class="md-nav__link">
+      5-6 metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-7/" title="5-7 optimizers" class="md-nav__link">
+      5-7 optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter5/Chapter5-8/" title="5-8 callbacks" class="md-nav__link">
+      5-8 callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8">
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Chapter6
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter6" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/" title="Chapter 6: High-level API in TensorFlow" class="md-nav__link">
+      Chapter 6: High-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-1/" title="6-1 Three Ways of Modeling" class="md-nav__link">
+      6-1 Three Ways of Modeling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-2/" title="6-2 Three Ways of Training" class="md-nav__link">
+      6-2 Three Ways of Training
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-3/" title="6-3 Model Training Using Single GPU" class="md-nav__link">
+      6-3 Model Training Using Single GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-4/" title="6-4 Model Training Using Multiple GPUs" class="md-nav__link">
+      6-4 Model Training Using Multiple GPUs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-5/" title="6-5 Model Training Using TPU" class="md-nav__link">
+      6-5 Model Training Using TPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-nav__link">
+      6-6 Model Deploying Using tensorflow-serving
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../english/Chapter6/Chapter6-7/" title="6-7 Call Tensorflow Model Using spark-scala" class="md-nav__link">
+      6-7 Call Tensorflow Model Using spark-scala
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一一个吃货转行算法的心路历程" class="md-nav__link">
+    一，一个吃货转行算法的心路历程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二吃货为什么要写这本书" class="md-nav__link">
+    二，吃货为什么要写这本书？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三吃货写的这本书怎么样" class="md-nav__link">
+    三，吃货写的这本书怎么样？
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#四如何获取吃货写的这本书" class="md-nav__link">
+    四，如何获取吃货写的这本书?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#五鼓励和联系这个吃货" class="md-nav__link">
+    五，鼓励和联系这个吃货
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/edit/master/docs/chinese/后记：一个吃货和一道菜的故事.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="一个吃货和一道菜的故事">一个吃货和一道菜的故事<a class="headerlink" href="#一个吃货和一道菜的故事" title="Permanent link">#</a></h1>
+<p>《30天吃掉那只TensorFlow2》这本书已经全部整理完稿。本篇文章算是这本书的一个后记。</p>
+<p>本文介绍了一个吃货与算法结缘的故事，并介绍了本书的写作过程。可供感兴趣的读者一乐。</p>
+<p>如果读者时间紧迫，可直接阅读本文第3部分和第4部分，了解书籍内容和获取方法。</p>
+<h3 id="一一个吃货转行算法的心路历程">一，一个吃货转行算法的心路历程<a class="headerlink" href="#一一个吃货转行算法的心路历程" title="Permanent link">#</a></h3>
+<p>2015年6月，又是一个毕业季，一个吃货从北京吃饭大学毕业了。</p>
+<p>虽然是吃饭大学毕业，但他学的是理论物理，而理论物理不是一个适合找饭吃的专业。</p>
+<p>几经辗转，这个吃货在金融行业找到了一份量化程序员的工作，虽然收入低微，但是这个吃货梦想有一天可以找到能够稳定盈利的量化策略，通过交易赚钱让自己能够每天都有口好吃的。</p>
+<p>然而，资本市场波谲云诡，他尝试过许多交易策略，却没有找到能够稳定赚钱的"圣杯"，伙食也一天比一天变差了。</p>
+<p>在与K线的纠缠中，他慢慢地迷失了，虽然他知道每次亏钱都是靠实力输的，但是他不知道自己每次赚钱是凭借实力赚的还是凭运气赚的。他感到在金融交易这个行业很难清晰地看到自己的进步。</p>
+<p>付出了那么多的努力，搞了那么多模型，写了那么多策略，自己就真的有成长吗？在残酷的交易世界里，这些东西不能赚钱，不能够改善自己的伙食，又有什么价值呢？</p>
+<p>作为一个吃货，他无法忍受伙食变得越来越差。他决定换一个能够稳定地让伙食变得更好的行业。</p>
+<p>那个时候，随着AlphaGo战胜世界围棋冠军李世石的故事广为人知，在互联网领域有一个新兴岗位逐渐火热，那就是算法工程师。</p>
+<p>这个吃货心想，我也是做模型的，算法工程师也是做模型的，怎么伙食差别这么大，不行我要转行做算法工程师。</p>
+<p>然后吃货就开始准备了。吃货性格内向，不擅言谈，交际圈较小，身边没有认识做算法工程师的朋友。</p>
+<p>于是吃货从一些招聘网站上浏览了一些算法工程师的招聘信息，又在知乎等平台上浏览了一些关于转行算法工程师的相关帖子。</p>
+<p>他给自己制定了一个为期半年左右的学习计划。学习顺序大概如下：</p>
+<ul>
+<li>1，Python编程</li>
+<li>2，Numpy,Pandas,matplotlib数据分析</li>
+<li>3，beautifulSoup,requests网络爬虫 </li>
+<li>4，sklearn机器学习（同步学习《机器学习实战》，李航《统计学习方法》）</li>
+<li>5，tensorflow深度学习（同步学习吴恩达的《深度学习》视频课程）</li>
+</ul>
+<p>他决定第4阶段学的差不多就去找算法工程师的工作。</p>
+<p>（PS：实践表明，这个学习计划的第3部分是可以去除的。算法工程师通常不需要掌握爬虫技术，算法工程师训练模型所需要的数据一般来自于公司业务，直接从数据库中获取即可。）</p>
+<p>为了确保自己能够真正地学会，并能够清晰地看到自己的成长。这个吃货决定要让自己的学习留下点痕迹。</p>
+<p>同时，他又想，能不能在学习的同时改善一下自己的伙食呢？思来想去，最后他找到了一个方法，那就是每学完一个部分，就录制一个视频课程拿到网易云课堂上去卖。看能不能每个月多个三块五块的，以便改善一下伙食。</p>
+<p><strong>一个吃货，一旦决定为了改善自己的伙食想要做点什么，他的意志力是惊人的。</strong></p>
+<p>于是，大概有半年左右，这个吃货每天晚上和周末的时间都几乎花在了这几个课程的学习和输出上。网易云课堂上陆陆续续多了这个吃货的以下5门课程。</p>
+<p><strong>第一门课程：《Python编程ABC》</strong></p>
+<p><img alt="" src="../../data/Python%E7%BC%96%E7%A8%8BABC.png" /></p>
+<p>吃货本来做量化交易掌握了一些Python编程基础，但不是很熟练，学习加整理这个课程大概花了半个月。</p>
+<p>考虑到自身水平有限，吃货怕没有一个人买，不敢卖高价，因此该课程标价1元，上线2年多，总共卖出108份。</p>
+<p>算下来还是不错的，每个月多个三块钱伙食费的理想还是基本实现了的，离五块钱还差一些。</p>
+<p>该课程尽管买的人不多，还是有几个评价的。</p>
+<p><img alt="" src="../../data/%E4%B8%8A%E5%BD%93%E4%BA%86.png" /></p>
+<p><strong>第二门课程：《Python数据分析》</strong></p>
+<p><img alt="" src="../../data/Python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90.png" /></p>
+<p>Python数据分析的3个标准套件：numpy,Pandas,matplotlib 掌握起来还是需要下点功夫的。</p>
+<p>吃货学习这几个库和整理最终的课程大概花了一个半月。考虑到这门课程做了比较久的时间，同时吃货感到自己的水平有了那么一丢丢进步了，Pandas玩的基本666的了，吃货决定这门课卖10块钱一份，看看能不能每个月多个5块10块的。</p>
+<p>这门课程上线2年多，总共卖出去35份。看来每个月多个10块的目标也是基本实现了的。这门课由于买的人非常少，所以目前还没有收到过评价。关起门来说，这门课的质量只能算是让人不忍心给差评吧。</p>
+<p><strong>第三门课程：《Python网络爬虫入门》</strong></p>
+<p><img alt="" src="../../data/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8.png" /></p>
+<p><strong>第四门课程：《Python网络爬虫进阶》</strong></p>
+<p><img alt="" src="../../data/Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%BF%9B%E9%98%B6.png" /></p>
+<p>Python网络爬虫的基础还是不难的，但如果要熟练掌握各种反爬策略的突破以及对动态网页的抓取还是非常有挑战性的，</p>
+<p>Python爬虫的学习以及这两门课程的制作大概花费了吃货2个月的时间。</p>
+<p>其中的网络爬虫入门课程是免费课程，网络爬虫进阶课程售价30元。</p>
+<p>网络爬虫入门课程收获了不少好评，虽然没有赚到一毛钱，不能直接改善伙食，但吃货看了这些好评，感觉比吃了蜜还要甜。</p>
+<p><img alt="" src="../../data/%E5%86%85%E5%AE%B9%E9%9D%9E%E5%B8%B8%E6%A3%92.png" /></p>
+<p><strong>第五门课程：《sklearn机器学习》</strong></p>
+<p><img alt="" src="../../data/sklearn%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.png" /></p>
+<p>在做这门课程的时候，吃货同步学习了《机器学习实战》和《统计学习方法》的一些章节。包括学习和输出，大概花了吃货2个月左右时间。</p>
+<p>整体上，sklearn的基础使用和机器学习的基本概念的掌握还是不困难的。决策树和SVM的一些原理可能坑会比较多，需要花费较多时间梳理。</p>
+<p>吃货的这门课程售价68元，整体上评价较高，达到4.7颗星。</p>
+<p><img alt="" src="../../data/%E8%89%AF%E5%BF%83%E8%AF%BE%E7%A8%8B.png" /></p>
+<p>实际上这门课程做到一半的时候，吃货决定裸辞，因为那时候大概是2018年3月份了，是招聘的黄金时期。经过了半年多的准备，吃货信心满满，感觉已经掌握了从Python基础到Python数据分析到Python机器学习的基本技能，应该能够摸到算法工程师的工作机会。</p>
+<p>吃货开始在Boss上和拉勾上投递简历，那时候正是算法岗需求most火爆的时期，吃货陆陆续续收到了一些二三线互联网公司的面试邀约。但陆续面了好几场，吃货发现自己总是会遇到一些如手写二分查找，手写快排算法，手写爬楼梯方法这样的问题。拿到这些问题后吃货一脸懵逼，在纸上抓破脑袋写下了几行import numpy as np,import pandas as pd 这样的东西，然后面试官就笑盈盈地跟吃货说，你回去等通知吧。</p>
+<p>于是，吃货一边白天面试，一边晚上回家整理白天遇到的这些问题，并重点针对一些常见的手写代码题进行了准备，掌握了一些像时间复杂度和动态规划这样基本的数据结构和算法知识。周末的时候，再继续录制《sklearn机器学习》这个课程。这样大概持续了半个多月，吃货开始收到一些offer. 很快，吃货跟一个offer确认了眼神，正式转行成为了一个互联网行业的搬砖工，伙食相比以前有了较大的改善，吃货的心里乐开了花。</p>
+<p>吃货后来在周末的时候也把这些面试的经验总结起来，放在了网易云课堂上。</p>
+<p><img alt="" src="../../data/%E9%9D%A2%E8%AF%95%E6%8C%87%E5%8D%97.png" /></p>
+<p>这个课程的评价比较两级分化，有人叫好，也有人吐槽说木有什么卵用。</p>
+<p><img alt="" src="../../data/%E5%A4%AA%E4%B8%80%E8%88%AC%E4%BA%86.png" /></p>
+<h3 id="二吃货为什么要写这本书">二，吃货为什么要写这本书？<a class="headerlink" href="#二吃货为什么要写这本书" title="Permanent link">#</a></h3>
+<p>成为了一名互联网搬砖工后，吃货本想着在周末时间，把自己转行之前制定的学习计划的第5部分，即tensorflow深度学习（同步学习吴恩达的《深度学习》视频课程）这部分付诸实施。</p>
+<p>但搬砖工作非常辛苦，同时工作还需要吃货掌握一些其它的技能，例如linux基本操作，git基本操作，Hive数据库，mapreduce编程方法，xgboost和lightgbm建模方法等等。</p>
+<p>大概半年后，吃货才感到已经熟练掌握了当时工作所需要的主要技能，能够较为顺利地开发项目。到了周末的时候，吃货开始一边在网易云课堂上看吴恩达《深度学习》视频课程，一边学习使用tensorflow.</p>
+<p><img alt="" src="../../data/Ng%E7%9A%84%E8%AF%BE%E7%A8%8B.png" /></p>
+<p>吴恩达的这个系列的课程总体上非常不错，但略微偏理论一些，讲了较多的数学细节，吃货当时学的还是有些吃力的。大概用了半年的周末时间，才基本学习完成了这五门课，并梳理出来了5篇学习笔记。</p>
+<p>后来吃货向"Python之禅"公众号投稿了一篇文章《18式优雅你的Python》，号主志军大大在后来做抽奖送书的活动时就送了吃货一本书《Python深度学习》。这本书相比于吴恩达课程更加基础一些，该书假定读者无任何机器学习知识，以Keras为工具，使用丰富的范例演示深度学习的最佳实践。该书通俗易懂，全书没有一个数学公式，注重培养读者的深度学习直觉。吃货拿来该书，简直如获至宝，不到两个周末就吃完了，对深度学习在实践层面有了更为清晰的认识。</p>
+<p>同时，吃货还在学习tensorflow1.0，总体而言学得比较痛苦，官方文档讲的各种概念多而杂，静态图非常难以调试，tf.control_dependencies, tf.while_loop这些东西简直反人类，又是tf.estimator, 又是tflearn, 又是tf.keras，让人无所适从。吃货花费了非常多的时间，基本上才把tensorflow1.0常用的一些概念和工具梳理到一个适合人类理解的程度。</p>
+<p>但tensorflow不仁，以吃货为刍狗。就在吃货快要整理完这个tensorflow1.0教程的时候，tensorflow官方宣布将不久推出tensorflow2.0，默认使用动态图，并对API进行大幅度的调整。吃货当时心里的滋味，就好像一个男孩子追一个女生追了大半年，感觉基本摸清楚了这个女生的脾气和个性的时候，这个女生突然有一天对他说："你别追了，我要去做变性手术了，变成一个男孩子。"</p>
+<p>于是，吃货转而开始学习Spark，整体而言，Spark的官方教程非常完善，网络上也有比较好的教程资源。吃货学起来非常顺利，不到2个月，就学习并整理了一份系统的Spark教程，放在了github仓库中。</p>
+<p>2019年10月1日，这是一个特别的日子。这一天既是祖国母亲的生日，也是tensorflow2.0的生日。在这一天tensorflow官方宣布发布tensorflow2.0的正式版本。吃货知道这个消息后非常开心，就好像一个花痴终于等到了花开一样。但是吃货当时正在做一个他搬砖以来遇到过的最复杂的一个spark大数据挖掘项目，周末的时间都投入到这个项目的攻坚中去了。吃货决定等这个项目基本完成后，重新学习并梳理一份tensorflow2的教程。</p>
+<p>大概在2020年初，吃货开始学习tensorflow2.0的官方文档。尽管tensorflow2.0宣称已经为改善用户体验做出了巨大的改进，really easy to use，但吃货学得并不轻松。tensorflow2.0官方文档和tensorflow1.0官方文档显然是出自同一批作者之手，他们一如既往地秉承着谷歌make things complicated的风格传统，用哈希表一般混乱的文档结构、无法运行的范例代码、复杂的函数嵌套调用关系、随意插入的不常用第三方库等技巧将读者的懵圈程度逐步推向高潮。</p>
+<p>在吃货看来，tensorflow2.0官方文档所有的问题可以抽象为一个问题：噪声太多。读者要从噪声如此之多的官方教程中提取出他想要的信息是非常的吃力的。如果把官方教程比作一盘菜，那么这盘菜虽然有许多营养物质，但也有许多的沙子，不小心咬到一口就硌得慌，甚至会觉得恶心得不行。吃货决定要做一盘营养丰富，且美味宜人的菜。</p>
+<p>吃货开始按照他想象中美味佳肴的样子来做这盘菜。周末本应适合去参加户外爬山活动，他对着电脑在做菜。放假回家的火车上，他对着电脑在做菜。春节到家后由于疫情影响不提倡窜门，他可以有更多时间开心地对着电脑做菜。疫情形势愈发严峻企业延迟复工，他回到北京一边隔离一边对着电脑在做菜。</p>
+<h3 id="三吃货写的这本书怎么样">三，吃货写的这本书怎么样？<a class="headerlink" href="#三吃货写的这本书怎么样" title="Permanent link">#</a></h3>
+<p>前后用了约两个月，吃货的这本书基本写完了。吃货心想，该给它取个什么名字呢？</p>
+<p>嗯，有了，这是一本可以帮助大家改善伙食的书。大概可以连续吃30天，而且应该味道不错。</p>
+<p>就叫他《30天吃掉那只TensorFlow2》吧。</p>
+<p>从这本书的书名应该能够看出，作者是个吃货，而且是个很有毅力的吃货。</p>
+<p>这是一本怎么样的书呢？这是一本对人类用户极其友善的TensorFlow2.0入门工具书。</p>
+<p>为了尽可能降低信息噪声，这本书相比官方文档在篇章结构和范例选取上做了大量的优化。</p>
+<p>不同于官方文档混乱的篇章结构，既有教程又有指南，缺少整体的编排逻辑。</p>
+<p>这本书按照内容难易程度、读者检索习惯和TensorFlow自身的层次结构设计内容，循序渐进，层次清晰，方便按照功能查找相应范例。</p>
+<p>不同于官方文档冗长的范例代码，这本书在范例设计上尽可能简约化和结构化，增强范例易读性和通用性，大部分代码片段在实践中可即取即用。</p>
+<p>总之，这本书倾注了一个吃货对美食的全部向往和追求，如果你非常喜欢美食，并且想要学习TensorFlow2，那么这本书一定值得你品尝品尝。</p>
+<p><img alt="" src="../../data/%E4%B9%A6%E7%B1%8D%E7%9B%AE%E5%BD%951.png" /></p>
+<p><img alt="" src="../../data/%E4%B9%A6%E7%B1%8D%E7%9B%AE%E5%BD%952.png" /></p>
+<p><img alt="" src="../../data/%E4%B9%A6%E7%B1%8D%E7%9B%AE%E5%BD%953.png" /></p>
+<p>这本书在github上线1个月来，得到了不少小伙伴的反馈，提了一些issues，吃货针对相关问题进行了一些回答和对项目做了改进。</p>
+<p>同时这个项目也获得了100多颗星星，吃货看在眼里，美在心里，每天早上睡觉起来都会去github星球上数星星。</p>
+<p><img alt="" src="../../data/github%E6%88%AA%E5%9B%BE.png" /></p>
+<h3 id="四如何获取吃货写的这本书">四，如何获取吃货写的这本书?<a class="headerlink" href="#四如何获取吃货写的这本书" title="Permanent link">#</a></h3>
+<p>这本书目前有4种形式获取。</p>
+<p>1，gitbook电子书。以网页链接呈现，同时可以在电脑和手机上用浏览器打开。</p>
+<p>电子书链接： <a href="https://lyhue1991.github.io/eat_tensorflow2_in_30_days">https://lyhue1991.github.io/eat_tensorflow2_in_30_days</a></p>
+<p>2，github项目源码。包含全部数据集和md格式源码，可以在jupyter上安装jupytext后将md源码作为ipynb打开。</p>
+<p>项目链接：<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days">https://github.com/lyhue1991/eat_tensorflow2_in_30_days</a></p>
+<p>3，pdf格式电子书。</p>
+<p>4，ipynb格式项目源码。</p>
+<p>其中github项目源码和gitbook电子书将持续维护，后续可能也会增加一些新的范例。pdf版本电子书和ipynb项目源码可以在公众号"<strong>Python与算法之美</strong>"后台回复关键字: <strong>tf</strong> 进行获取。这两种形式获取的《eat tensorflow2 in 30 days》无法保证更新。</p>
+<p>阅读体验优先推荐使用gitbook电子书，具有目录查找和上下页翻页功能，字体大小和背景色可以根据个人喜好进行调整，颜值超高。</p>
+<p><img alt="" src="../../data/gitbook%E7%94%B5%E5%AD%90%E4%B9%A6.png" /></p>
+<h3 id="五鼓励和联系这个吃货">五，鼓励和联系这个吃货<a class="headerlink" href="#五鼓励和联系这个吃货" title="Permanent link">#</a></h3>
+<p>最后，想给大家讲一个吃货小王子的故事。</p>
+<blockquote>
+<p>在很久很久以前，有一个小王子，住在一个只比他大一点点的星球上，他，想要一个朋友。</p>
+<p>在昨天今天和明天，有一个吃货，住在一个只比他大一点点的github星球上，他，想要一颗星星。</p>
+</blockquote>
+<p>如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。</p>
+<p>也可以在公众号后台回复关键字：<strong>加群</strong>，加入读者交流群和大家讨论。</p>
+<p><img alt="image.png" src="../../data/Python%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8Elogo.jpg" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                How to eat TensorFlow2 in 30 days ?🔥🔥
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                一、TensorFlow的建模流程
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ["navigation.expand", "tabs"],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

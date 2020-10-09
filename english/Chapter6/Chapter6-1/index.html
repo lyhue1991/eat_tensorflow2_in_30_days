@@ -1,0 +1,2026 @@
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>6-1 Three Ways of Modeling - 30天吃掉那只Tensorflow2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-1-three-ways-of-modeling" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-header-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            30天吃掉那只Tensorflow2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              6-1 Three Ways of Modeling
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        How to eat TensorFlow2 in 30 days ?🔥🔥
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../chinese/" class="md-tabs__link">
+          Chinese
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          English
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    30天吃掉那只Tensorflow2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chinese
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chinese" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Chinese
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/%E5%90%8E%E8%AE%B0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%90%83%E8%B4%A7%E5%92%8C%E4%B8%80%E9%81%93%E8%8F%9C%E7%9A%84%E6%95%85%E4%BA%8B/" title="一个吃货和一道菜的故事" class="md-nav__link">
+      一个吃货和一道菜的故事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      1.建模流程
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="1.建模流程" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        1.建模流程
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-nav__link">
+      一、TensorFlow的建模流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-1%2C%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-1,结构化数据建模流程范例" class="md-nav__link">
+      1-1,结构化数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-2%2C%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-2,图片数据建模流程范例" class="md-nav__link">
+      1-2,图片数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-3%2C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-3,文本数据建模流程范例" class="md-nav__link">
+      1-3,文本数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-4%2C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-4,时间序列数据建模流程范例" class="md-nav__link">
+      1-4,时间序列数据建模流程范例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      2.核心概念
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="2.核心概念" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        2.核心概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="二、TensorFlow的核心概念" class="md-nav__link">
+      二、TensorFlow的核心概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-1%2C%E5%BC%A0%E9%87%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="2-1,张量数据结构" class="md-nav__link">
+      2-1,张量数据结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-2%2C%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E5%9B%BE/" title="2-2,三种计算图" class="md-nav__link">
+      2-2,三种计算图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-3%2C%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%9C%BA%E5%88%B6/" title="2-3,自动微分机制" class="md-nav__link">
+      2-3,自动微分机制
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      3.层次结构
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="3.层次结构" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        3.层次结构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" title="三、TensorFlow的层次结构" class="md-nav__link">
+      三、TensorFlow的层次结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-1%2C%E4%BD%8E%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-1,低阶API示范" class="md-nav__link">
+      3-1,低阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-2%2C%E4%B8%AD%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-2,中阶API示范" class="md-nav__link">
+      3-2,中阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-3%2C%E9%AB%98%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-3,高阶API示范" class="md-nav__link">
+      3-3,高阶API示范
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      4.低阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="4.低阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        4.低阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/" title="四、TensorFlow的低阶API" class="md-nav__link">
+      四、TensorFlow的低阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-1%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C/" title="4-1,张量的结构操作" class="md-nav__link">
+      4-1,张量的结构操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-2%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97/" title="4-2,张量的数学运算" class="md-nav__link">
+      4-2,张量的数学运算
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-3%2CAutoGraph%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" title="4-3,AutoGraph的使用规范" class="md-nav__link">
+      4-3,AutoGraph的使用规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-nav__link">
+      4-4,AutoGraph的机制原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-5%2CAutoGraph%E5%92%8Ctf.Module/" title="4-5,AutoGraph和tf.Module" class="md-nav__link">
+      4-5,AutoGraph和tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      5.中阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="5.中阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        5.中阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/" title="五、TensorFlow的中阶API" class="md-nav__link">
+      五、TensorFlow的中阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-1%2C%E6%95%B0%E6%8D%AE%E7%AE%A1%E9%81%93Dataset/" title="5-1,数据管道Dataset" class="md-nav__link">
+      5-1,数据管道Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-nav__link">
+      5-2,特征列feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-3%2C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activation/" title="5-3,激活函数activation" class="md-nav__link">
+      5-3,激活函数activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-4%2C%E6%A8%A1%E5%9E%8B%E5%B1%82layers/" title="5-4,模型层layers" class="md-nav__link">
+      5-4,模型层layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-5%2C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0losses/" title="5-5,损失函数losses" class="md-nav__link">
+      5-5,损失函数losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-6%2C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics/" title="5-6,评估指标metrics" class="md-nav__link">
+      5-6,评估指标metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-7%2C%E4%BC%98%E5%8C%96%E5%99%A8optimizers/" title="5-7,优化器optimizers" class="md-nav__link">
+      5-7,优化器optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-8%2C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks/" title="5-8,回调函数callbacks" class="md-nav__link">
+      5-8,回调函数callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      6.高阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="6.高阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        6.高阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/" title="六、TensorFlow的高阶API" class="md-nav__link">
+      六、TensorFlow的高阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-1%2C%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-1,构建模型的3种方法" class="md-nav__link">
+      6-1,构建模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-2%2C%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-2,训练模型的3种方法" class="md-nav__link">
+      6-2,训练模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-3%2C%E4%BD%BF%E7%94%A8%E5%8D%95GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-3,使用单GPU训练模型" class="md-nav__link">
+      6-3,使用单GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-4%2C%E4%BD%BF%E7%94%A8%E5%A4%9AGPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-4,使用多GPU训练模型" class="md-nav__link">
+      6-4,使用多GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-5%2C%E4%BD%BF%E7%94%A8TPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-5,使用TPU训练模型" class="md-nav__link">
+      6-5,使用TPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-6%2C%E4%BD%BF%E7%94%A8tensorflow-serving%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/" title="6-6,使用tensorflow-serving部署模型" class="md-nav__link">
+      6-6,使用tensorflow-serving部署模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-7%2C%E4%BD%BF%E7%94%A8spark-scala%E8%B0%83%E7%94%A8tensorflow%E6%A8%A1%E5%9E%8B/" title="6-7,使用spark-scala调用tensorflow2.0训练好的模型" class="md-nav__link">
+      6-7,使用spark-scala调用tensorflow2.0训练好的模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      English
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="English" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        English
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Epilogue/" title="Epilogue: A Story Between a Foodie and Cuisine" class="md-nav__link">
+      Epilogue: A Story Between a Foodie and Cuisine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Chapter1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter1" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/" title="Chapter 1: Modeling Procedure of TensorFlow" class="md-nav__link">
+      Chapter 1: Modeling Procedure of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-1/" title="1-1 Example: Modeling Procedure for Structured Data" class="md-nav__link">
+      1-1 Example: Modeling Procedure for Structured Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-2/" title="1-2 Example: Modeling Procedure for Images" class="md-nav__link">
+      1-2 Example: Modeling Procedure for Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-3/" title="1-3 Example: Modeling Procedure for Texts" class="md-nav__link">
+      1-3 Example: Modeling Procedure for Texts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-4/" title="1-4 Example: Modeling Procedure for Temporal Sequences" class="md-nav__link">
+      1-4 Example: Modeling Procedure for Temporal Sequences
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Chapter2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter2" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/" title="Chapter 2: Key Concepts of TensorFlow" class="md-nav__link">
+      Chapter 2: Key Concepts of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-1/" title="2-1 Data Structure" class="md-nav__link">
+      2-1 Data Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-2/" title="2-2 Three Types of Graph" class="md-nav__link">
+      2-2 Three Types of Graph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-3/" title="2-3 Automatic Differentiate" class="md-nav__link">
+      2-3 Automatic Differentiate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Chapter3
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter3" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/" title="Chapter 3: Hierarchy of TensorFlow" class="md-nav__link">
+      Chapter 3: Hierarchy of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-1/" title="3-1 Low-level API: Demonstration" class="md-nav__link">
+      3-1 Low-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-2/" title="3-2 Mid-level API: Demonstration" class="md-nav__link">
+      3-2 Mid-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-3/" title="3-3 High-level API: Demonstration" class="md-nav__link">
+      3-3 High-level API: Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Chapter4
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter4" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/" title="Chapter 4: Low-level API in TensorFlow" class="md-nav__link">
+      Chapter 4: Low-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-1/" title="4-1 Structural Operations of the Tensor" class="md-nav__link">
+      4-1 Structural Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-2/" title="4-2 Mathematical Operations of the Tensor" class="md-nav__link">
+      4-2 Mathematical Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-3/" title="4-3 Rules of Using the AutoGraph" class="md-nav__link">
+      4-3 Rules of Using the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-4/" title="4-4 Mechanisms of the AutoGraph" class="md-nav__link">
+      4-4 Mechanisms of the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-5/" title="4-5 AutoGraph and tf.Module" class="md-nav__link">
+      4-5 AutoGraph and tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Chapter5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter5" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/" title="Chapter 5: Mid-level API in TensorFlow" class="md-nav__link">
+      Chapter 5: Mid-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-1/" title="5-1 Dataset" class="md-nav__link">
+      5-1 Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-2/" title="5-2 feature_column" class="md-nav__link">
+      5-2 feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-3/" title="5-3 activation" class="md-nav__link">
+      5-3 activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-4/" title="5-4 layers" class="md-nav__link">
+      5-4 layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-5/" title="5-5 losses" class="md-nav__link">
+      5-5 losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-6/" title="5-6 metrics" class="md-nav__link">
+      5-6 metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-7/" title="5-7 optimizers" class="md-nav__link">
+      5-7 optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-8/" title="5-8 callbacks" class="md-nav__link">
+      5-8 callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8" checked>
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Chapter6
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter6" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Chapter 6: High-level API in TensorFlow" class="md-nav__link">
+      Chapter 6: High-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        6-1 Three Ways of Modeling
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="6-1 Three Ways of Modeling" class="md-nav__link md-nav__link--active">
+      6-1 Three Ways of Modeling
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-modeling-using-sequential" class="md-nav__link">
+    1. Modeling Using Sequential
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modeling-using-functional-api" class="md-nav__link">
+    2. Modeling Using Functional API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-customized-modeling-using-child-class-of-model" class="md-nav__link">
+    3. Customized Modeling Using Child Class of Model
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-2/" title="6-2 Three Ways of Training" class="md-nav__link">
+      6-2 Three Ways of Training
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-3/" title="6-3 Model Training Using Single GPU" class="md-nav__link">
+      6-3 Model Training Using Single GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-4/" title="6-4 Model Training Using Multiple GPUs" class="md-nav__link">
+      6-4 Model Training Using Multiple GPUs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-5/" title="6-5 Model Training Using TPU" class="md-nav__link">
+      6-5 Model Training Using TPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-nav__link">
+      6-6 Model Deploying Using tensorflow-serving
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-7/" title="6-7 Call Tensorflow Model Using spark-scala" class="md-nav__link">
+      6-7 Call Tensorflow Model Using spark-scala
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-modeling-using-sequential" class="md-nav__link">
+    1. Modeling Using Sequential
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-modeling-using-functional-api" class="md-nav__link">
+    2. Modeling Using Functional API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-customized-modeling-using-child-class-of-model" class="md-nav__link">
+    3. Customized Modeling Using Child Class of Model
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/edit/master/docs/english/Chapter6/Chapter6-1.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="6-1-three-ways-of-modeling">6-1 Three Ways of Modeling<a class="headerlink" href="#6-1-three-ways-of-modeling" title="Permanent link">#</a></h1>
+<p>There are three ways of modeling: using <code>Sequential</code> to construct model with the order of layers, using functional APIs to construct model with arbitrary structure, using child class inheriting from the base class <code>Model</code>.</p>
+<p>For the models with sequenced structure, <code>Sequential</code> method should be given the highest priority.</p>
+<p>For the models with nonsequenced structures such as multiple input/output, shared weights, or residual connections, modeling with functional API is recommended.</p>
+<p>Modeling through child class of <code>Model</code> should be AVOIDED unless with special requirements. This method is flexible, but also fallible.</p>
+<p>Here are the examples of modeling using the three above-mentioned methods to classify IMDB movie reviews.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span> 
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="n">train_token_path</span> <span class="o">=</span> <span class="s2">&quot;../../data/imdb/train_token.csv&quot;</span>
+<span class="n">test_token_path</span> <span class="o">=</span> <span class="s2">&quot;../../data/imdb/test_token.csv&quot;</span>
+
+<span class="n">MAX_WORDS</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># We will only consider the top 10,000 words in the dataset</span>
+<span class="n">MAX_LEN</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># We will cut reviews after 200 words</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">20</span> 
+
+<span class="c1"># Constructing data pipeline</span>
+<span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">to_number</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,))</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">to_number</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s2">&quot; &quot;</span><span class="p">)),</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ds_train</span><span class="o">=</span>  <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">train_token_path</span><span class="p">])</span> \
+   <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parse_line</span><span class="p">,</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+
+<span class="n">ds_test</span><span class="o">=</span>  <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">test_token_path</span><span class="p">])</span> \
+   <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parse_line</span><span class="p">,</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">)</span> \
+   <span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="1-modeling-using-sequential">1. Modeling Using <code>Sequential</code><a class="headerlink" href="#1-modeling-using-sequential" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">MAX_WORDS</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">input_length</span><span class="o">=</span><span class="n">MAX_LEN</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Nadam&#39;</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+            <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/Sequential%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">baselogger</span> <span class="o">=</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">BaseLogger</span><span class="p">(</span><span class="n">stateful_metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AUC&quot;</span><span class="p">])</span>
+<span class="n">logdir</span> <span class="o">=</span> <span class="s2">&quot;../../data/keras_model/&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">tensorboard_callback</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">logdir</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ds_train</span><span class="p">,</span><span class="n">validation_data</span> <span class="o">=</span> <span class="n">ds_test</span><span class="p">,</span>
+        <span class="n">epochs</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">baselogger</span><span class="p">,</span><span class="n">tensorboard_callback</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s1">&#39;svg&#39;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">plot_metric</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">metric</span><span class="p">):</span>
+    <span class="n">train_metrics</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+    <span class="n">val_metrics</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_&#39;</span><span class="o">+</span><span class="n">metric</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_metrics</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">train_metrics</span><span class="p">,</span> <span class="s1">&#39;bo--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_metrics</span><span class="p">,</span> <span class="s1">&#39;ro-&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training and validation &#39;</span><span class="o">+</span> <span class="n">metric</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;train_&quot;</span><span class="o">+</span><span class="n">metric</span><span class="p">,</span> <span class="s1">&#39;val_&#39;</span><span class="o">+</span><span class="n">metric</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plot_metric</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><img alt="" src="../../../data/6-1-fit%E6%A8%A1%E5%9E%8B.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="2-modeling-using-functional-api">2. Modeling Using Functional API<a class="headerlink" href="#2-modeling-using-functional-api" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">MAX_LEN</span><span class="p">])</span>
+<span class="n">x</span>  <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">MAX_WORDS</span><span class="p">,</span><span class="mi">7</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="n">branch1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">branch1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">3</span><span class="p">)(</span><span class="n">branch1</span><span class="p">)</span>
+<span class="n">branch1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">branch1</span><span class="p">)</span>
+<span class="n">branch1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">GlobalMaxPool1D</span><span class="p">()(</span><span class="n">branch1</span><span class="p">)</span>
+
+<span class="n">branch2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">branch2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">5</span><span class="p">)(</span><span class="n">branch2</span><span class="p">)</span>
+<span class="n">branch2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">branch2</span><span class="p">)</span>
+<span class="n">branch2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">GlobalMaxPool1D</span><span class="p">()(</span><span class="n">branch2</span><span class="p">)</span>
+
+<span class="n">branch3</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">branch3</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">7</span><span class="p">)(</span><span class="n">branch3</span><span class="p">)</span>
+<span class="n">branch3</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">SeparableConv1D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">branch3</span><span class="p">)</span>
+<span class="n">branch3</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">GlobalMaxPool1D</span><span class="p">()(</span><span class="n">branch3</span><span class="p">)</span>
+
+<span class="n">concat</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Concatenate</span><span class="p">()([</span><span class="n">branch1</span><span class="p">,</span><span class="n">branch2</span><span class="p">,</span><span class="n">branch3</span><span class="p">])</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">)(</span><span class="n">concat</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">,</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Nadam&#39;</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+            <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model: &quot;model&quot;
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_1 (InputLayer)            [(None, 200)]        0                                            
+__________________________________________________________________________________________________
+embedding (Embedding)           (None, 200, 7)       70000       input_1[0][0]                    
+__________________________________________________________________________________________________
+separable_conv1d (SeparableConv (None, 198, 64)      533         embedding[0][0]                  
+__________________________________________________________________________________________________
+separable_conv1d_2 (SeparableCo (None, 196, 64)      547         embedding[0][0]                  
+__________________________________________________________________________________________________
+separable_conv1d_4 (SeparableCo (None, 194, 64)      561         embedding[0][0]                  
+__________________________________________________________________________________________________
+max_pooling1d (MaxPooling1D)    (None, 66, 64)       0           separable_conv1d[0][0]           
+__________________________________________________________________________________________________
+max_pooling1d_1 (MaxPooling1D)  (None, 39, 64)       0           separable_conv1d_2[0][0]         
+__________________________________________________________________________________________________
+max_pooling1d_2 (MaxPooling1D)  (None, 27, 64)       0           separable_conv1d_4[0][0]         
+__________________________________________________________________________________________________
+separable_conv1d_1 (SeparableCo (None, 64, 32)       2272        max_pooling1d[0][0]              
+__________________________________________________________________________________________________
+separable_conv1d_3 (SeparableCo (None, 35, 32)       2400        max_pooling1d_1[0][0]            
+__________________________________________________________________________________________________
+separable_conv1d_5 (SeparableCo (None, 21, 32)       2528        max_pooling1d_2[0][0]            
+__________________________________________________________________________________________________
+global_max_pooling1d (GlobalMax (None, 32)           0           separable_conv1d_1[0][0]         
+__________________________________________________________________________________________________
+global_max_pooling1d_1 (GlobalM (None, 32)           0           separable_conv1d_3[0][0]         
+__________________________________________________________________________________________________
+global_max_pooling1d_2 (GlobalM (None, 32)           0           separable_conv1d_5[0][0]         
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 96)           0           global_max_pooling1d[0][0]       
+                                                                 global_max_pooling1d_1[0][0]     
+                                                                 global_max_pooling1d_2[0][0]     
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 1)            97          concatenate[0][0]                
+==================================================================================================
+Total params: 78,938
+Trainable params: 78,938
+Non-trainable params: 0
+__________________________________________________________________________________________________
+</code></pre></div>
+<p><img alt="" src="../../../data/FunctionalAPI%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">logdir</span> <span class="o">=</span> <span class="s2">&quot;../../data/keras_model/&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">tensorboard_callback</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">logdir</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ds_train</span><span class="p">,</span><span class="n">validation_data</span> <span class="o">=</span> <span class="n">ds_test</span><span class="p">,</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tensorboard_callback</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Epoch 1/6
+1000/1000 [==============================] - 32s 32ms/step - loss: 0.5527 - accuracy: 0.6758 - AUC: 0.7731 - val_loss: 0.3646 - val_accuracy: 0.8426 - val_AUC: 0.9192
+Epoch 2/6
+1000/1000 [==============================] - 24s 24ms/step - loss: 0.3024 - accuracy: 0.8737 - AUC: 0.9444 - val_loss: 0.3281 - val_accuracy: 0.8644 - val_AUC: 0.9350
+Epoch 3/6
+1000/1000 [==============================] - 24s 24ms/step - loss: 0.2158 - accuracy: 0.9159 - AUC: 0.9715 - val_loss: 0.3461 - val_accuracy: 0.8666 - val_AUC: 0.9363
+Epoch 4/6
+1000/1000 [==============================] - 24s 24ms/step - loss: 0.1492 - accuracy: 0.9464 - AUC: 0.9859 - val_loss: 0.4017 - val_accuracy: 0.8568 - val_AUC: 0.9311
+Epoch 5/6
+1000/1000 [==============================] - 24s 24ms/step - loss: 0.0944 - accuracy: 0.9696 - AUC: 0.9939 - val_loss: 0.4998 - val_accuracy: 0.8550 - val_AUC: 0.9233
+Epoch 6/6
+1000/1000 [==============================] - 26s 26ms/step - loss: 0.0526 - accuracy: 0.9865 - AUC: 0.9977 - val_loss: 0.6463 - val_accuracy: 0.8462 - val_AUC: 0.9138
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plot_metric</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/6-1-2-train.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="3-customized-modeling-using-child-class-of-model">3. Customized Modeling Using Child Class of <code>Model</code><a class="headerlink" href="#3-customized-modeling-using-child-class-of-model" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define a customized residual module as Layer</span>
+
+<span class="k">class</span> <span class="nc">ResBlock</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="n">kernel_size</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_shape</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span>
+                                   <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span><span class="n">kernel_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span>
+                                   <span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="n">input_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                   <span class="n">kernel_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span><span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxpool</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MaxPool1D</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span> <span class="c1"># Identical to self.built = True</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Add</span><span class="p">()([</span><span class="n">inputs</span><span class="p">,</span><span class="n">x</span><span class="p">])</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxpool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+    <span class="c1"># Need to define get_config method in order to sequentialize the model constructed from the customized Layer by Functional API.</span>
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="n">config</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;kernel_size&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_size</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">config</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test ResBlock</span>
+<span class="n">resblock</span> <span class="o">=</span> <span class="n">ResBlock</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">resblock</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">resblock</span><span class="o">.</span><span class="n">compute_output_shape</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>TensorShape([None, 100, 7])
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Customized model, which could also be implemented by Sequential or Functional API</span>
+
+<span class="k">class</span> <span class="nc">ImdbModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ImdbModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_shape</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">MAX_WORDS</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block1</span> <span class="o">=</span> <span class="n">ResBlock</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block2</span> <span class="o">=</span> <span class="n">ResBlock</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dense</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">activation</span> <span class="o">=</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ImdbModel</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">block2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dense</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ImdbModel</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">input_shape</span> <span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="mi">200</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Nadam&#39;</span><span class="p">,</span>
+            <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+            <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Model: &quot;imdb_model&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding (Embedding)        multiple                  70000     
+_________________________________________________________________
+res_block (ResBlock)         multiple                  19143     
+_________________________________________________________________
+res_block_1 (ResBlock)       multiple                  13703     
+_________________________________________________________________
+dense (Dense)                multiple                  351       
+=================================================================
+Total params: 103,197
+Trainable params: 103,197
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><img alt="" src="../../../data/Model%E5%AD%90%E7%B1%BB%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84.png" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="n">logdir</span> <span class="o">=</span> <span class="s2">&quot;../tflogs/keras_model/&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">tensorboard_callback</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">TensorBoard</span><span class="p">(</span><span class="n">logdir</span><span class="p">,</span> <span class="n">histogram_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">ds_train</span><span class="p">,</span><span class="n">validation_data</span> <span class="o">=</span> <span class="n">ds_test</span><span class="p">,</span>
+                    <span class="n">epochs</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span><span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">tensorboard_callback</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Epoch 1/6
+1000/1000 [==============================] - 47s 47ms/step - loss: 0.5629 - accuracy: 0.6618 - AUC: 0.7548 - val_loss: 0.3422 - val_accuracy: 0.8510 - val_AUC: 0.9286
+Epoch 2/6
+1000/1000 [==============================] - 43s 43ms/step - loss: 0.2648 - accuracy: 0.8903 - AUC: 0.9576 - val_loss: 0.3276 - val_accuracy: 0.8650 - val_AUC: 0.9410
+Epoch 3/6
+1000/1000 [==============================] - 42s 42ms/step - loss: 0.1573 - accuracy: 0.9439 - AUC: 0.9846 - val_loss: 0.3861 - val_accuracy: 0.8682 - val_AUC: 0.9390
+Epoch 4/6
+1000/1000 [==============================] - 42s 42ms/step - loss: 0.0849 - accuracy: 0.9706 - AUC: 0.9950 - val_loss: 0.5324 - val_accuracy: 0.8616 - val_AUC: 0.9292
+Epoch 5/6
+1000/1000 [==============================] - 43s 43ms/step - loss: 0.0393 - accuracy: 0.9876 - AUC: 0.9986 - val_loss: 0.7693 - val_accuracy: 0.8566 - val_AUC: 0.9132
+Epoch 6/6
+1000/1000 [==============================] - 44s 44ms/step - loss: 0.0222 - accuracy: 0.9926 - AUC: 0.9994 - val_loss: 0.9328 - val_accuracy: 0.8584 - val_AUC: 0.9052
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plot_metric</span><span class="p">(</span><span class="n">history</span><span class="p">,</span><span class="s2">&quot;AUC&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><img alt="" src="../../../data/6-1-3-fit%E6%A8%A1%E5%9E%8B.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>Please leave comments in the WeChat official account "Python与算法之美" (Elegance of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.</p>
+<p>You are also welcomed to join the group chat with the other readers through replying <strong>加群 (join group)</strong> in the WeChat official account.</p>
+<p><img alt="image.png" src="../../../data/Python%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8Elogo.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="Chapter 6: High-level API in TensorFlow" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Chapter 6: High-level API in TensorFlow
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../Chapter6-2/" title="6-2 Three Ways of Training" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                6-2 Three Ways of Training
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["navigation.expand", "tabs"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

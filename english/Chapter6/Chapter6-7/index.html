@@ -1,0 +1,2001 @@
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>6-7 Call Tensorflow Model Using spark-scala - 30天吃掉那只Tensorflow2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-7-call-tensorflow-model-using-spark-scala" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-header-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            30天吃掉那只Tensorflow2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              6-7 Call Tensorflow Model Using spark-scala
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        How to eat TensorFlow2 in 30 days ?🔥🔥
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../chinese/" class="md-tabs__link">
+          Chinese
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          English
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    30天吃掉那只Tensorflow2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chinese
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chinese" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Chinese
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/%E5%90%8E%E8%AE%B0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%90%83%E8%B4%A7%E5%92%8C%E4%B8%80%E9%81%93%E8%8F%9C%E7%9A%84%E6%95%85%E4%BA%8B/" title="一个吃货和一道菜的故事" class="md-nav__link">
+      一个吃货和一道菜的故事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      1.建模流程
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="1.建模流程" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        1.建模流程
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-nav__link">
+      一、TensorFlow的建模流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-1%2C%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-1,结构化数据建模流程范例" class="md-nav__link">
+      1-1,结构化数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-2%2C%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-2,图片数据建模流程范例" class="md-nav__link">
+      1-2,图片数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-3%2C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-3,文本数据建模流程范例" class="md-nav__link">
+      1-3,文本数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-4%2C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-4,时间序列数据建模流程范例" class="md-nav__link">
+      1-4,时间序列数据建模流程范例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      2.核心概念
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="2.核心概念" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        2.核心概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="二、TensorFlow的核心概念" class="md-nav__link">
+      二、TensorFlow的核心概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-1%2C%E5%BC%A0%E9%87%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="2-1,张量数据结构" class="md-nav__link">
+      2-1,张量数据结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-2%2C%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E5%9B%BE/" title="2-2,三种计算图" class="md-nav__link">
+      2-2,三种计算图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-3%2C%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%9C%BA%E5%88%B6/" title="2-3,自动微分机制" class="md-nav__link">
+      2-3,自动微分机制
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      3.层次结构
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="3.层次结构" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        3.层次结构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" title="三、TensorFlow的层次结构" class="md-nav__link">
+      三、TensorFlow的层次结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-1%2C%E4%BD%8E%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-1,低阶API示范" class="md-nav__link">
+      3-1,低阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-2%2C%E4%B8%AD%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-2,中阶API示范" class="md-nav__link">
+      3-2,中阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-3%2C%E9%AB%98%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-3,高阶API示范" class="md-nav__link">
+      3-3,高阶API示范
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      4.低阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="4.低阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        4.低阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/" title="四、TensorFlow的低阶API" class="md-nav__link">
+      四、TensorFlow的低阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-1%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C/" title="4-1,张量的结构操作" class="md-nav__link">
+      4-1,张量的结构操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-2%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97/" title="4-2,张量的数学运算" class="md-nav__link">
+      4-2,张量的数学运算
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-3%2CAutoGraph%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" title="4-3,AutoGraph的使用规范" class="md-nav__link">
+      4-3,AutoGraph的使用规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-nav__link">
+      4-4,AutoGraph的机制原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/4.%E4%BD%8E%E9%98%B6API/4-5%2CAutoGraph%E5%92%8Ctf.Module/" title="4-5,AutoGraph和tf.Module" class="md-nav__link">
+      4-5,AutoGraph和tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7">
+    
+    <label class="md-nav__link" for="nav-2-7">
+      5.中阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="5.中阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        5.中阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/" title="五、TensorFlow的中阶API" class="md-nav__link">
+      五、TensorFlow的中阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-1%2C%E6%95%B0%E6%8D%AE%E7%AE%A1%E9%81%93Dataset/" title="5-1,数据管道Dataset" class="md-nav__link">
+      5-1,数据管道Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-nav__link">
+      5-2,特征列feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-3%2C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activation/" title="5-3,激活函数activation" class="md-nav__link">
+      5-3,激活函数activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-4%2C%E6%A8%A1%E5%9E%8B%E5%B1%82layers/" title="5-4,模型层layers" class="md-nav__link">
+      5-4,模型层layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-5%2C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0losses/" title="5-5,损失函数losses" class="md-nav__link">
+      5-5,损失函数losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-6%2C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics/" title="5-6,评估指标metrics" class="md-nav__link">
+      5-6,评估指标metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-7%2C%E4%BC%98%E5%8C%96%E5%99%A8optimizers/" title="5-7,优化器optimizers" class="md-nav__link">
+      5-7,优化器optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/5.%E4%B8%AD%E9%98%B6API/5-8%2C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks/" title="5-8,回调函数callbacks" class="md-nav__link">
+      5-8,回调函数callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      6.高阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="6.高阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        6.高阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/" title="六、TensorFlow的高阶API" class="md-nav__link">
+      六、TensorFlow的高阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-1%2C%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-1,构建模型的3种方法" class="md-nav__link">
+      6-1,构建模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-2%2C%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-2,训练模型的3种方法" class="md-nav__link">
+      6-2,训练模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-3%2C%E4%BD%BF%E7%94%A8%E5%8D%95GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-3,使用单GPU训练模型" class="md-nav__link">
+      6-3,使用单GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-4%2C%E4%BD%BF%E7%94%A8%E5%A4%9AGPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-4,使用多GPU训练模型" class="md-nav__link">
+      6-4,使用多GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-5%2C%E4%BD%BF%E7%94%A8TPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-5,使用TPU训练模型" class="md-nav__link">
+      6-5,使用TPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-6%2C%E4%BD%BF%E7%94%A8tensorflow-serving%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/" title="6-6,使用tensorflow-serving部署模型" class="md-nav__link">
+      6-6,使用tensorflow-serving部署模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../chinese/6.%E9%AB%98%E9%98%B6API/6-7%2C%E4%BD%BF%E7%94%A8spark-scala%E8%B0%83%E7%94%A8tensorflow%E6%A8%A1%E5%9E%8B/" title="6-7,使用spark-scala调用tensorflow2.0训练好的模型" class="md-nav__link">
+      6-7,使用spark-scala调用tensorflow2.0训练好的模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      English
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="English" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        English
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Epilogue/" title="Epilogue: A Story Between a Foodie and Cuisine" class="md-nav__link">
+      Epilogue: A Story Between a Foodie and Cuisine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Chapter1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter1" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/" title="Chapter 1: Modeling Procedure of TensorFlow" class="md-nav__link">
+      Chapter 1: Modeling Procedure of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-1/" title="1-1 Example: Modeling Procedure for Structured Data" class="md-nav__link">
+      1-1 Example: Modeling Procedure for Structured Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-2/" title="1-2 Example: Modeling Procedure for Images" class="md-nav__link">
+      1-2 Example: Modeling Procedure for Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-3/" title="1-3 Example: Modeling Procedure for Texts" class="md-nav__link">
+      1-3 Example: Modeling Procedure for Texts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter1/Chapter1-4/" title="1-4 Example: Modeling Procedure for Temporal Sequences" class="md-nav__link">
+      1-4 Example: Modeling Procedure for Temporal Sequences
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Chapter2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter2" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/" title="Chapter 2: Key Concepts of TensorFlow" class="md-nav__link">
+      Chapter 2: Key Concepts of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-1/" title="2-1 Data Structure" class="md-nav__link">
+      2-1 Data Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-2/" title="2-2 Three Types of Graph" class="md-nav__link">
+      2-2 Three Types of Graph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter2/Chapter2-3/" title="2-3 Automatic Differentiate" class="md-nav__link">
+      2-3 Automatic Differentiate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Chapter3
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter3" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/" title="Chapter 3: Hierarchy of TensorFlow" class="md-nav__link">
+      Chapter 3: Hierarchy of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-1/" title="3-1 Low-level API: Demonstration" class="md-nav__link">
+      3-1 Low-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-2/" title="3-2 Mid-level API: Demonstration" class="md-nav__link">
+      3-2 Mid-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter3/Chapter3-3/" title="3-3 High-level API: Demonstration" class="md-nav__link">
+      3-3 High-level API: Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Chapter4
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter4" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/" title="Chapter 4: Low-level API in TensorFlow" class="md-nav__link">
+      Chapter 4: Low-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-1/" title="4-1 Structural Operations of the Tensor" class="md-nav__link">
+      4-1 Structural Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-2/" title="4-2 Mathematical Operations of the Tensor" class="md-nav__link">
+      4-2 Mathematical Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-3/" title="4-3 Rules of Using the AutoGraph" class="md-nav__link">
+      4-3 Rules of Using the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-4/" title="4-4 Mechanisms of the AutoGraph" class="md-nav__link">
+      4-4 Mechanisms of the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter4/Chapter4-5/" title="4-5 AutoGraph and tf.Module" class="md-nav__link">
+      4-5 AutoGraph and tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Chapter5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter5" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/" title="Chapter 5: Mid-level API in TensorFlow" class="md-nav__link">
+      Chapter 5: Mid-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-1/" title="5-1 Dataset" class="md-nav__link">
+      5-1 Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-2/" title="5-2 feature_column" class="md-nav__link">
+      5-2 feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-3/" title="5-3 activation" class="md-nav__link">
+      5-3 activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-4/" title="5-4 layers" class="md-nav__link">
+      5-4 layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-5/" title="5-5 losses" class="md-nav__link">
+      5-5 losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-6/" title="5-6 metrics" class="md-nav__link">
+      5-6 metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-7/" title="5-7 optimizers" class="md-nav__link">
+      5-7 optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter5/Chapter5-8/" title="5-8 callbacks" class="md-nav__link">
+      5-8 callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8" checked>
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Chapter6
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter6" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Chapter 6: High-level API in TensorFlow" class="md-nav__link">
+      Chapter 6: High-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-1/" title="6-1 Three Ways of Modeling" class="md-nav__link">
+      6-1 Three Ways of Modeling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-2/" title="6-2 Three Ways of Training" class="md-nav__link">
+      6-2 Three Ways of Training
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-3/" title="6-3 Model Training Using Single GPU" class="md-nav__link">
+      6-3 Model Training Using Single GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-4/" title="6-4 Model Training Using Multiple GPUs" class="md-nav__link">
+      6-4 Model Training Using Multiple GPUs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-5/" title="6-5 Model Training Using TPU" class="md-nav__link">
+      6-5 Model Training Using TPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-nav__link">
+      6-6 Model Deploying Using tensorflow-serving
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        6-7 Call Tensorflow Model Using spark-scala
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="6-7 Call Tensorflow Model Using spark-scala" class="md-nav__link md-nav__link--active">
+      6-7 Call Tensorflow Model Using spark-scala
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-using-tensorflow-model-in-spark-scala" class="md-nav__link">
+    0 Using TensorFlow model in spark-scala
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-preparing-protobuf-model-file" class="md-nav__link">
+    1. Preparing protobuf Model File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-a-spark-scala-project-insert-jar-package-dependencies-for-tensorflow-in-java" class="md-nav__link">
+    2. Create a spark (scala) project, insert jar package dependencies for TensorFlow in java.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-loading-tensorflow-model-on-the-driver-end-of-spark-scala-project-and-debug-it-successfully" class="md-nav__link">
+    3. Loading TensorFlow model on the driver end of spark (scala) project and debug it successfully.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-loading-tensorflow-model-on-executor-of-spark-scala-project-through-rdd-and-debug-it-successfully" class="md-nav__link">
+    4. Loading TensorFlow model on executor of spark (scala) project through RDD and debug it successfully
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-loading-tensorflow-model-on-executor-of-spark-scala-project-through-data-and-debug-it-successfully" class="md-nav__link">
+    5. Loading TensorFlow model on executor of spark (scala) project through Data and debug it successfully
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-using-tensorflow-model-in-spark-scala" class="md-nav__link">
+    0 Using TensorFlow model in spark-scala
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-preparing-protobuf-model-file" class="md-nav__link">
+    1. Preparing protobuf Model File
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-a-spark-scala-project-insert-jar-package-dependencies-for-tensorflow-in-java" class="md-nav__link">
+    2. Create a spark (scala) project, insert jar package dependencies for TensorFlow in java.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-loading-tensorflow-model-on-the-driver-end-of-spark-scala-project-and-debug-it-successfully" class="md-nav__link">
+    3. Loading TensorFlow model on the driver end of spark (scala) project and debug it successfully.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-loading-tensorflow-model-on-executor-of-spark-scala-project-through-rdd-and-debug-it-successfully" class="md-nav__link">
+    4. Loading TensorFlow model on executor of spark (scala) project through RDD and debug it successfully
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-loading-tensorflow-model-on-executor-of-spark-scala-project-through-data-and-debug-it-successfully" class="md-nav__link">
+    5. Loading TensorFlow model on executor of spark (scala) project through Data and debug it successfully
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/edit/master/docs/english/Chapter6/Chapter6-7.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="6-7-call-tensorflow-model-using-spark-scala">6-7 Call Tensorflow Model Using spark-scala<a class="headerlink" href="#6-7-call-tensorflow-model-using-spark-scala" title="Permanent link">#</a></h1>
+<p>This section introduce how to use the trained TensorFlow model to predict in spark.</p>
+<p>The prerequisite of this section is fundamental knowledge on spark and scala.</p>
+<p>It is easier to use pyspark, since it only requires loading model with Python on each executor and predict separately.</p>
+<p>For the consideration of the performance, the spark in scala version is the most popular.</p>
+<p>The section shows how to use the trained TensorFlow model in spark through TensorFlow for Java.</p>
+<p>It is possible to predit with the trained TensorFlow model in hundreds of thousands computers using the parallel computing feature of spark.</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="0-using-tensorflow-model-in-spark-scala">0 Using TensorFlow model in spark-scala<a class="headerlink" href="#0-using-tensorflow-model-in-spark-scala" title="Permanent link">#</a></h3>
+<p>The necessary steps for predicting with trained TensorFlow model in spark (scala) are:</p>
+<p>(1) Preparing protobuf model file</p>
+<p>(2) Create a spark (scala) project, insert jar package dependencies for TensorFlow in java.</p>
+<p>(3) Loading TensorFlow model on the driver end of spark (scala) project and debug it successfully.</p>
+<p>(4) Loading TensorFlow model on executor of spark (scala) project through RDD and debug it successfully.</p>
+<p>(5) Loading TensorFlow model on executor of spark (scala) project through Data and debug it successfully.</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="1-preparing-protobuf-model-file">1. Preparing protobuf Model File<a class="headerlink" href="#1-preparing-protobuf-model-file" title="Permanent link">#</a></h3>
+<p>Here we train a simple linear regression model with <code>tf.keras</code> and save it as protobuf file.</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span><span class="n">layers</span><span class="p">,</span><span class="n">optimizers</span>
+
+<span class="c1">## Number of samples</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">800</span>
+
+<span class="c1">## Generating testing dataset</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">([</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="n">minval</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">maxval</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> 
+<span class="n">w0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">],[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">]])</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>
+
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@w0</span> <span class="o">+</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">([</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">mean</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span><span class="n">stddev</span><span class="o">=</span> <span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># @ is matrix multiplication; adding Gaussian noise</span>
+
+<span class="c1">## Modeling</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,),</span><span class="n">name</span> <span class="o">=</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span> <span class="c1"># Set the input name as &quot;inputs&quot;</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;outputs&quot;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span> <span class="c1"># Set the output name as &quot;outputs&quot;</span>
+<span class="n">linear</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">,</span><span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">)</span>
+<span class="n">linear</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+<span class="c1">## Training with fit method</span>
+<span class="n">linear</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;rmsprop&quot;</span><span class="p">,</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mae&quot;</span><span class="p">])</span>
+<span class="n">linear</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>  
+
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;w = &quot;</span><span class="p">,</span><span class="n">linear</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">kernel</span><span class="p">)</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;b = &quot;</span><span class="p">,</span><span class="n">linear</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+<span class="c1">## Save the model as pb format</span>
+<span class="n">export_path</span> <span class="o">=</span> <span class="s2">&quot;../../data/linear_model/&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>       <span class="c1"># Version could be used for management of further updates</span>
+<span class="n">linear</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">export_path</span><span class="o">+</span><span class="n">version</span><span class="p">,</span> <span class="n">save_format</span><span class="o">=</span><span class="s2">&quot;tf&quot;</span><span class="p">)</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">ls</span> <span class="p">{</span><span class="n">export_path</span><span class="o">+</span><span class="n">version</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check the info of the model file</span>
+<span class="err">!</span><span class="n">saved_model_cli</span> <span class="n">show</span> <span class="o">--</span><span class="nb">dir</span> <span class="p">{</span><span class="n">export_path</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">version</span><span class="p">)}</span> <span class="o">--</span><span class="nb">all</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>The model file information marked red could be used later.</p>
+<p><img alt="" src="../../../data/%E6%A8%A1%E5%9E%8B%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF.png" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="2-create-a-spark-scala-project-insert-jar-package-dependencies-for-tensorflow-in-java">2. Create a spark (scala) project, insert jar package dependencies for TensorFlow in java.<a class="headerlink" href="#2-create-a-spark-scala-project-insert-jar-package-dependencies-for-tensorflow-in-java" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>Need to add the following jar package dependency if use maven to manage projects.</p>
+<div class="highlight"><pre><span></span><code>&lt;!-- https://mvnrepository.com/artifact/org.tensorflow/tensorflow --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.tensorflow&lt;/groupId&gt;
+    &lt;artifactId&gt;tensorflow&lt;/artifactId&gt;
+    &lt;version&gt;1.15.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></div>
+<p>You may also download the jar package <code>org.tensorflow.tensorflow</code>, together with the depended <code>org.tensorflow.libtensorflow</code> and <code>org.tensorflowlibtensorflow_jni</code> from the following link, then add all of them into the project.</p>
+<p><a href="https://mvnrepository.com/artifact/org.tensorflow/tensorflow/1.15.0">https://mvnrepository.com/artifact/org.tensorflow/tensorflow/1.15.0</a></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="3-loading-tensorflow-model-on-the-driver-end-of-spark-scala-project-and-debug-it-successfully">3. Loading TensorFlow model on the driver end of spark (scala) project and debug it successfully.<a class="headerlink" href="#3-loading-tensorflow-model-on-the-driver-end-of-spark-scala-project-and-debug-it-successfully" title="Permanent link">#</a></h3>
+<p>The following demonstration is run in jupyter notebook. We need to install toree to have it support spark(scala).</p>
+<!-- #region -->
+<p><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">scala.collection.mutable.WrappedArray</span>
+<span class="k">import</span> <span class="nn">org.</span><span class="o">{</span><span class="n">tensorflow</span><span class="k">=&gt;</span><span class="n">tf</span><span class="o">}</span>
+
+<span class="c1">//Note: the second argument of the load function should be &quot;serve&quot;; the related info could be found from the model file.</span>
+
+<span class="k">val</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">SavedModelBundle</span> 
+   <span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="s">&quot;/Users/liangyun/CodeFiles/eat_tensorflow2_in_30_days/data/linear_model/1&quot;</span><span class="o">,</span><span class="s">&quot;serve&quot;</span><span class="o">)</span>
+
+<span class="c1">//Note: for the Java version TensorFlow uses static graph as TensorFlow 1.X, i.e. use `Session`, then explicit data to feed and results to fetch, and finally run it.</span>
+<span class="c1">//Note: multiple feed methods could be used consequetively when we need to feed multiple data.</span>
+<span class="c1">//Note: the input must be in the type of float</span>
+
+<span class="k">val</span> <span class="n">sess</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">session</span><span class="o">()</span>
+<span class="k">val</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">Tensor</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">2.0f</span><span class="o">,</span><span class="mf">3.0f</span><span class="o">)))</span>
+<span class="k">val</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">sess</span><span class="o">.</span><span class="n">runner</span><span class="o">().</span><span class="n">feed</span><span class="o">(</span><span class="s">&quot;serving_default_inputs:0&quot;</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+         <span class="o">.</span><span class="n">fetch</span><span class="o">(</span><span class="s">&quot;StatefulPartitionedCall:0&quot;</span><span class="o">).</span><span class="n">run</span><span class="o">().</span><span class="n">get</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+
+<span class="k">val</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Float</span><span class="o">](</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">0</span><span class="o">).</span><span class="n">toInt</span><span class="o">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">1</span><span class="o">).</span><span class="n">toInt</span><span class="o">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">copyTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+
+<span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">x</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
+<span class="k">if</span><span class="o">(</span><span class="n">y</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">y</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
+<span class="k">if</span><span class="o">(</span><span class="n">sess</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>
+<span class="k">if</span><span class="o">(</span><span class="n">bundle</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="n">bundle</span><span class="o">.</span><span class="n">close</span><span class="o">()</span>  
+
+<span class="n">result</span>
+</code></pre></div><br />
+<!-- #endregion -->
+</p>
+<p>The output is:</p>
+<div class="highlight"><pre><span></span><code>Array(Array(3.019596), Array(3.9878292))
+</code></pre></div>
+<p><img alt="" src="../../../data/TfDriver.png" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="4-loading-tensorflow-model-on-executor-of-spark-scala-project-through-rdd-and-debug-it-successfully">4. Loading TensorFlow model on executor of spark (scala) project through RDD and debug it successfully<a class="headerlink" href="#4-loading-tensorflow-model-on-executor-of-spark-scala-project-through-rdd-and-debug-it-successfully" title="Permanent link">#</a></h3>
+<p>Here we transfer the TensorFlow model loaded on the Driver end to each executor through broadcasting, and predict with distributed computing on all the executors.</p>
+<!-- #region -->
+<p><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+<span class="k">import</span> <span class="nn">scala.collection.mutable.WrappedArray</span>
+<span class="k">import</span> <span class="nn">org.</span><span class="o">{</span><span class="n">tensorflow</span><span class="k">=&gt;</span><span class="n">tf</span><span class="o">}</span>
+
+<span class="k">val</span> <span class="n">spark</span> <span class="o">=</span> <span class="nc">SparkSession</span>
+    <span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+    <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">&quot;TfRDD&quot;</span><span class="o">)</span>
+    <span class="o">.</span><span class="n">enableHiveSupport</span><span class="o">()</span>
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+
+<span class="k">val</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span>
+
+<span class="c1">// Loading model on Driver end</span>
+<span class="k">val</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">SavedModelBundle</span> 
+   <span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="s">&quot;/Users/liangyun/CodeFiles/master_tensorflow2_in_20_hours/data/linear_model/1&quot;</span><span class="o">,</span><span class="s">&quot;serve&quot;</span><span class="o">)</span>
+
+<span class="c1">// Broadcasting the model to all the executors</span>
+<span class="k">val</span> <span class="n">broads</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="n">bundle</span><span class="o">)</span>
+
+<span class="c1">// Creating dataset</span>
+<span class="k">val</span> <span class="n">rdd_data</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">makeRDD</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">3.0f</span><span class="o">,</span><span class="mf">5.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">6.0f</span><span class="o">,</span><span class="mf">7.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">8.0f</span><span class="o">,</span><span class="mf">3.0f</span><span class="o">)))</span>
+
+<span class="c1">// Predicting in batch by using the model through mapPartitions</span>
+<span class="k">val</span> <span class="n">rdd_result</span> <span class="o">=</span> <span class="n">rdd_data</span><span class="o">.</span><span class="n">mapPartitions</span><span class="o">(</span><span class="n">iter</span> <span class="o">=&gt;</span> <span class="o">{</span>
+
+    <span class="k">val</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">iter</span><span class="o">.</span><span class="n">toArray</span>
+    <span class="k">val</span> <span class="n">model</span> <span class="o">=</span> <span class="n">broads</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">val</span> <span class="n">sess</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">session</span><span class="o">()</span>
+    <span class="k">val</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">Tensor</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="n">arr</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">sess</span><span class="o">.</span><span class="n">runner</span><span class="o">().</span><span class="n">feed</span><span class="o">(</span><span class="s">&quot;serving_default_inputs:0&quot;</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+             <span class="o">.</span><span class="n">fetch</span><span class="o">(</span><span class="s">&quot;StatefulPartitionedCall:0&quot;</span><span class="o">).</span><span class="n">run</span><span class="o">().</span><span class="n">get</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+
+    <span class="c1">// Copy the prediction into the Array in type Float with the same shape</span>
+    <span class="k">val</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Float</span><span class="o">](</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">0</span><span class="o">).</span><span class="n">toInt</span><span class="o">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">1</span><span class="o">).</span><span class="n">toInt</span><span class="o">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">copyTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">iterator</span>
+
+<span class="o">})</span>
+
+
+<span class="n">rdd_result</span><span class="o">.</span><span class="n">take</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
+<span class="n">bundle</span><span class="o">.</span><span class="n">close</span>
+</code></pre></div><br />
+<!-- #endregion -->
+</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>The output is:</p>
+<div class="highlight"><pre><span></span><code>Array(Array(3.019596), Array(3.9264367), Array(7.8607616), Array(15.974984))
+</code></pre></div>
+<p><img alt="" src="../../../data/TfRDD.png" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="5-loading-tensorflow-model-on-executor-of-spark-scala-project-through-data-and-debug-it-successfully">5. Loading TensorFlow model on executor of spark (scala) project through Data and debug it successfully<a class="headerlink" href="#5-loading-tensorflow-model-on-executor-of-spark-scala-project-through-data-and-debug-it-successfully" title="Permanent link">#</a></h3>
+<p>The distributed prediction using TensorFlow model could also be implemented on DataFrame data, besides implementing on RDD data in Spark.</p>
+<p>It could be done through registering the method of prediction as a sparkSQL function.</p>
+<!-- #region -->
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+<span class="k">import</span> <span class="nn">scala.collection.mutable.WrappedArray</span>
+<span class="k">import</span> <span class="nn">org.</span><span class="o">{</span><span class="n">tensorflow</span><span class="k">=&gt;</span><span class="n">tf</span><span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">TfDataFrame</span> <span class="k">extends</span> <span class="nc">Serializable</span><span class="o">{</span>
+
+
+    <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span><span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span><span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+
+        <span class="k">val</span> <span class="n">spark</span> <span class="o">=</span> <span class="nc">SparkSession</span>
+        <span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">&quot;TfDataFrame&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">enableHiveSupport</span><span class="o">()</span>
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+        <span class="k">val</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span>
+
+
+        <span class="k">import</span> <span class="nn">spark.implicits._</span>
+
+        <span class="k">val</span> <span class="n">bundle</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">SavedModelBundle</span> 
+           <span class="o">.</span><span class="n">load</span><span class="o">(</span><span class="s">&quot;/Users/liangyun/CodeFiles/master_tensorflow2_in_20_hours/data/linear_model/1&quot;</span><span class="o">,</span><span class="s">&quot;serve&quot;</span><span class="o">)</span>
+
+        <span class="k">val</span> <span class="n">broads</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">broadcast</span><span class="o">(</span><span class="n">bundle</span><span class="o">)</span>
+
+        <span class="c1">// Construct the prediction function and register it as udf of sparkSQL</span>
+        <span class="k">val</span> <span class="n">tfpredict</span> <span class="o">=</span> <span class="o">(</span><span class="n">features</span><span class="k">:</span><span class="kt">WrappedArray</span><span class="o">[</span><span class="kt">Float</span><span class="o">])</span>  <span class="o">=&gt;</span> <span class="o">{</span>
+            <span class="k">val</span> <span class="n">bund</span> <span class="o">=</span> <span class="n">broads</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">val</span> <span class="n">sess</span> <span class="o">=</span> <span class="n">bund</span><span class="o">.</span><span class="n">session</span><span class="o">()</span>
+            <span class="k">val</span> <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="nc">Tensor</span><span class="o">.</span><span class="n">create</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="n">features</span><span class="o">.</span><span class="n">toArray</span><span class="o">))</span>
+            <span class="k">val</span> <span class="n">y</span> <span class="o">=</span>  <span class="n">sess</span><span class="o">.</span><span class="n">runner</span><span class="o">().</span><span class="n">feed</span><span class="o">(</span><span class="s">&quot;serving_default_inputs:0&quot;</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span>
+                     <span class="o">.</span><span class="n">fetch</span><span class="o">(</span><span class="s">&quot;StatefulPartitionedCall:0&quot;</span><span class="o">).</span><span class="n">run</span><span class="o">().</span><span class="n">get</span><span class="o">(</span><span class="mi">0</span><span class="o">)</span>
+            <span class="k">val</span> <span class="n">result</span> <span class="o">=</span> <span class="nc">Array</span><span class="o">.</span><span class="n">ofDim</span><span class="o">[</span><span class="kt">Float</span><span class="o">](</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">0</span><span class="o">).</span><span class="n">toInt</span><span class="o">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="o">()(</span><span class="mi">1</span><span class="o">).</span><span class="n">toInt</span><span class="o">)</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">copyTo</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+            <span class="k">val</span> <span class="n">y_pred</span> <span class="o">=</span> <span class="n">result</span><span class="o">(</span><span class="mi">0</span><span class="o">)(</span><span class="mi">0</span><span class="o">)</span>
+            <span class="n">y_pred</span>
+        <span class="o">}</span>
+        <span class="n">spark</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">register</span><span class="o">(</span><span class="s">&quot;tfpredict&quot;</span><span class="o">,</span><span class="n">tfpredict</span><span class="o">)</span>
+
+        <span class="c1">// Creating DataFrame dataset, and put the features into one of the columns</span>
+        <span class="k">val</span> <span class="n">dfdata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">parallelize</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="mf">1.0f</span><span class="o">,</span><span class="mf">2.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">3.0f</span><span class="o">,</span><span class="mf">5.0f</span><span class="o">),</span><span class="nc">Array</span><span class="o">(</span><span class="mf">7.0f</span><span class="o">,</span><span class="mf">8.0f</span><span class="o">))).</span><span class="n">toDF</span><span class="o">(</span><span class="s">&quot;features&quot;</span><span class="o">)</span>
+        <span class="n">dfdata</span><span class="o">.</span><span class="n">show</span> 
+
+        <span class="c1">// Call the sparkSQL predicting function, add a new column as y_preds</span>
+        <span class="k">val</span> <span class="n">dfresult</span> <span class="o">=</span> <span class="n">dfdata</span><span class="o">.</span><span class="n">selectExpr</span><span class="o">(</span><span class="s">&quot;features&quot;</span><span class="o">,</span><span class="s">&quot;tfpredict(features) as y_preds&quot;</span><span class="o">)</span>
+        <span class="n">dfresult</span><span class="o">.</span><span class="n">show</span> 
+        <span class="n">bundle</span><span class="o">.</span><span class="n">close</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+<!-- #endregion -->
+
+<!-- #region -->
+<p><div class="highlight"><pre><span></span><code><span class="nc">TfDataFrame</span><span class="o">.</span><span class="n">main</span><span class="o">(</span><span class="nc">Array</span><span class="o">())</span>
+</code></pre></div><br />
+<!-- #endregion -->
+</p>
+<div class="highlight"><pre><span></span><code>+----------+
+|  features|
++----------+
+|[1.0, 2.0]|
+|[3.0, 5.0]|
+|[7.0, 8.0]|
++----------+
+
++----------+---------+
+|  features|  y_preds|
++----------+---------+
+|[1.0, 2.0]| 3.019596|
+|[3.0, 5.0]|3.9264367|
+|[7.0, 8.0]| 8.828995|
++----------+---------+
+</code></pre></div>
+<p>We implemented distributed prediction using a linear regression model (implemented by <code>tf.keras</code>) using both RDD and DataFrame data structures in spark.</p>
+<p>It is also possible to use the trained neural networks for distributed prediction through spark with just a slight modifications on this demonstration.</p>
+<p>Actually the capability of TensorFlow is more than implementing neural networks, the low-level language of graph is able to express all kinds of numerical computation.</p>
+<p>We are able to implement any kind of machine learning model on TensorFlow 2.0 with these various low-level APIs.</p>
+<p>It is also possible to export the trained models as files and use it on the distributed system such as spark, which provides huge space of imagination for future applications.</p>
+<p>Please leave comments in the WeChat official account "Python与算法之美" (Elegance of Python and Algorithms) if you want to communicate with the author about the content. The author will try best to reply given the limited time available.</p>
+<p>You are also welcomed to join the group chat with the other readers through replying <strong>加群 (join group)</strong> in the WeChat official account.</p>
+<p><img alt="image.png" src="../../../data/Python%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8Elogo.jpg" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                6-6 Model Deploying Using tensorflow-serving
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["navigation.expand", "tabs"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

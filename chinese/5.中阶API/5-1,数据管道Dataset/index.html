@@ -1,0 +1,2418 @@
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
+    
+    
+      
+        <title>5-1,数据管道Dataset - 30天吃掉那只Tensorflow2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.4dd2dd8d.min.css">
+      
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#5-1数据管道dataset" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-header-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            30天吃掉那只Tensorflow2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              5-1,数据管道Dataset
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        How to eat TensorFlow2 in 30 days ?🔥🔥
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          Chinese
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../english/" class="md-tabs__link">
+          English
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="30天吃掉那只Tensorflow2" class="md-nav__button md-logo" aria-label="30天吃掉那只Tensorflow2">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    30天吃掉那只Tensorflow2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/" title="前往 GitHub 仓库" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Chinese
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chinese" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        Chinese
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../%E5%90%8E%E8%AE%B0%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%90%83%E8%B4%A7%E5%92%8C%E4%B8%80%E9%81%93%E8%8F%9C%E7%9A%84%E6%95%85%E4%BA%8B/" title="一个吃货和一道菜的故事" class="md-nav__link">
+      一个吃货和一道菜的故事
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      1.建模流程
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="1.建模流程" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        <span class="md-nav__icon md-icon"></span>
+        1.建模流程
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/" title="一、TensorFlow的建模流程" class="md-nav__link">
+      一、TensorFlow的建模流程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-1%2C%E7%BB%93%E6%9E%84%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-1,结构化数据建模流程范例" class="md-nav__link">
+      1-1,结构化数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-2%2C%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-2,图片数据建模流程范例" class="md-nav__link">
+      1-2,图片数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-3%2C%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-3,文本数据建模流程范例" class="md-nav__link">
+      1-3,文本数据建模流程范例
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../1.%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B/1-4%2C%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E6%95%B0%E6%8D%AE%E5%BB%BA%E6%A8%A1%E6%B5%81%E7%A8%8B%E8%8C%83%E4%BE%8B/" title="1-4,时间序列数据建模流程范例" class="md-nav__link">
+      1-4,时间序列数据建模流程范例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      2.核心概念
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="2.核心概念" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        <span class="md-nav__icon md-icon"></span>
+        2.核心概念
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" title="二、TensorFlow的核心概念" class="md-nav__link">
+      二、TensorFlow的核心概念
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-1%2C%E5%BC%A0%E9%87%8F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="2-1,张量数据结构" class="md-nav__link">
+      2-1,张量数据结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-2%2C%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E5%9B%BE/" title="2-2,三种计算图" class="md-nav__link">
+      2-2,三种计算图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2-3%2C%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86%E6%9C%BA%E5%88%B6/" title="2-3,自动微分机制" class="md-nav__link">
+      2-3,自动微分机制
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-5" type="checkbox" id="nav-2-5">
+    
+    <label class="md-nav__link" for="nav-2-5">
+      3.层次结构
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="3.层次结构" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-5">
+        <span class="md-nav__icon md-icon"></span>
+        3.层次结构
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/" title="三、TensorFlow的层次结构" class="md-nav__link">
+      三、TensorFlow的层次结构
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-1%2C%E4%BD%8E%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-1,低阶API示范" class="md-nav__link">
+      3-1,低阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-2%2C%E4%B8%AD%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-2,中阶API示范" class="md-nav__link">
+      3-2,中阶API示范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../3.%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/3-3%2C%E9%AB%98%E9%98%B6API%E7%A4%BA%E8%8C%83/" title="3-3,高阶API示范" class="md-nav__link">
+      3-3,高阶API示范
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
+      4.低阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="4.低阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon"></span>
+        4.低阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/" title="四、TensorFlow的低阶API" class="md-nav__link">
+      四、TensorFlow的低阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/4-1%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C/" title="4-1,张量的结构操作" class="md-nav__link">
+      4-1,张量的结构操作
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/4-2%2C%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97/" title="4-2,张量的数学运算" class="md-nav__link">
+      4-2,张量的数学运算
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/4-3%2CAutoGraph%E7%9A%84%E4%BD%BF%E7%94%A8%E8%A7%84%E8%8C%83/" title="4-3,AutoGraph的使用规范" class="md-nav__link">
+      4-3,AutoGraph的使用规范
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/4-4%2CAutoGraph%E7%9A%84%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86/" title="4-4,AutoGraph的机制原理" class="md-nav__link">
+      4-4,AutoGraph的机制原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../4.%E4%BD%8E%E9%98%B6API/4-5%2CAutoGraph%E5%92%8Ctf.Module/" title="4-5,AutoGraph和tf.Module" class="md-nav__link">
+      4-5,AutoGraph和tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" checked>
+    
+    <label class="md-nav__link" for="nav-2-7">
+      5.中阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="5.中阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        <span class="md-nav__icon md-icon"></span>
+        5.中阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="五、TensorFlow的中阶API" class="md-nav__link">
+      五、TensorFlow的中阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        5-1,数据管道Dataset
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="5-1,数据管道Dataset" class="md-nav__link md-nav__link--active">
+      5-1,数据管道Dataset
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一构建数据管道" class="md-nav__link">
+    一，构建数据管道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二应用数据转换" class="md-nav__link">
+    二，应用数据转换
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三提升管道性能" class="md-nav__link">
+    三，提升管道性能
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-nav__link">
+      5-2,特征列feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-3%2C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0activation/" title="5-3,激活函数activation" class="md-nav__link">
+      5-3,激活函数activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-4%2C%E6%A8%A1%E5%9E%8B%E5%B1%82layers/" title="5-4,模型层layers" class="md-nav__link">
+      5-4,模型层layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-5%2C%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0losses/" title="5-5,损失函数losses" class="md-nav__link">
+      5-5,损失函数losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-6%2C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics/" title="5-6,评估指标metrics" class="md-nav__link">
+      5-6,评估指标metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-7%2C%E4%BC%98%E5%8C%96%E5%99%A8optimizers/" title="5-7,优化器optimizers" class="md-nav__link">
+      5-7,优化器optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../5-8%2C%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks/" title="5-8,回调函数callbacks" class="md-nav__link">
+      5-8,回调函数callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      6.高阶API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="6.高阶API" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        <span class="md-nav__icon md-icon"></span>
+        6.高阶API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/" title="六、TensorFlow的高阶API" class="md-nav__link">
+      六、TensorFlow的高阶API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-1%2C%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-1,构建模型的3种方法" class="md-nav__link">
+      6-1,构建模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-2%2C%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%843%E7%A7%8D%E6%96%B9%E6%B3%95/" title="6-2,训练模型的3种方法" class="md-nav__link">
+      6-2,训练模型的3种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-3%2C%E4%BD%BF%E7%94%A8%E5%8D%95GPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-3,使用单GPU训练模型" class="md-nav__link">
+      6-3,使用单GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-4%2C%E4%BD%BF%E7%94%A8%E5%A4%9AGPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-4,使用多GPU训练模型" class="md-nav__link">
+      6-4,使用多GPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-5%2C%E4%BD%BF%E7%94%A8TPU%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" title="6-5,使用TPU训练模型" class="md-nav__link">
+      6-5,使用TPU训练模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-6%2C%E4%BD%BF%E7%94%A8tensorflow-serving%E9%83%A8%E7%BD%B2%E6%A8%A1%E5%9E%8B/" title="6-6,使用tensorflow-serving部署模型" class="md-nav__link">
+      6-6,使用tensorflow-serving部署模型
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../6.%E9%AB%98%E9%98%B6API/6-7%2C%E4%BD%BF%E7%94%A8spark-scala%E8%B0%83%E7%94%A8tensorflow%E6%A8%A1%E5%9E%8B/" title="6-7,使用spark-scala调用tensorflow2.0训练好的模型" class="md-nav__link">
+      6-7,使用spark-scala调用tensorflow2.0训练好的模型
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      English
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="English" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        English
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/" title="How to eat TensorFlow2 in 30 days ?🔥🔥" class="md-nav__link">
+      How to eat TensorFlow2 in 30 days ?🔥🔥
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Epilogue/" title="Epilogue: A Story Between a Foodie and Cuisine" class="md-nav__link">
+      Epilogue: A Story Between a Foodie and Cuisine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Chapter1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter1" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/" title="Chapter 1: Modeling Procedure of TensorFlow" class="md-nav__link">
+      Chapter 1: Modeling Procedure of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-1/" title="1-1 Example: Modeling Procedure for Structured Data" class="md-nav__link">
+      1-1 Example: Modeling Procedure for Structured Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-2/" title="1-2 Example: Modeling Procedure for Images" class="md-nav__link">
+      1-2 Example: Modeling Procedure for Images
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-3/" title="1-3 Example: Modeling Procedure for Texts" class="md-nav__link">
+      1-3 Example: Modeling Procedure for Texts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter1/Chapter1-4/" title="1-4 Example: Modeling Procedure for Temporal Sequences" class="md-nav__link">
+      1-4 Example: Modeling Procedure for Temporal Sequences
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Chapter2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter2" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/" title="Chapter 2: Key Concepts of TensorFlow" class="md-nav__link">
+      Chapter 2: Key Concepts of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-1/" title="2-1 Data Structure" class="md-nav__link">
+      2-1 Data Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-2/" title="2-2 Three Types of Graph" class="md-nav__link">
+      2-2 Three Types of Graph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter2/Chapter2-3/" title="2-3 Automatic Differentiate" class="md-nav__link">
+      2-3 Automatic Differentiate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Chapter3
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter3" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/" title="Chapter 3: Hierarchy of TensorFlow" class="md-nav__link">
+      Chapter 3: Hierarchy of TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-1/" title="3-1 Low-level API: Demonstration" class="md-nav__link">
+      3-1 Low-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-2/" title="3-2 Mid-level API: Demonstration" class="md-nav__link">
+      3-2 Mid-level API: Demonstration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter3/Chapter3-3/" title="3-3 High-level API: Demonstration" class="md-nav__link">
+      3-3 High-level API: Demonstration
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6">
+    
+    <label class="md-nav__link" for="nav-3-6">
+      Chapter4
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter4" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/" title="Chapter 4: Low-level API in TensorFlow" class="md-nav__link">
+      Chapter 4: Low-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-1/" title="4-1 Structural Operations of the Tensor" class="md-nav__link">
+      4-1 Structural Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-2/" title="4-2 Mathematical Operations of the Tensor" class="md-nav__link">
+      4-2 Mathematical Operations of the Tensor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-3/" title="4-3 Rules of Using the AutoGraph" class="md-nav__link">
+      4-3 Rules of Using the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-4/" title="4-4 Mechanisms of the AutoGraph" class="md-nav__link">
+      4-4 Mechanisms of the AutoGraph
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter4/Chapter4-5/" title="4-5 AutoGraph and tf.Module" class="md-nav__link">
+      4-5 AutoGraph and tf.Module
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7">
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Chapter5
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter5" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/" title="Chapter 5: Mid-level API in TensorFlow" class="md-nav__link">
+      Chapter 5: Mid-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-1/" title="5-1 Dataset" class="md-nav__link">
+      5-1 Dataset
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-2/" title="5-2 feature_column" class="md-nav__link">
+      5-2 feature_column
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-3/" title="5-3 activation" class="md-nav__link">
+      5-3 activation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-4/" title="5-4 layers" class="md-nav__link">
+      5-4 layers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-5/" title="5-5 losses" class="md-nav__link">
+      5-5 losses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-6/" title="5-6 metrics" class="md-nav__link">
+      5-6 metrics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-7/" title="5-7 optimizers" class="md-nav__link">
+      5-7 optimizers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter5/Chapter5-8/" title="5-8 callbacks" class="md-nav__link">
+      5-8 callbacks
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8">
+    
+    <label class="md-nav__link" for="nav-3-8">
+      Chapter6
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Chapter6" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        Chapter6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/" title="Chapter 6: High-level API in TensorFlow" class="md-nav__link">
+      Chapter 6: High-level API in TensorFlow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-1/" title="6-1 Three Ways of Modeling" class="md-nav__link">
+      6-1 Three Ways of Modeling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-2/" title="6-2 Three Ways of Training" class="md-nav__link">
+      6-2 Three Ways of Training
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-3/" title="6-3 Model Training Using Single GPU" class="md-nav__link">
+      6-3 Model Training Using Single GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-4/" title="6-4 Model Training Using Multiple GPUs" class="md-nav__link">
+      6-4 Model Training Using Multiple GPUs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-5/" title="6-5 Model Training Using TPU" class="md-nav__link">
+      6-5 Model Training Using TPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-6/" title="6-6 Model Deploying Using tensorflow-serving" class="md-nav__link">
+      6-6 Model Deploying Using tensorflow-serving
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../english/Chapter6/Chapter6-7/" title="6-7 Call Tensorflow Model Using spark-scala" class="md-nav__link">
+      6-7 Call Tensorflow Model Using spark-scala
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#一构建数据管道" class="md-nav__link">
+    一，构建数据管道
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#二应用数据转换" class="md-nav__link">
+    二，应用数据转换
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#三提升管道性能" class="md-nav__link">
+    三，提升管道性能
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/lyhue1991/eat_tensorflow2_in_30_days/edit/master/docs/chinese/5.中阶API/5-1,数据管道Dataset.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="5-1数据管道dataset">5-1,数据管道Dataset<a class="headerlink" href="#5-1数据管道dataset" title="Permanent link">#</a></h1>
+<p>如果需要训练的数据大小不大，例如不到1G，那么可以直接全部读入内存中进行训练，这样一般效率最高。</p>
+<p>但如果需要训练的数据很大，例如超过10G，无法一次载入内存，那么通常需要在训练的过程中分批逐渐读入。</p>
+<p>使用 tf.data API 可以构建数据输入管道，轻松处理大量的数据，不同的数据格式，以及不同的数据转换。</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="一构建数据管道">一，构建数据管道<a class="headerlink" href="#一构建数据管道" title="Permanent link">#</a></h3>
+<p>可以从 Numpy array, Pandas DataFrame, Python generator, csv文件, 文本文件, 文件路径, tfrecords文件等方式构建数据管道。</p>
+<p>其中通过Numpy array, Pandas DataFrame, 文件路径构建数据管道是最常用的方法。</p>
+<p>通过tfrecords文件方式构建数据管道较为复杂，需要对样本构建tf.Example后压缩成字符串写到tfrecords文件，读取后再解析成tf.Example。</p>
+<p>但tfrecords文件的优点是压缩后文件较小，便于网络传播，加载速度较快。</p>
+<p><strong>1,从Numpy array构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从Numpy array构建数据管道</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span> 
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+
+<span class="n">ds1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">features</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="n">ds1</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor([5.1 3.5 1.4 0.2], shape=(4,), dtype=float64) tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor([4.9 3.  1.4 0.2], shape=(4,), dtype=float64) tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor([4.7 3.2 1.3 0.2], shape=(4,), dtype=float64) tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor([4.6 3.1 1.5 0.2], shape=(4,), dtype=float64) tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor([5.  3.6 1.4 0.2], shape=(4,), dtype=float64) tf.Tensor(0, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>2,从 Pandas DataFrame构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从 Pandas DataFrame构建数据管道</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">dfiris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span><span class="n">columns</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">dfiris</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">),</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]))</span>
+
+<span class="k">for</span> <span class="n">features</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="n">ds2</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>{&#39;sepal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=5.1&gt;, &#39;sepal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=3.5&gt;, &#39;petal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=1.4&gt;, &#39;petal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=0.2&gt;} tf.Tensor(0, shape=(), dtype=int64)
+{&#39;sepal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=4.9&gt;, &#39;sepal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=3.0&gt;, &#39;petal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=1.4&gt;, &#39;petal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=0.2&gt;} tf.Tensor(0, shape=(), dtype=int64)
+{&#39;sepal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=4.7&gt;, &#39;sepal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=3.2&gt;, &#39;petal length (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=1.3&gt;, &#39;petal width (cm)&#39;: &lt;tf.Tensor: shape=(), dtype=float32, numpy=0.2&gt;} tf.Tensor(0, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>3,从Python generator构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从Python generator构建数据管道</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">ImageDataGenerator</span>
+
+<span class="c1"># 定义一个从文件中读取图片的generator</span>
+<span class="n">image_generator</span> <span class="o">=</span> <span class="n">ImageDataGenerator</span><span class="p">(</span><span class="n">rescale</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">flow_from_directory</span><span class="p">(</span>
+                    <span class="s2">&quot;../../data/cifar2/test/&quot;</span><span class="p">,</span>
+                    <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+                    <span class="n">batch_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                    <span class="n">class_mode</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">)</span>
+
+<span class="n">classdict</span> <span class="o">=</span> <span class="n">image_generator</span><span class="o">.</span><span class="n">class_indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classdict</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">features</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="n">image_generator</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="p">(</span><span class="n">features</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ds3</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span><span class="n">output_types</span><span class="o">=</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s1">&#39;svg&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> 
+<span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ds3</span><span class="o">.</span><span class="n">unbatch</span><span class="p">()</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">9</span><span class="p">)):</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;label = </span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/5-1-cifar2%E9%A2%84%E8%A7%88.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>4,从csv文件构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从csv文件构建数据管道</span>
+<span class="n">ds4</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">make_csv_dataset</span><span class="p">(</span>
+      <span class="n">file_pattern</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;../../data/titanic/train.csv&quot;</span><span class="p">,</span><span class="s2">&quot;../../data/titanic/test.csv&quot;</span><span class="p">],</span>
+      <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+      <span class="n">label_name</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span>
+      <span class="n">na_value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+      <span class="n">num_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+      <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">data</span><span class="p">,</span><span class="n">label</span> <span class="ow">in</span> <span class="n">ds4</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>OrderedDict([(&#39;PassengerId&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([540,  58, 764], dtype=int32)&gt;), (&#39;Pclass&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([1, 3, 1], dtype=int32)&gt;), (&#39;Name&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=
+array([b&#39;Frolicher, Miss. Hedwig Margaritha&#39;, b&#39;Novel, Mr. Mansouer&#39;,
+       b&#39;Carter, Mrs. William Ernest (Lucile Polk)&#39;], dtype=object)&gt;), (&#39;Sex&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;female&#39;, b&#39;male&#39;, b&#39;female&#39;], dtype=object)&gt;), (&#39;Age&#39;, &lt;tf.Tensor: shape=(3,), dtype=float32, numpy=array([22. , 28.5, 36. ], dtype=float32)&gt;), (&#39;SibSp&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([0, 0, 1], dtype=int32)&gt;), (&#39;Parch&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([2, 0, 2], dtype=int32)&gt;), (&#39;Ticket&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;13568&#39;, b&#39;2697&#39;, b&#39;113760&#39;], dtype=object)&gt;), (&#39;Fare&#39;, &lt;tf.Tensor: shape=(3,), dtype=float32, numpy=array([ 49.5   ,   7.2292, 120.    ], dtype=float32)&gt;), (&#39;Cabin&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;B39&#39;, b&#39;&#39;, b&#39;B96 B98&#39;], dtype=object)&gt;), (&#39;Embarked&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;C&#39;, b&#39;C&#39;, b&#39;S&#39;], dtype=object)&gt;)]) tf.Tensor([1 0 1], shape=(3,), dtype=int32)
+OrderedDict([(&#39;PassengerId&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([845,  66, 390], dtype=int32)&gt;), (&#39;Pclass&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([3, 3, 2], dtype=int32)&gt;), (&#39;Name&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=
+array([b&#39;Culumovic, Mr. Jeso&#39;, b&#39;Moubarek, Master. Gerios&#39;,
+       b&#39;Lehmann, Miss. Bertha&#39;], dtype=object)&gt;), (&#39;Sex&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;male&#39;, b&#39;male&#39;, b&#39;female&#39;], dtype=object)&gt;), (&#39;Age&#39;, &lt;tf.Tensor: shape=(3,), dtype=float32, numpy=array([17.,  0., 17.], dtype=float32)&gt;), (&#39;SibSp&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([0, 1, 0], dtype=int32)&gt;), (&#39;Parch&#39;, &lt;tf.Tensor: shape=(3,), dtype=int32, numpy=array([0, 1, 0], dtype=int32)&gt;), (&#39;Ticket&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;315090&#39;, b&#39;2661&#39;, b&#39;SC 1748&#39;], dtype=object)&gt;), (&#39;Fare&#39;, &lt;tf.Tensor: shape=(3,), dtype=float32, numpy=array([ 8.6625, 15.2458, 12.    ], dtype=float32)&gt;), (&#39;Cabin&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;&#39;, b&#39;&#39;, b&#39;&#39;], dtype=object)&gt;), (&#39;Embarked&#39;, &lt;tf.Tensor: shape=(3,), dtype=string, numpy=array([b&#39;S&#39;, b&#39;C&#39;, b&#39;C&#39;], dtype=object)&gt;)]) tf.Tensor([0 1 1], shape=(3,), dtype=int32)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>5,从文本文件构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 从文本文件构建数据管道</span>
+
+<span class="n">ds5</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;../../data/titanic/train.csv&quot;</span><span class="p">,</span><span class="s2">&quot;../../data/titanic/test.csv&quot;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#略去第一行header</span>
+
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ds5</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;493,0,1,&quot;Molson, Mr. Harry Markland&quot;,male,55.0,0,0,113787,30.5,C30,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;53,1,1,&quot;Harper, Mrs. Henry Sleeper (Myna Haxtun)&quot;,female,49.0,1,0,PC 17572,76.7292,D33,C&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;388,1,2,&quot;Buss, Miss. Kate&quot;,female,36.0,0,0,27849,13.0,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;192,0,2,&quot;Carbines, Mr. William&quot;,male,19.0,0,0,28424,13.0,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;687,0,3,&quot;Panula, Mr. Jaako Arnold&quot;,male,14.0,4,1,3101295,39.6875,,S&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>6,从文件路径构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ds6</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">list_files</span><span class="p">(</span><span class="s2">&quot;../../data/cifar2/train/*/*.jpg&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">ds6</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;../../data/cifar2/train/automobile/1263.jpg&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;../../data/cifar2/train/airplane/2837.jpg&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;../../data/cifar2/train/airplane/4264.jpg&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;../../data/cifar2/train/automobile/4241.jpg&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;../../data/cifar2/train/automobile/192.jpg&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">)):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">regex_full_match</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="s2">&quot;.*/automobile/.*&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1">#注意此处为jpeg格式</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s1">&#39;svg&#39;</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ds6</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load_image</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">)):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">((</span><span class="n">img</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;label = </span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/5-1-car2.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>7,从tfrecords文件构建数据管道</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># inpath：原始数据路径 outpath:TFRecord文件输出路径</span>
+<span class="k">def</span> <span class="nf">create_tfrecords</span><span class="p">(</span><span class="n">inpath</span><span class="p">,</span><span class="n">outpath</span><span class="p">):</span> 
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">TFRecordWriter</span><span class="p">(</span><span class="n">outpath</span><span class="p">)</span>
+    <span class="n">dirs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">inpath</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dirs</span><span class="p">):</span>
+        <span class="n">class_path</span> <span class="o">=</span> <span class="n">inpath</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span> <span class="n">name</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
+        <span class="k">for</span> <span class="n">img_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">class_path</span><span class="p">):</span>
+            <span class="n">img_path</span> <span class="o">=</span> <span class="n">class_path</span> <span class="o">+</span> <span class="n">img_name</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+            <span class="c1">#img = tf.image.decode_image(img)</span>
+            <span class="c1">#img = tf.image.encode_jpeg(img) #统一成jpeg格式压缩</span>
+            <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Example</span><span class="p">(</span>
+               <span class="n">features</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Features</span><span class="p">(</span><span class="n">feature</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">int64_list</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Int64List</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">index</span><span class="p">])),</span>
+                    <span class="s1">&#39;img_raw&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">bytes_list</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">BytesList</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()]))</span>
+               <span class="p">}))</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">())</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">create_tfrecords</span><span class="p">(</span><span class="s2">&quot;../../data/cifar2/test/&quot;</span><span class="p">,</span><span class="s2">&quot;../../data/cifar2_test.tfrecords/&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+
+<span class="k">def</span> <span class="nf">parse_example</span><span class="p">(</span><span class="n">proto</span><span class="p">):</span>
+    <span class="n">description</span> <span class="o">=</span><span class="p">{</span> <span class="s1">&#39;img_raw&#39;</span> <span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">FixedLenFeature</span><span class="p">([],</span> <span class="n">tf</span><span class="o">.</span><span class="n">string</span><span class="p">),</span>
+                   <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">FixedLenFeature</span><span class="p">([],</span> <span class="n">tf</span><span class="o">.</span><span class="n">int64</span><span class="p">)}</span> 
+    <span class="n">example</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">parse_single_example</span><span class="p">(</span><span class="n">proto</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">example</span><span class="p">[</span><span class="s2">&quot;img_raw&quot;</span><span class="p">])</span>   <span class="c1">#注意此处为jpeg格式</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">ds7</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TFRecordDataset</span><span class="p">(</span><span class="s2">&quot;../../data/cifar2_test.tfrecords&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">parse_example</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span> <span class="o">=</span> <span class="s1">&#39;svg&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> 
+<span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ds7</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">9</span><span class="p">)):</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">((</span><span class="n">img</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;label = </span><span class="si">%d</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="" src="../../../data/5-1-car9.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="二应用数据转换">二，应用数据转换<a class="headerlink" href="#二应用数据转换" title="Permanent link">#</a></h3>
+<p>Dataset数据结构应用非常灵活，因为它本质上是一个Sequece序列，其每个元素可以是各种类型，例如可以是张量，列表，字典，也可以是Dataset。</p>
+<p>Dataset包含了非常丰富的数据转换功能。</p>
+<ul>
+<li>
+<p>map: 将转换函数映射到数据集每一个元素。</p>
+</li>
+<li>
+<p>flat_map: 将转换函数映射到数据集的每一个元素，并将嵌套的Dataset压平。</p>
+</li>
+<li>
+<p>interleave: 效果类似flat_map,但可以将不同来源的数据夹在一起。</p>
+</li>
+<li>
+<p>filter: 过滤掉某些元素。</p>
+</li>
+<li>
+<p>zip: 将两个长度相同的Dataset横向铰合。</p>
+</li>
+<li>
+<p>concatenate: 将两个Dataset纵向连接。</p>
+</li>
+<li>
+<p>reduce: 执行归并操作。</p>
+</li>
+<li>
+<p>batch : 构建批次，每次放一个批次。比原始数据增加一个维度。 其逆操作为unbatch。</p>
+</li>
+<li>
+<p>padded_batch: 构建批次，类似batch, 但可以填充到相同的形状。</p>
+</li>
+<li>
+<p>window :构建滑动窗口，返回Dataset of Dataset.</p>
+</li>
+<li>
+<p>shuffle: 数据顺序洗牌。</p>
+</li>
+<li>
+<p>repeat: 重复数据若干次，不带参数时，重复无数次。</p>
+</li>
+<li>
+<p>shard: 采样，从某个位置开始隔固定距离采样一个元素。</p>
+</li>
+<li>
+<p>take: 采样，从开始位置取前几个元素。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1">#map:将转换函数映射到数据集每一个元素</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">([</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span><span class="s2">&quot;hello China&quot;</span><span class="p">,</span><span class="s2">&quot;hello Beijing&quot;</span><span class="p">])</span>
+<span class="n">ds_map</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_map</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor([b&#39;hello&#39; b&#39;world&#39;], shape=(2,), dtype=string)
+tf.Tensor([b&#39;hello&#39; b&#39;China&#39;], shape=(2,), dtype=string)
+tf.Tensor([b&#39;hello&#39; b&#39;Beijing&#39;], shape=(2,), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#flat_map:将转换函数映射到数据集的每一个元素，并将嵌套的Dataset压平。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">([</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span><span class="s2">&quot;hello China&quot;</span><span class="p">,</span><span class="s2">&quot;hello Beijing&quot;</span><span class="p">])</span>
+<span class="n">ds_flatmap</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">flat_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_flatmap</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;world&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;China&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;Beijing&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># interleave: 效果类似flat_map,但可以将不同来源的数据夹在一起。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">([</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span><span class="s2">&quot;hello China&quot;</span><span class="p">,</span><span class="s2">&quot;hello Beijing&quot;</span><span class="p">])</span>
+<span class="n">ds_interleave</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">interleave</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s2">&quot; &quot;</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_interleave</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;hello&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;world&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;China&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;Beijing&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#filter:过滤掉某些元素。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">([</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span><span class="s2">&quot;hello China&quot;</span><span class="p">,</span><span class="s2">&quot;hello Beijing&quot;</span><span class="p">])</span>
+<span class="c1">#找出含有字母a或B的元素</span>
+<span class="n">ds_filter</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">regex_full_match</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;.*[a|B].*&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_filter</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;hello China&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;hello Beijing&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#zip:将两个长度相同的Dataset横向铰合。</span>
+
+<span class="n">ds1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ds3</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ds_zip</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">zip</span><span class="p">((</span><span class="n">ds1</span><span class="p">,</span><span class="n">ds2</span><span class="p">,</span><span class="n">ds3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span> <span class="ow">in</span> <span class="n">ds_zip</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span><span class="n">z</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0 3 6
+1 4 7
+2 5 8
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#condatenate:将两个Dataset纵向连接。</span>
+
+<span class="n">ds1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ds2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ds_concat</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ds1</span><span class="p">,</span><span class="n">ds2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_concat</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(2, shape=(), dtype=int64)
+tf.Tensor(3, shape=(), dtype=int64)
+tf.Tensor(4, shape=(), dtype=int64)
+tf.Tensor(5, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#reduce:执行归并操作。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mf">5.0</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+<span class="n">result</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&lt;tf.Tensor: shape=(), dtype=float32, numpy=15.0&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#batch:构建批次，每次放一个批次。比原始数据增加一个维度。 其逆操作为unbatch。 </span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ds_batch</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_batch</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor([0 1 2 3], shape=(4,), dtype=int64)
+tf.Tensor([4 5 6 7], shape=(4,), dtype=int64)
+tf.Tensor([ 8  9 10 11], shape=(4,), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#padded_batch:构建批次，类似batch, 但可以填充到相同的形状。</span>
+
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],[</span><span class="mi">8</span><span class="p">]]</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">iter</span><span class="p">(</span><span class="n">elements</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+<span class="n">ds_padded_batch</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">padded_batch</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">padded_shapes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,])</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_padded_batch</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>    
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(
+[[1 2 0 0]
+ [3 4 5 0]], shape=(2, 4), dtype=int32)
+tf.Tensor(
+[[6 7 0 0]
+ [8 0 0 0]], shape=(2, 4), dtype=int32)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#window:构建滑动窗口，返回Dataset of Dataset.</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1">#window返回的是Dataset of Dataset,可以用flat_map压平</span>
+<span class="n">ds_window</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">window</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flat_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">drop_remainder</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> 
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_window</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor([0 1 2], shape=(3,), dtype=int64)
+tf.Tensor([1 2 3], shape=(3,), dtype=int64)
+tf.Tensor([2 3 4], shape=(3,), dtype=int64)
+tf.Tensor([3 4 5], shape=(3,), dtype=int64)
+tf.Tensor([4 5 6], shape=(3,), dtype=int64)
+tf.Tensor([5 6 7], shape=(3,), dtype=int64)
+tf.Tensor([6 7 8], shape=(3,), dtype=int64)
+tf.Tensor([7 8 9], shape=(3,), dtype=int64)
+tf.Tensor([ 8  9 10], shape=(3,), dtype=int64)
+tf.Tensor([ 9 10 11], shape=(3,), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#shuffle:数据顺序洗牌。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ds_shuffle</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_shuffle</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(4, shape=(), dtype=int64)
+tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor(6, shape=(), dtype=int64)
+tf.Tensor(5, shape=(), dtype=int64)
+tf.Tensor(2, shape=(), dtype=int64)
+tf.Tensor(7, shape=(), dtype=int64)
+tf.Tensor(11, shape=(), dtype=int64)
+tf.Tensor(3, shape=(), dtype=int64)
+tf.Tensor(9, shape=(), dtype=int64)
+tf.Tensor(10, shape=(), dtype=int64)
+tf.Tensor(8, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#repeat:重复数据若干次，不带参数时，重复无数次。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ds_repeat</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_repeat</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(2, shape=(), dtype=int64)
+tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(2, shape=(), dtype=int64)
+tf.Tensor(0, shape=(), dtype=int64)
+tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(2, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#shard:采样，从某个位置开始隔固定距离采样一个元素。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ds_shard</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">shard</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_shard</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(1, shape=(), dtype=int64)
+tf.Tensor(4, shape=(), dtype=int64)
+tf.Tensor(7, shape=(), dtype=int64)
+tf.Tensor(10, shape=(), dtype=int64)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#take:采样，从开始位置取前几个元素。</span>
+
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ds_take</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="n">ds_take</span><span class="o">.</span><span class="n">as_numpy_iterator</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[0, 1, 2]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<h3 id="三提升管道性能">三，提升管道性能<a class="headerlink" href="#三提升管道性能" title="Permanent link">#</a></h3>
+<p>训练深度学习模型常常会非常耗时。</p>
+<p>模型训练的耗时主要来自于两个部分，一部分来自**数据准备**，另一部分来自**参数迭代**。</p>
+<p>参数迭代过程的耗时通常依赖于GPU来提升。</p>
+<p>而数据准备过程的耗时则可以通过构建高效的数据管道进行提升。</p>
+<p>以下是一些构建高效数据管道的建议。</p>
+<ul>
+<li>
+<p>1，使用 prefetch 方法让数据准备和参数迭代两个过程相互并行。</p>
+</li>
+<li>
+<p>2，使用 interleave 方法可以让数据读取过程多进程执行,并将不同来源数据夹在一起。</p>
+</li>
+<li>
+<p>3，使用 map 时设置num_parallel_calls 让数据转换过程多进程执行。</p>
+</li>
+<li>
+<p>4，使用 cache 方法让数据在第一个epoch后缓存到内存中，仅限于数据集不大情形。</p>
+</li>
+<li>
+<p>5，使用 map转换时，先batch, 然后采用向量化的转换方法对每个batch进行转换。</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>1，使用 prefetch 方法让数据准备和参数迭代两个过程相互并行。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1">#打印时间分割线</span>
+<span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">printbar</span><span class="p">():</span>
+    <span class="n">ts</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+    <span class="n">today_ts</span> <span class="o">=</span> <span class="n">ts</span><span class="o">%</span><span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span>
+
+    <span class="n">hour</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">today_ts</span><span class="o">//</span><span class="mi">3600</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span><span class="o">%</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+    <span class="n">minite</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">((</span><span class="n">today_ts</span><span class="o">%</span><span class="mi">3600</span><span class="p">)</span><span class="o">//</span><span class="mi">60</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">today_ts</span><span class="o">%</span><span class="mi">60</span><span class="p">),</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">timeformat</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">length</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">))</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;0</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">m</span><span class="p">))</span>
+
+    <span class="n">timestring</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">timeformat</span><span class="p">(</span><span class="n">hour</span><span class="p">),</span><span class="n">timeformat</span><span class="p">(</span><span class="n">minite</span><span class="p">),</span>
+                <span class="n">timeformat</span><span class="p">(</span><span class="n">second</span><span class="p">)],</span><span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;==========&quot;</span><span class="o">*</span><span class="mi">8</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">timestring</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 数据准备和参数迭代两个过程默认情况下是串行的。</span>
+
+<span class="c1"># 模拟数据准备</span>
+<span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="c1">#假设每次准备数据需要2s</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+        <span class="k">yield</span> <span class="n">i</span> 
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span><span class="n">output_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+
+<span class="c1"># 模拟参数迭代</span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">():</span>
+    <span class="c1">#假设每一步训练需要1s</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 训练过程预计耗时 10*2+10*1 = 30s</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start training...&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+    <span class="n">train_step</span><span class="p">()</span>  
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end training...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 使用 prefetch 方法让数据准备和参数迭代两个过程相互并行。</span>
+
+<span class="c1"># 训练过程预计耗时 max(10*2,10*1) = 20s</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start training with prefetch...&quot;</span><span class="p">))</span>
+
+<span class="c1"># tf.data.experimental.AUTOTUNE 可以让程序自动选择合适的参数</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">buffer_size</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">):</span>
+    <span class="n">train_step</span><span class="p">()</span>  
+
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end training...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>2，使用 interleave 方法可以让数据读取过程多进程执行,并将不同来源数据夹在一起。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ds_files</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">list_files</span><span class="p">(</span><span class="s2">&quot;../../data/titanic/*.csv&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds_files</span><span class="o">.</span><span class="n">flat_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;493,0,1,&quot;Molson, Mr. Harry Markland&quot;,male,55.0,0,0,113787,30.5,C30,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;53,1,1,&quot;Harper, Mrs. Henry Sleeper (Myna Haxtun)&quot;,female,49.0,1,0,PC 17572,76.7292,D33,C&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;388,1,2,&quot;Buss, Miss. Kate&quot;,female,36.0,0,0,27849,13.0,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;192,0,2,&quot;Carbines, Mr. William&quot;,male,19.0,0,0,28424,13.0,,S&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">ds_files</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">list_files</span><span class="p">(</span><span class="s2">&quot;../../data/titanic/*.csv&quot;</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">ds_files</span><span class="o">.</span><span class="n">interleave</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">TextLineDataset</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>tf.Tensor(b&#39;181,0,3,&quot;Sage, Miss. Constance Gladys&quot;,female,,8,2,CA. 2343,69.55,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;493,0,1,&quot;Molson, Mr. Harry Markland&quot;,male,55.0,0,0,113787,30.5,C30,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;405,0,3,&quot;Oreskovic, Miss. Marija&quot;,female,20.0,0,0,315096,8.6625,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;53,1,1,&quot;Harper, Mrs. Henry Sleeper (Myna Haxtun)&quot;,female,49.0,1,0,PC 17572,76.7292,D33,C&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;635,0,3,&quot;Skoog, Miss. Mabel&quot;,female,9.0,3,2,347088,27.9,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;388,1,2,&quot;Buss, Miss. Kate&quot;,female,36.0,0,0,27849,13.0,,S&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;701,1,1,&quot;Astor, Mrs. John Jacob (Madeleine Talmadge Force)&quot;,female,18.0,1,0,PC 17757,227.525,C62 C64,C&#39;, shape=(), dtype=string)
+tf.Tensor(b&#39;192,0,2,&quot;Carbines, Mr. William&quot;,male,19.0,0,0,28424,13.0,,S&#39;, shape=(), dtype=string)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>3，使用 map 时设置num_parallel_calls 让数据转换过程多进行执行。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">list_files</span><span class="p">(</span><span class="s2">&quot;../../data/cifar2/train/*/*.jpg&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">)):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">regex_full_match</span><span class="p">(</span><span class="n">img_path</span><span class="p">,</span><span class="s2">&quot;.*/automobile/.*&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">decode_jpeg</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1">#注意此处为jpeg格式</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">label</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#单进程转换</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start transformation...&quot;</span><span class="p">))</span>
+
+<span class="n">ds_map</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load_image</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">ds_map</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end transformation...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#多进程转换</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start parallel transformation...&quot;</span><span class="p">))</span>
+
+<span class="n">ds_map_parallel</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load_image</span><span class="p">,</span><span class="n">num_parallel_calls</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">ds_map_parallel</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end parallel transformation...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>4，使用 cache 方法让数据在第一个epoch后缓存到内存中，仅限于数据集不大情形。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 模拟数据准备</span>
+<span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="c1">#假设每次准备数据需要2s</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+        <span class="k">yield</span> <span class="n">i</span> 
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span><span class="n">output_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span>
+
+<span class="c1"># 模拟参数迭代</span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">():</span>
+    <span class="c1">#假设每一步训练需要0s</span>
+    <span class="k">pass</span>
+
+<span class="c1"># 训练过程预计耗时 (5*2+5*0)*3 = 30s</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start training...&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="n">train_step</span><span class="p">()</span>  
+    <span class="n">printbar</span><span class="p">()</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;epoch =&quot;</span><span class="p">,</span><span class="n">epoch</span><span class="p">,</span><span class="s2">&quot; ended&quot;</span><span class="p">)</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end training...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># 模拟数据准备</span>
+<span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="c1">#假设每次准备数据需要2s</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+        <span class="k">yield</span> <span class="n">i</span> 
+
+<span class="c1"># 使用 cache 方法让数据在第一个epoch后缓存到内存中，仅限于数据集不大情形。</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span><span class="n">generator</span><span class="p">,</span><span class="n">output_types</span> <span class="o">=</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">int32</span><span class="p">))</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+
+<span class="c1"># 模拟参数迭代</span>
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">():</span>
+    <span class="c1">#假设每一步训练需要0s</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="c1"># 训练过程预计耗时 (5*2+5*0)+(5*0+5*0)*2 = 10s</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start training...&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="n">train_step</span><span class="p">()</span>  
+    <span class="n">printbar</span><span class="p">()</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="s2">&quot;epoch =&quot;</span><span class="p">,</span><span class="n">epoch</span><span class="p">,</span><span class="s2">&quot; ended&quot;</span><span class="p">)</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end training...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p><strong>5，使用 map转换时，先batch, 然后采用向量化的转换方法对每个batch进行转换。</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">#先map后batch</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">ds_map_batch</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start scalar transformation...&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_map_batch</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end scalar transformation...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#先batch后map</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">ds_batch_map</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;start vector transformation...&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ds_batch_map</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="n">printbar</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s2">&quot;end vector transformation...&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>如果对本书内容理解上有需要进一步和作者交流的地方，欢迎在公众号"Python与算法之美"下留言。作者时间和精力有限，会酌情予以回复。</p>
+<p>也可以在公众号后台回复关键字：<strong>加群</strong>，加入读者交流群和大家讨论。</p>
+<p><img alt="image.png" src="../../../data/Python%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8Elogo.jpg" /></p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../" title="五、TensorFlow的中阶API" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                五、TensorFlow的中阶API
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../5-2%2C%E7%89%B9%E5%BE%81%E5%88%97feature_column/" title="5-2,特征列feature_column" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                5-2,特征列feature_column
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.3636a4ec.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: ["navigation.expand", "tabs"],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
