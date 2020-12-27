@@ -15,7 +15,7 @@
 
 # !git rm --cached  .ipynb_checkpoints/* 
 
-# !git commit -m "revise 5-5" 
+# !git commit -m "revise some chapters" 
 
 # !git remote rm origin 
 
@@ -25,7 +25,7 @@
 
 # !git pull  origin master 
 
-# !git push   origin master 
+# !git push  -f origin master 
 
 # !git push -f gitee master 
 
