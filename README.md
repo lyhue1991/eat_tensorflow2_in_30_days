@@ -228,6 +228,12 @@ Please leave comments in the WeChat official account "算法美食屋" (Machine 
 
 🐳 kesci专栏地址：https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0
 
+**极速通道** 
+*  🚀 公众号 “**算法美食屋**” 后台回复暗号："**吃货来了**"
+*  😋 获取教程的jupyter notebook 源码文件以及全部数据集的百度云盘下载链接。
+*  https://mp.weixin.qq.com/s/ymLtH5BqlWAkpOmCLQOYxw
+
+
 
 ### 一，TensorFlow2 🍎 or Pytorch🔥
 
