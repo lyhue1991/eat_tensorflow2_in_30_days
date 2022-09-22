@@ -1,29 +1,26 @@
-<!-- #region -->
 # How to eat TensorFlow2 in 30 days ?🔥🔥
 
 Click here for [Chinese Version（中文版）](#30天吃掉那只-tensorflow2)
 
 **《10天吃掉那只pyspark》**
 * 🚀 github项目地址: https://github.com/lyhue1991/eat_pyspark_in_10_days
-* 🐳 和鲸专栏地址: https://www.kesci.com/home/column/5fe6aa955e24ed00302304e0 【代码可直接fork后云端运行，无需配置环境】
+* 🐳 和鲸专栏地址: https://www.heywhale.com/home/column/5fe6aa955e24ed00302304e0 【代码可直接fork后云端运行，无需配置环境】
 
 
 **《20天吃掉那只Pytorch》**
 * 🚀 github项目地址: https://github.com/lyhue1991/eat_pytorch_in_20_days
-* 🐳 和鲸专栏地址: https://www.kesci.com/home/column/5f2ac5d8af3980002cb1bc08 【代码可直接fork后云端运行，无需配置环境】
+* 🐳 和鲸专栏地址: https://www.heywhale.com/home/column/5f2ac5d8af3980002cb1bc08 【代码可直接fork后云端运行，无需配置环境】
 
 
 **《30天吃掉那只TensorFlow2》**
 * 🚀 github项目地址: https://github.com/lyhue1991/eat_tensorflow2_in_30_days
-* 🐳 和鲸专栏地址: https://www.kesci.com/home/column/5d8ef3c3037db3002d3aa3a0 【代码可直接fork后云端运行，无需配置环境】
+* 🐳 和鲸专栏地址: https://www.heywhale.com/home/column/5d8ef3c3037db3002d3aa3a0 【代码可直接fork后云端运行，无需配置环境】
 
 **极速通道** 
 *  🚀 公众号 “**算法美食屋**” 后台回复暗号："**吃货来了**"
 *  😋 获取以上3套教程的jupyter notebook 源码文件以及全部数据集的百度云盘下载链接。
 *   https://mp.weixin.qq.com/s/ymLtH5BqlWAkpOmCLQOYxw 
 
-
-<!-- #endregion -->
 
 ### 1. TensorFlow2 🍎 or Pytorch🔥
 
